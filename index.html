@@ -32,31 +32,28 @@
         max-width: 750px;
         display: flex;
         flex-direction: column;
-        gap: 40px; /* Space between multiple boards */
+        gap: 40px;
     }
 
     /* Ultra-Realistic Chalkboard and Wood Grain Frame */
     .chalkboard {
-        /* Realistic Matte Chalk Dust Slate Texture */
         background: radial-gradient(circle at 50% 30%, rgba(55, 75, 65, 0.9), rgba(35, 45, 40, 0.95)),
                     repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 10px);
         background-color: #2b3a32; 
         
-        /* Realistic Heavy Wood Grain Border */
         border: 22px solid #5c2c16;
         border-image: repeating-linear-gradient(0deg, #5c2c16, #4a2210 20px, #6a351c 40px, #4a2210 60px) 22 stretch;
         
         border-radius: 12px;
-        color: rgba(245, 245, 245, 0.95); /* Soft chalk-white text */
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6), 0 0 4px rgba(255, 255, 255, 0.2); /* Chalk text effect */
+        color: rgba(245, 245, 245, 0.95);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6), 0 0 4px rgba(255, 255, 255, 0.2);
         padding: 30px;
         box-shadow: 
-            inset 0px 0px 20px rgba(0,0,0,0.7), /* Inside board shadow */
-            12px 15px 25px rgba(0, 0, 0, 0.4); /* Floor drop shadow */
+            inset 0px 0px 20px rgba(0,0,0,0.7),
+            12px 15px 25px rgba(0, 0, 0, 0.4);
         position: relative;
     }
 
-    /* Authentic chalkboard corner brackets */
     .chalkboard::before {
         content: '';
         position: absolute;
@@ -72,7 +69,7 @@
     }
     
     h1 { color: #fff; font-size: 2.2em; }
-    h2 { color: #ffe699; font-size: 1.8em; } /* Light yellow chalk for subtitles */
+    h2 { color: #ffe699; font-size: 1.8em; }
 
     p {
         font-size: 1.2em;
@@ -80,7 +77,6 @@
         text-align: center;
     }
 
-    /* List Structures inside boards */
     .board-list {
         display: flex;
         flex-direction: column;
@@ -103,7 +99,6 @@
         background: rgba(255, 255, 255, 0.08);
     }
 
-    /* Realistic Wood Frame for Images */
     .wood-frame {
         width: 85px;
         height: 85px;
@@ -126,7 +121,6 @@
         object-fit: cover;
     }
 
-    /* Colorful Neon Chalk Links */
     .chalk-link {
         font-size: 1.9em;
         text-decoration: none;
@@ -134,7 +128,6 @@
         transition: all 0.2s ease;
     }
 
-    /* Custom neon chalk colors */
     .x-link { color: #99ccff; text-shadow: 0 0 5px rgba(153,204,255,0.4); }
     .yt-link { color: #ff9999; text-shadow: 0 0 5px rgba(255,153,153,0.4); }
     .tt-link { color: #b3ffec; text-shadow: 0 0 5px rgba(179,255,236,0.4); }
@@ -160,7 +153,7 @@
             <div class="board-list">
                 <div class="board-item">
                     <div class="wood-frame">
-                        <img src="https://static.wikia.nocookie.net/granny/images/c/ce/App_icon_v1.3.2%2B.png/revision/latest?cb=20210320221242" alt="Granny Logo">
+                        <img src="granny_icon.png" alt="Granny Logo">
                     </div>
                     <a href="granny.html" class="chalk-link granny-link">Enter Granny's House</a>
                 </div>
@@ -204,7 +197,7 @@
 
         <div class="chalkboard">
             <h2>Next Project Ideas</h2>
-            <p style="text-align: left; padding-left: 20px; color: #ffccff;">✓ Hooked up granny.html with custom icon frame</p>
+            <p style="text-align: left; padding-left: 20px; color: #ffccff;">✓ Hooked up granny.html with local image asset</p>
             <p style="text-align: left; padding-left: 20px; color: #ccffcc;">⏳ Design the inner granny.html page</p>
             <p style="text-align: left; padding-left: 20px; color: #ffeb99;">⏳ Drop in your next idea here...</p>
         </div>
