@@ -272,14 +272,14 @@
                     </div>
             </div>
 
-            <form id="sticky-form" style="display: flex; gap: 10px; margin-top: 20px; justify-content: center;">
+            <div style="display: flex; gap: 10px; margin-top: 20px; justify-content: center;">
                 <input type="text" id="sticky-input" placeholder="Scribble a note..." maxlength="60" required 
                     style="width: 70%; background: rgba(0,0,0,0.3); border: 2px dashed rgba(255,255,255,0.4); border-radius: 4px; padding: 10px; color: #fff; font-family: inherit; outline: none; font-size: 1.1em;">
-                <button type="submit" id="sticky-btn" 
+                <button type="button" id="sticky-btn" onclick="submitStickyNote()"
                     style="background: #5c2c16; color: #ffe699; border: 2px solid #4a2210; border-radius: 4px; padding: 10px 20px; font-family: inherit; font-weight: bold; cursor: pointer; font-size: 1.1em;">
                     Stick It!
                 </button>
-            </form>
+            </div>
         </div>
 
     </div>
@@ -287,65 +287,66 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <script>
-        // Database credentials connected to your project account
         const SUPABASE_URL = "https://vnqastfkkjsnealijlz.supabase.co";
         const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZucWFzdGZra3Nqc25lYWxpamx6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI5NjgwNDEsImV4cCI6MjA5ODU0NDA0MX0.mOhiOV8oK0VFj_Aty1dg80hXoue64hh9zGZn6b5Tf0k";
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // Sticky Note Configuration
         const noteColors = ['#ff7eb9', '#ff7f50', '#ffeb3b', '#7afcff', '#98ff98'];
 
         async function loadStickyNotes() {
             const wall = document.getElementById('sticky-note-wall');
             wall.innerHTML = ''; 
 
-            const { data, error } = await supabaseClient
-                .from('sticky_notes')
-                .select('message')
-                .order('id', { ascending: false })
-                .limit(8);
+            try {
+                const { data, error } = await supabaseClient
+                    .from('sticky_notes')
+                    .select('message')
+                    .order('id', { ascending: false })
+                    .limit(8);
 
-            if (error) {
-                console.error('Error fetching notes:', error);
-                return;
+                if (error) {
+                    console.error('Error fetching notes:', error);
+                    return;
+                }
+
+                if (!data || data.length === 0) {
+                    wall.innerHTML = `<p style="color: #4a2210; font-style: italic; font-weight: bold;">The board is clean... be the first to scribble!</p>`;
+                    return;
+                }
+
+                data.reverse().forEach((note, index) => {
+                    const randomColor = noteColors[index % noteColors.length];
+                    const randomRotation = (Math.random() * 6 - 3).toFixed(1); 
+                    
+                    const noteDiv = document.createElement('div');
+                    noteDiv.style.cssText = `
+                        background: ${randomColor};
+                        color: #222;
+                        padding: 15px;
+                        width: 130px;
+                        min-height: 100px;
+                        box-shadow: 3px 5px 8px rgba(0,0,0,0.4);
+                        transform: rotate(${randomRotation}deg);
+                        font-family: inherit;
+                        font-size: 1em;
+                        font-weight: bold;
+                        word-wrap: break-word;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        text-align: center;
+                        border-bottom-right-radius: 20px 5px;
+                    `;
+                    noteDiv.innerText = note.message;
+                    wall.appendChild(noteDiv);
+                });
+            } catch (err) {
+                console.error("Load system encountered an error:", err);
             }
-
-            if (!data || data.length === 0) {
-                wall.innerHTML = `<p style="color: #4a2210; font-style: italic; font-weight: bold;">The board is clean... be the first to scribble!</p>`;
-                return;
-            }
-
-            data.reverse().forEach((note, index) => {
-                const randomColor = noteColors[index % noteColors.length];
-                const randomRotation = (Math.random() * 6 - 3).toFixed(1); 
-                
-                const noteDiv = document.createElement('div');
-                noteDiv.style.cssText = `
-                    background: ${randomColor};
-                    color: #222;
-                    padding: 15px;
-                    width: 130px;
-                    min-height: 100px;
-                    box-shadow: 3px 5px 8px rgba(0,0,0,0.4);
-                    transform: rotate(${randomRotation}deg);
-                    font-family: inherit;
-                    font-size: 1em;
-                    font-weight: bold;
-                    word-wrap: break-word;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    text-align: center;
-                    border-bottom-right-radius: 20px 5px;
-                `;
-                noteDiv.innerText = note.message;
-                wall.appendChild(noteDiv);
-            });
         }
 
-        // Direct HTTP Fetch Request to guarantee delivery and extract exact errors
-        document.getElementById('sticky-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
+        // Dedicated click handler completely outside form elements to avoid any refresh issues
+        async function submitStickyNote() {
             const input = document.getElementById('sticky-input');
             const userMessage = input.value.trim();
 
@@ -356,28 +357,4 @@
                     method: 'POST',
                     headers: {
                         'apikey': SUPABASE_ANON_KEY,
-                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-                        'Content-Type': 'application/json',
-                        'Prefer': 'return=minimal'
-                    },
-                    body: JSON.stringify({ message: userMessage })
-                });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    alert(`Database Error: ${errorData.message || response.statusText}`);
-                } else {
-                    input.value = ''; 
-                    loadStickyNotes(); 
-                }
-            } catch (err) {
-                alert(`Connection Failed: ${err.message}`);
-            }
-        });
-
-        // Language Pack Translations
-        const translations = {
-            en: {
-                langLabel: "Language:",
-                welcomeTitle: "Welcome to My Chalkboard!",
-                welcomeDesc: "This is where I'll keep all the fun things I'm working on! Come back here and tell me what you want to add or edit next!",
+                        'Authorization': `Bearer ${SUPABASE_AN
