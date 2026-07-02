@@ -32,7 +32,39 @@
         max-width: 750px;
         display: flex;
         flex-direction: column;
-        gap: 40px;
+        gap: 40px; 
+    }
+
+    /* Wood Framed Language Picker */
+    .lang-menu-container {
+        align-self: flex-end;
+        background: #2b3a32;
+        padding: 8px 15px;
+        border: 6px solid #5c2c16;
+        border-image: repeating-linear-gradient(45deg, #4a2210, #6a351c 10px, #4a2210 20px) 6 stretch;
+        border-radius: 6px;
+        box-shadow: 4px 4px 10px rgba(0,0,0,0.3);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .lang-label {
+        color: #ffe699;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    .lang-select {
+        background: #333;
+        color: #fff;
+        border: 2px dashed rgba(255,255,255,0.3);
+        padding: 5px;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 1em;
+        cursor: pointer;
+        outline: none;
     }
 
     /* Ultra-Realistic Chalkboard and Wood Grain Frame */
@@ -45,12 +77,12 @@
         border-image: repeating-linear-gradient(0deg, #5c2c16, #4a2210 20px, #6a351c 40px, #4a2210 60px) 22 stretch;
         
         border-radius: 12px;
-        color: rgba(245, 245, 245, 0.95);
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6), 0 0 4px rgba(255, 255, 255, 0.2);
+        color: rgba(245, 245, 245, 0.95); 
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6), 0 0 4px rgba(255, 255, 255, 0.2); 
         padding: 30px;
         box-shadow: 
-            inset 0px 0px 20px rgba(0,0,0,0.7),
-            12px 15px 25px rgba(0, 0, 0, 0.4);
+            inset 0px 0px 20px rgba(0,0,0,0.7), 
+            12px 15px 25px rgba(0, 0, 0, 0.4); 
         position: relative;
     }
 
@@ -69,7 +101,7 @@
     }
     
     h1 { color: #fff; font-size: 2.2em; }
-    h2 { color: #ffe699; font-size: 1.8em; }
+    h2 { color: #ffe699; font-size: 1.8em; } 
 
     p {
         font-size: 1.2em;
@@ -137,32 +169,46 @@
         color: #fff !important;
         text-shadow: 0 0 10px rgba(255,255,255,0.8) !important;
     }
+
+    .goal-item {
+        text-align: left;
+        padding-left: 20px;
+    }
 </style>
 </head>
 <body>
 
     <div class="studio-wall">
 
-        <div class="chalkboard">
-            <h1>Welcome to My Chalkboard!</h1>
-            <p>This is where I'll keep all the fun things I'm working on! Come back here and tell me what you want to add or edit next!</p>
+        <div class="lang-menu-container">
+            <span class="lang-label" id="lang-label">Language:</span>
+            <select class="lang-select" id="language-picker" onchange="changeLanguage(this.value)">
+                <option value="en">English</option>
+                <option value="at">Österreichisch (Austrian)</option>
+                <option value="es">Español</option>
+            </select>
         </div>
 
         <div class="chalkboard">
-            <h2>Granny's Corner</h2>
+            <h1 id="welcome-title">Welcome to My Chalkboard!</h1>
+            <p id="welcome-desc">This is where I'll keep all the fun things I'm working on! Come back here and tell me what you want to add or edit next!</p>
+        </div>
+
+        <div class="chalkboard">
+            <h2 id="granny-title">Granny's Corner</h2>
             <div class="board-list">
                 <div class="board-item">
                     <div class="wood-frame">
                         <img src="granny_icon.png" alt="Granny Logo">
                     </div>
-                    <a href="granny.html" class="chalk-link granny-link">Enter Granny's House</a>
+                    <a href="granny.html" class="chalk-link granny-link" id="granny-btn">Enter Granny's House</a>
                 </div>
             </div>
-            <p style="font-size: 1em; margin-top: 15px; color: #ff9999;">⚠️ She hears everything... watch your step!</p>
+            <p style="font-size: 1em; margin-top: 15px; color: #ff9999;" id="granny-warning">⚠️ She hears everything... watch your step!</p>
         </div>
 
         <div class="chalkboard" id="socials-chalkboard">
-            <h2>My Creative Studio Socials</h2>
+            <h2 id="socials-title">My Creative Studio Socials</h2>
             <div class="board-list">
 
                 <div class="board-item">
@@ -190,19 +236,90 @@
         </div>
 
         <div class="chalkboard">
-            <h2>Stream & Content Schedule</h2>
-            <p style="color: #ccffcc;">Stay tuned for active upload and streaming days!</p>
-            <p style="font-size: 1em; color: #ffeb99;">[ Scribble a schedule or milestone notes here later ]</p>
+            <h2 id="schedule-title">Stream & Content Schedule</h2>
+            <p style="color: #ccffcc;" id="schedule-desc">Stay tuned for active upload and streaming days!</p>
+            <p style="font-size: 1em; color: #ffeb99;" id="schedule-placeholder">[ Scribble a schedule or milestone notes here later ]</p>
         </div>
 
         <div class="chalkboard">
-            <h2>Next Project Ideas</h2>
-            <p style="text-align: left; padding-left: 20px; color: #ffccff;">✓ Hooked up granny.html with local image asset</p>
-            <p style="text-align: left; padding-left: 20px; color: #ccffcc;">⏳ Design the inner granny.html page</p>
-            <p style="text-align: left; padding-left: 20px; color: #ffeb99;">⏳ Drop in your next idea here...</p>
+            <h2 id="ideas-title">Next Project Ideas</h2>
+            <p class="goal-item" style="color: #ffccff;" id="idea-1">✓ Hooked up granny.html with local image asset</p>
+            <p class="goal-item" style="color: #ccffcc;" id="idea-2">⏳ Design the inner granny.html page</p>
+            <p class="goal-item" style="color: #ffeb99;" id="idea-3">⏳ Drop in your next idea here...</p>
         </div>
 
     </div>
 
+    <script>
+        const translations = {
+            en: {
+                langLabel: "Language:",
+                welcomeTitle: "Welcome to My Chalkboard!",
+                welcomeDesc: "This is where I'll keep all the fun things I'm working on! Come back here and tell me what you want to add or edit next!",
+                grannyTitle: "Granny's Corner",
+                grannyBtn: "Enter Granny's House",
+                grannyWarning: "⚠️ She hears everything... watch your step!",
+                socialsTitle: "My Creative Studio Socials",
+                scheduleTitle: "Stream & Content Schedule",
+                scheduleDesc: "Stay tuned for active upload and streaming days!",
+                schedulePlaceholder: "[ Scribble a schedule or milestone notes here later ]",
+                ideasTitle: "Next Project Ideas",
+                idea1: "✓ Hooked up granny.html with local image asset",
+                idea2: "⏳ Design the inner granny.html page",
+                idea3: "⏳ Drop in your next idea here..."
+            },
+            at: {
+                langLabel: "Sprache:",
+                welcomeTitle: "Servus auf meiner Kreidetafel!",
+                welcomeDesc: "Da herinnen sammle ich all den fetzigen Kram, an dem ich gerade herumbastle! Schau einfach wieder vorbei und sag mir, was wir als Nächstes drantackern oder ändern sollen!",
+                grannyTitle: "Omas Eck",
+                grannyBtn: "Geh in Oma ihr Haus",
+                grannyWarning: "⚠️ Die hört absolut alles... pass bloß auf deine Haxn auf!",
+                socialsTitle: "Meine sozialen Netzwerke",
+                scheduleTitle: "Sende- & Contentplan",
+                scheduleDesc: "Bleib dran für die fixen Upload- und Streaming-Tage!",
+                schedulePlaceholder: "[ Kritzel später hier den Fahrplan oder Meilensteine hin ]",
+                ideasTitle: "Nächste Projektideen",
+                idea1: "✓ granny.html mit lokalem Bild verknüpft",
+                idea2: "⏳ Das Innere der granny.html Seite gestalten",
+                idea3: "⏳ Pack deine nächste Idee einfach hier dazu..."
+            },
+            es: {
+                langLabel: "Idioma:",
+                welcomeTitle: "¡Bienvenido a mi Pizarrón!",
+                welcomeDesc: "¡Aquí guardaré todas las cosas divertidas en las que estoy trabajando! ¡Regresa aquí y dime qué quieres agregar o editar después!",
+                grannyTitle: "El Rincón de Granny",
+                grannyBtn: "Entrar a la Casa de Granny",
+                grannyWarning: "⚠️ Ella lo escucha todo... ¡cuida tus pasos!",
+                socialsTitle: "Mis Redes del Estudio Creativo",
+                scheduleTitle: "Calendario de Transmisiones",
+                scheduleDesc: "¡Mantente al tanto para los días activos de videos y directos!",
+                schedulePlaceholder: "[ Escribe un horario o notas de metas aquí más tarde ]",
+                ideasTitle: "Próximas Ideas de Proyectos",
+                idea1: "✓ Conectado granny.html con archivo de imagen local",
+                idea2: "⏳ Diseñar la página interna granny.html",
+                idea3: "⏳ Pon tu próxima idea aquí...",
+            }
+        };
+
+        function changeLanguage(lang) {
+            const set = translations[lang] || translations['en'];
+            
+            document.getElementById('lang-label').innerText = set.langLabel;
+            document.getElementById('welcome-title').innerText = set.welcomeTitle;
+            document.getElementById('welcome-desc').innerText = set.welcomeDesc;
+            document.getElementById('granny-title').innerText = set.grannyTitle;
+            document.getElementById('granny-btn').innerText = set.grannyBtn;
+            document.getElementById('granny-warning').innerText = set.grannyWarning;
+            document.getElementById('socials-title').innerText = set.socialsTitle;
+            document.getElementById('schedule-title').innerText = set.scheduleTitle;
+            document.getElementById('schedule-desc').innerText = set.scheduleDesc;
+            document.getElementById('schedule-placeholder').innerText = set.schedulePlaceholder;
+            document.getElementById('ideas-title').innerText = set.ideasTitle;
+            document.getElementById('idea-1').innerText = set.idea1;
+            document.getElementById('idea-2').innerText = set.idea2;
+            document.getElementById('idea-3').innerText = set.idea3;
+        }
+    </script>
 </body>
 </html>
