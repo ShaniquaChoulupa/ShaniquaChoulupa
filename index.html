@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Creative Chalkboard Studio</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        /* Fun, Bright, Pastel Rainbow Background */
+        background: linear-gradient(135deg, #FFB3BA, #FFDFBA, #FFFFBA, #BAFFC9, #BAE1FF, #D0BAFF); 
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+
+    .chalkboard {
+        background-color: #333;
+        /* Simulated Wooden Border */
+        border: 20px solid;
+        border-image: url('data:image/svg+xml;charset=utf-8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="%238B4513"/></svg>') 20 stretch; 
+        border-radius: 15px;
+        color: #f0f0f0;
+        padding: 20px;
+        width: 80%;
+        max-width: 800px;
+        margin: 20px auto;
+        box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    h1, h2 {
+        text-align: center;
+        color: #fff;
+    }
+
+    .social-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #555;
+        padding-bottom: 15px;
+    }
+
+    .social-link {
+        font-size: 1.8em;
+        text-decoration: none;
+        color: #00BFFF; /* Chalk Blue */
+        font-weight: bold;
+    }
+
+    .social-link:hover {
+        color: #FF69B4; /* Chalk Pink on hover */
+    }
+
+    .profile-frame {
+        width: 80px;
+        height: 80px;
+        border: 8px solid #8B4513; /* Wooden Frame for PFP */
+        border-radius: 8px;
+        overflow: hidden;
+        margin-right: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+        background-color: #555;
+    }
+
+    .profile-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+</head>
+<body>
+
+    <div class="chalkboard">
+        <h1>Welcome to My Chalkboard!</h1>
+        <p>This is where I'll keep all the fun things I'm working on! Come back here and tell me what you want to add or edit next!</p>
+    </div>
+
+    <div class="chalkboard" id="socials-chalkboard">
+        <h2>My Creative Studio Socials</h2>
+
+        <div class="social-item">
+            <div class="profile-frame">
+                <img src="https://yt3.googleusercontent.com/POKwmI3ynJ3ozLspb19iALs652zdBzm3nHcMPAKd2qYVIh3nK1kD7MEqRGWd51FGgzv1kfu3Fw=s160-c-k-c0x00ffffff-no-rj" alt="X PFP">
+            </div>
+            <a href="https://x.com/boogybunz?s=11" class="social-link" target="_blank">X</a>
+        </div>
+
+        <div class="social-item">
+            <div class="profile-frame">
+                <img src="https://yt3.googleusercontent.com/POKwmI3ynJ3ozLspb19iALs652zdBzm3nHcMPAKd2qYVIh3nK1kD7MEqRGWd51FGgzv1kfu3Fw=s160-c-k-c0x00ffffff-no-rj" alt="YouTube PFP">
+            </div>
+            <a href="https://youtube.com/@boogybunz?si=tosvdsOepbzazPAP" class="social-link" target="_blank">YouTube</a>
+        </div>
+
+        <div class="social-item">
+            <div class="profile-frame">
+                <img src="https://p19-common-sign.tiktokcdn-us.com/tos-useast8-avt-0068-tx2/1650acf60dc81df7488861dbfaebabed~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=9640&refresh_token=69f9653b&x-expires=1783137600&x-signature=cTzkQUmNOby%2B19AeJ6oScf6EtEE%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=useast5" alt="TikTok PFP">
+            </div>
+            <a href="https://www.tiktok.com/@brandinittie?_r=1&_t=ZP-97gg9jo0sQw" class="social-link" target="_blank">TikTok</a>
+        </div>
+    </div>
+
+</body>
+</html>
