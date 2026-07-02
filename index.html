@@ -175,7 +175,7 @@
         padding-left: 20px;
     }
 
-    /* New Dedicated Notice Board Style Inside the Chalkboard Frame */
+    /* Dedicated Notice Board Style Inside the Chalkboard Frame */
     .bulletin-board-backing {
         background-color: #dfb17b;
         background-image: radial-gradient(rgba(0,0,0,0.15) 15%, transparent 16%),
@@ -194,7 +194,6 @@
 
     <div class="studio-wall">
 
-        <!-- Language Picker Dropdown Menu -->
         <div class="lang-menu-container">
             <span class="lang-label" id="lang-label">Language:</span>
             <select class="lang-select" id="language-picker" onchange="changeLanguage(this.value)">
@@ -205,13 +204,11 @@
             </select>
         </div>
 
-        <!-- CHALKBOARD 1: Welcome Board -->
         <div class="chalkboard">
             <h1 id="welcome-title">Welcome to My Chalkboard!</h1>
             <p id="welcome-desc">This is where I'll keep all the fun things I'm working on! Come back here and tell me what you want to add or edit next!</p>
         </div>
 
-        <!-- CHALKBOARD 2: Granny Feature Board -->
         <div class="chalkboard">
             <h2 id="granny-title">Granny's Corner</h2>
             <div class="board-list">
@@ -225,12 +222,10 @@
             <p style="font-size: 1em; margin-top: 15px; color: #ff9999;" id="granny-warning">⚠️ She hears everything... watch your step!</p>
         </div>
 
-        <!-- CHALKBOARD 3: Social Media Hub -->
         <div class="chalkboard" id="socials-chalkboard">
             <h2 id="socials-title">My Creative Studio Socials</h2>
             <div class="board-list">
 
-                <!-- X (Twitter) -->
                 <div class="board-item">
                     <div class="wood-frame">
                         <img src="https://yt3.googleusercontent.com/POKwmI3ynJ3ozLspb19iALs652zdBzm3nHcMPAKd2qYVIh3nK1kD7MEqRGWd51FGgzv1kfu3Fw=s160-c-k-c0x00ffffff-no-rj" alt="X PFP">
@@ -238,7 +233,6 @@
                     <a href="https://x.com/boogybunz?s=11" class="chalk-link x-link" target="_blank">X</a>
                 </div>
 
-                <!-- YouTube -->
                 <div class="board-item">
                     <div class="wood-frame">
                         <img src="https://yt3.googleusercontent.com/POKwmI3ynJ3ozLspb19iALs652zdBzm3nHcMPAKd2qYVIh3nK1kD7MEqRGWd51FGgzv1kfu3Fw=s160-c-k-c0x00ffffff-no-rj" alt="YouTube PFP">
@@ -246,7 +240,6 @@
                     <a href="https://youtube.com/@boogybunz?si=tosvdsOepbzazPAP" class="chalk-link yt-link" target="_blank">YouTube</a>
                 </div>
 
-                <!-- TikTok -->
                 <div class="board-item">
                     <div class="wood-frame">
                         <img src="https://p19-common-sign.tiktokcdn-us.com/tos-useast8-avt-0068-tx2/1650acf60dc81df7488861dbfaebabed~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=9640&refresh_token=69f9653b&x-expires=1783137600&x-signature=cTzkQUmNOby%2B19AeJ6oScf6EtEE%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=useast5" alt="TikTok PFP">
@@ -257,14 +250,12 @@
             </div>
         </div>
 
-        <!-- CHALKBOARD 4: Community Board / Stream Schedule -->
         <div class="chalkboard">
             <h2 id="schedule-title">Stream & Content Schedule</h2>
             <p style="color: #ccffcc;" id="schedule-desc">Stay tuned for active upload and streaming days!</p>
             <p style="font-size: 1em; color: #ffeb99;" id="schedule-placeholder">[ Scribble a schedule or milestone notes here later ]</p>
         </div>
 
-        <!-- CHALKBOARD 5: Future Ideas / Scrapbook -->
         <div class="chalkboard">
             <h2 id="ideas-title">Next Project Ideas</h2>
             <p class="goal-item" style="color: #ffccff;" id="idea-1">✓ Hooked up granny.html with local image asset</p>
@@ -272,19 +263,15 @@
             <p class="goal-item" style="color: #ffeb99;" id="idea-3">⏳ Drop in your next idea here...</p>
         </div>
 
-        <!-- CHALKBOARD 6: Live Anonymous Sticky Note Board -->
         <div class="chalkboard">
             <h2 id="anon-title">Anonymous Sticky Notes</h2>
             <p id="anon-desc" style="color: #ffe699; font-size: 1.1em; text-align: center;">Click below to leave a message right on the chalkboard!</p>
             
-            <!-- Dedicated Inner Cork/Notice Board Container -->
             <div class="bulletin-board-backing">
                 <div id="sticky-note-wall" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; min-height: 120px; align-items: center;">
-                    <!-- Notes will load here dynamically -->
-                </div>
+                    </div>
             </div>
 
-            <!-- Note Submission Form -->
             <form id="sticky-form" style="display: flex; gap: 10px; margin-top: 20px; justify-content: center;">
                 <input type="text" id="sticky-input" placeholder="Scribble a note..." maxlength="60" required 
                     style="width: 70%; background: rgba(0,0,0,0.3); border: 2px dashed rgba(255,255,255,0.4); border-radius: 4px; padding: 10px; color: #fff; font-family: inherit; outline: none; font-size: 1.1em;">
@@ -297,10 +284,8 @@
 
     </div>
 
-    <!-- Include the Supabase JS Library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- Translation Engine & Database Script -->
     <script>
         // Database credentials connected to your project account
         const SUPABASE_URL = "https://vnqastfkkjsnealijlz.supabase.co";
@@ -358,23 +343,35 @@
             });
         }
 
+        // Direct HTTP Fetch Request to guarantee delivery and extract exact errors
         document.getElementById('sticky-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const input = document.getElementById('sticky-input');
             const userMessage = input.value.trim();
 
-            if (userMessage) {
-                const { error } = await supabaseClient
-                    .from('sticky_notes')
-                    .insert([{ message: userMessage }]);
+            if (!userMessage) return;
 
-                if (error) {
-                    alert('Oops, couldn\'t stick your note!');
-                    console.error(error);
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/sticky_notes`, {
+                    method: 'POST',
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                        'Content-Type': 'application/json',
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify({ message: userMessage })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    alert(`Database Error: ${errorData.message || response.statusText}`);
                 } else {
                     input.value = ''; 
                     loadStickyNotes(); 
                 }
+            } catch (err) {
+                alert(`Connection Failed: ${err.message}`);
             }
         });
 
@@ -384,109 +381,3 @@
                 langLabel: "Language:",
                 welcomeTitle: "Welcome to My Chalkboard!",
                 welcomeDesc: "This is where I'll keep all the fun things I'm working on! Come back here and tell me what you want to add or edit next!",
-                grannyTitle: "Granny's Corner",
-                grannyBtn: "Enter Granny's House",
-                grannyWarning: "⚠️ She hears everything... watch your step!",
-                socialsTitle: "My Creative Studio Socials",
-                scheduleTitle: "Stream & Content Schedule",
-                scheduleDesc: "Stay tuned for active upload and streaming days!",
-                schedulePlaceholder: "[ Scribble a schedule or milestone notes here later ]",
-                ideasTitle: "Next Project Ideas",
-                idea1: "✓ Hooked up granny.html with local image asset",
-                idea2: "⏳ Design the inner granny.html page",
-                idea3: "⏳ Drop in your next idea here...",
-                anonTitle: "Anonymous Sticky Notes",
-                anonDesc: "Click below to leave a message right on the chalkboard!",
-                stickyBtn: "Stick It!",
-                stickyPlaceholder: "Scribble a note..."
-            },
-            at: {
-                langLabel: "Sprache:",
-                welcomeTitle: "Servus auf meiner Kreidetafel!",
-                welcomeDesc: "Da herinnen sammle ich all den fetzigen Kram, an dem ich gerade herumbastle! Schau einfach wieder vorbei und sag mir, was wir als Nächstes drantackern oder ändern sollen!",
-                grannyTitle: "Omas Eck",
-                grannyBtn: "Geh in Oma ihr Haus",
-                grannyWarning: "⚠️ Die hört absolut alles... pass bloß auf deine Haxn auf!",
-                socialsTitle: "Meine sozialen Netzwerke",
-                scheduleTitle: "Sende- & Contentplan",
-                scheduleDesc: "Bleib dran für die fixen Upload- und Streaming-Tage!",
-                schedulePlaceholder: "[ Kritzel später hier den Fahrplan oder Meilensteine hin ]",
-                ideasTitle: "Nächste Projektideen",
-                idea1: "✓ granny.html mit lokalem Bild verknüpft",
-                idea2: "⏳ Das Innere der granny.html Seite gestalten",
-                idea3: "⏳ Pack deine nächste Idee einfach hier dazu...",
-                anonTitle: "Anonyme Zettelwirtschaft",
-                anonDesc: "Hau unten einen Text rein und kleb deinen Zettel auf die Tafel!",
-                stickyBtn: "Anpicken!",
-                stickyPlaceholder: "Schreib was auf..."
-            },
-            noe: {
-                langLabel: "Sproch:",
-                welcomeTitle: "Grias di auf meiner Kraidntofl!",
-                welcomeDesc: "Da drinnen hob i oin den leiwandn Kram, an dem i grod herumwurschtl! Schau hoid amoi vorbei und sog ma, wos ma ois Nächstes auffetackan oda ändern soin!",
-                grannyTitle: "Oma ihr Eckn",
-                grannyBtn: "Hupf in d'Hüttn von da Oma",
-                grannyWarning: "⚠️ De lodschte Hex head ois... pass ma gscheit auf deine Haxn auf!",
-                socialsTitle: "Meine Kanäle",
-                scheduleTitle: "Sende- & Video-Plan",
-                scheduleDesc: "Bleib gspannt auf de Fixitoge für d'Uploads und d'Streams!",
-                schedulePlaceholder: "[ Schmier speda do den Sprossnplan oda Zünotizn hin ]",
-                ideasTitle: "Nächste Ideen",
-                idea1: "✓ granny.html mid an lokaln Büdl zammghängt",
-                idea2: "⏳ Des Innere vo da granny.html Seitn herrichtn",
-                idea3: "⏳ Hau dei nächste Idee afoch do drunter...",
-                anonTitle: "Anonyme Zettln",
-                anonDesc: "Schreib afoch wos kurz auf und pick dein Zettel direkt auf d'Tofl!",
-                stickyBtn: "Haufnpicken!",
-                stickyPlaceholder: "Schmier wos hin..."
-            },
-            es: {
-                langLabel: "Idioma:",
-                welcomeTitle: "¡Bienvenido a mi Pizarrón!",
-                welcomeDesc: "¡Aquí guardaré todas las cosas divertidas en las que estoy trabajando! ¡Regresa aquí y dime qué quieres agregar o editar después!",
-                grannyTitle: "El Rincón de Granny",
-                grannyBtn: "Entrar a la Casa de Granny",
-                grannyWarning: "⚠️ Ella lo escucha todo... ¡cuida tus pasos!",
-                socialsTitle: "Mis Redes del Estudio Creativo",
-                scheduleTitle: "Calendario de Transmisiones",
-                scheduleDesc: "¡Mantente al tanto para los días activos de videos y directos!",
-                schedulePlaceholder: "[ Escribe un horario o notas de metas aquí más tarde ]",
-                ideasTitle: "Próximas Ideas de Proyectos",
-                idea1: "✓ Conectado granny.html con archivo de imagen local",
-                idea2: "⏳ Diseñar la página interna granny.html",
-                idea3: "⏳ Pon tu próxima idea aquí...",
-                anonTitle: "Notas Adhesivas Anónimas",
-                anonDesc: "¡Haz clic abajo para dejar un mensaje en el pizarrón!",
-                stickyBtn: "¡Pegar!",
-                stickyPlaceholder: "Escribe una nota..."
-            }
-        };
-
-        function changeLanguage(lang) {
-            const set = translations[lang] || translations['en'];
-            
-            document.getElementById('lang-label').innerText = set.langLabel;
-            document.getElementById('welcome-title').innerText = set.welcomeTitle;
-            document.getElementById('welcome-desc').innerText = set.welcomeDesc;
-            document.getElementById('granny-title').innerText = set.grannyTitle;
-            document.getElementById('granny-btn').innerText = set.grannyBtn;
-            document.getElementById('granny-warning').innerText = set.grannyWarning;
-            document.getElementById('socials-title').innerText = set.socialsTitle;
-            document.getElementById('schedule-title').innerText = set.scheduleTitle;
-            document.getElementById('schedule-desc').innerText = set.scheduleDesc;
-            document.getElementById('schedule-placeholder').innerText = set.schedulePlaceholder;
-            document.getElementById('ideas-title').innerText = set.ideasTitle;
-            document.getElementById('idea-1').innerText = set.idea1;
-            document.getElementById('idea-2').innerText = set.idea2;
-            document.getElementById('idea-3').innerText = set.idea3;
-            document.getElementById('anon-title').innerText = set.anonTitle;
-            document.getElementById('anon-desc').innerText = set.anonDesc;
-            document.getElementById('sticky-btn').innerText = set.stickyBtn;
-            document.getElementById('sticky-input').placeholder = set.stickyPlaceholder;
-        }
-
-        // Initialize on load
-        loadStickyNotes();
-    </script>
-</body>
-</html>
