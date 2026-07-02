@@ -80,15 +80,15 @@
         text-align: center;
     }
 
-    /* Social Items List */
-    .social-list {
+    /* List Structures inside boards */
+    .board-list {
         display: flex;
         flex-direction: column;
         gap: 25px;
         margin-top: 20px;
     }
 
-    .social-item {
+    .board-item {
         display: flex;
         align-items: center;
         background: rgba(255, 255, 255, 0.04);
@@ -98,13 +98,13 @@
         transition: transform 0.2s ease, background 0.2s ease;
     }
 
-    .social-item:hover {
+    .board-item:hover {
         transform: scale(1.02);
         background: rgba(255, 255, 255, 0.08);
     }
 
-    /* Realistic Wood Frame for Profile Pics */
-    .profile-frame {
+    /* Realistic Wood Frame for Images */
+    .wood-frame {
         width: 85px;
         height: 85px;
         border: 8px solid #5c2c16;
@@ -117,28 +117,30 @@
         align-items: center;
         box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5), 4px 4px 8px rgba(0,0,0,0.6);
         background-color: #222;
+        flex-shrink: 0;
     }
 
-    .profile-frame img {
+    .wood-frame img {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
 
     /* Colorful Neon Chalk Links */
-    .social-link {
+    .chalk-link {
         font-size: 1.9em;
         text-decoration: none;
         font-weight: bold;
         transition: all 0.2s ease;
     }
 
-    /* Custom neon chalk colors for each platform */
+    /* Custom neon chalk colors */
     .x-link { color: #99ccff; text-shadow: 0 0 5px rgba(153,204,255,0.4); }
     .yt-link { color: #ff9999; text-shadow: 0 0 5px rgba(255,153,153,0.4); }
     .tt-link { color: #b3ffec; text-shadow: 0 0 5px rgba(179,255,236,0.4); }
+    .granny-link { color: #ffb3ff; text-shadow: 0 0 5px rgba(255,179,255,0.4); }
 
-    .social-link:hover {
+    .chalk-link:hover {
         color: #fff !important;
         text-shadow: 0 0 10px rgba(255,255,255,0.8) !important;
     }
@@ -153,38 +155,57 @@
             <p>This is where I'll keep all the fun things I'm working on! Come back here and tell me what you want to add or edit next!</p>
         </div>
 
+        <div class="chalkboard">
+            <h2>Granny's Corner</h2>
+            <div class="board-list">
+                <div class="board-item">
+                    <div class="wood-frame">
+                        <img src="https://static.wikia.nocookie.net/granny/images/c/ce/App_icon_v1.3.2%2B.png/revision/latest?cb=20210320221242" alt="Granny Logo">
+                    </div>
+                    <a href="granny.html" class="chalk-link granny-link">Enter Granny's House</a>
+                </div>
+            </div>
+            <p style="font-size: 1em; margin-top: 15px; color: #ff9999;">⚠️ She hears everything... watch your step!</p>
+        </div>
+
         <div class="chalkboard" id="socials-chalkboard">
             <h2>My Creative Studio Socials</h2>
-            <div class="social-list">
+            <div class="board-list">
 
-                <div class="social-item">
-                    <div class="profile-frame">
+                <div class="board-item">
+                    <div class="wood-frame">
                         <img src="https://yt3.googleusercontent.com/POKwmI3ynJ3ozLspb19iALs652zdBzm3nHcMPAKd2qYVIh3nK1kD7MEqRGWd51FGgzv1kfu3Fw=s160-c-k-c0x00ffffff-no-rj" alt="X PFP">
                     </div>
-                    <a href="https://x.com/boogybunz?s=11" class="social-link x-link" target="_blank">X</a>
+                    <a href="https://x.com/boogybunz?s=11" class="chalk-link x-link" target="_blank">X</a>
                 </div>
 
-                <div class="social-item">
-                    <div class="profile-frame">
+                <div class="board-item">
+                    <div class="wood-frame">
                         <img src="https://yt3.googleusercontent.com/POKwmI3ynJ3ozLspb19iALs652zdBzm3nHcMPAKd2qYVIh3nK1kD7MEqRGWd51FGgzv1kfu3Fw=s160-c-k-c0x00ffffff-no-rj" alt="YouTube PFP">
                     </div>
-                    <a href="https://youtube.com/@boogybunz?si=tosvdsOepbzazPAP" class="social-link yt-link" target="_blank">YouTube</a>
+                    <a href="https://youtube.com/@boogybunz?si=tosvdsOepbzazPAP" class="chalk-link yt-link" target="_blank">YouTube</a>
                 </div>
 
-                <div class="social-item">
-                    <div class="profile-frame">
+                <div class="board-item">
+                    <div class="wood-frame">
                         <img src="https://p19-common-sign.tiktokcdn-us.com/tos-useast8-avt-0068-tx2/1650acf60dc81df7488861dbfaebabed~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=9640&refresh_token=69f9653b&x-expires=1783137600&x-signature=cTzkQUmNOby%2B19AeJ6oScf6EtEE%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=useast5" alt="TikTok PFP">
                     </div>
-                    <a href="https://www.tiktok.com/@brandinittie?_r=1&_t=ZP-97gg9jo0sQw" class="social-link tt-link" target="_blank">TikTok</a>
+                    <a href="https://www.tiktok.com/@brandinittie?_r=1&_t=ZP-97gg9jo0sQw" class="chalk-link tt-link" target="_blank">TikTok</a>
                 </div>
 
             </div>
         </div>
 
         <div class="chalkboard">
+            <h2>Stream & Content Schedule</h2>
+            <p style="color: #ccffcc;">Stay tuned for active upload and streaming days!</p>
+            <p style="font-size: 1em; color: #ffeb99;">[ Scribble a schedule or milestone notes here later ]</p>
+        </div>
+
+        <div class="chalkboard">
             <h2>Next Project Ideas</h2>
-            <p style="text-align: left; padding-left: 20px; color: #ffccff;">✓ Upgraded to realistic wood & slate</p>
-            <p style="text-align: left; padding-left: 20px; color: #ccffcc;">⏳ Add image paths for X and YouTube</p>
+            <p style="text-align: left; padding-left: 20px; color: #ffccff;">✓ Hooked up granny.html with custom icon frame</p>
+            <p style="text-align: left; padding-left: 20px; color: #ccffcc;">⏳ Design the inner granny.html page</p>
             <p style="text-align: left; padding-left: 20px; color: #ffeb99;">⏳ Drop in your next idea here...</p>
         </div>
 
