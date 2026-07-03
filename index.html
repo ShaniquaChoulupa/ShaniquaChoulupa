@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Creative Chalkboard Studio</title>
 <style>
-    /* iOS 6 Linen Style Background texture */
+    /* ==========================================
+       1. GLOBAL BASE STYLES & LAYOUT
+       ========================================== */
     body {
         margin: 0;
         padding: 40px;
@@ -13,122 +15,75 @@
         flex-direction: column;
         align-items: center;
         min-height: 100vh;
-        background-color: #2e3138;
-        background-image: 
-            radial-gradient(rgba(255,255,255,0.15) 1px, transparent 0),
-            radial-gradient(rgba(0,0,0,0.3) 1px, transparent 0);
-        background-size: 4px 4px;
-        background-position: 0 0, 2px 2px;
-        font-family: 'Marker Felt', 'Comic Sans MS', sans-serif;
         box-sizing: border-box;
-        color: #fff;
+        transition: background 0.5s ease, color 0.5s ease;
     }
 
-    /* 3x3 Skeuomorphic Grid Layout */
+    /* Controls the top bar layout for selectors */
+    .controls-wrapper {
+        width: 100%;
+        max-width: 1300px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+
+    /* Dropdown UI Containers */
+    .menu-container {
+        padding: 8px 16px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+    }
+
+    .menu-label {
+        font-weight: bold;
+        font-size: 0.95em;
+    }
+
+    .menu-select {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        cursor: pointer;
+        outline: none;
+    }
+
+    /* 3x3 Grid Matrix System */
     .studio-wall {
         width: 100%;
         max-width: 1300px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 30px; 
-        margin-top: 25px;
+    }
+
+    .welcome-card, .bottom-spanner {
+        grid-column: span 3;
     }
 
     @media (max-width: 1024px) {
         .studio-wall { grid-template-columns: repeat(2, 1fr); }
+        .welcome-card, .bottom-spanner { grid-column: span 2; }
     }
     @media (max-width: 768px) {
         .studio-wall { grid-template-columns: 1fr; }
+        .welcome-card, .bottom-spanner { grid-column: span 1; }
     }
 
-    /* iOS 6 Glossy Silver / Aluminum Language Bar */
-    .lang-menu-container {
-        align-self: flex-end;
-        background: linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 50%, #dddddd 50%, #cfcfcf 100%);
-        border: 1px solid #a6a6a6;
-        border-top-color: #b3b3b3;
-        border-bottom-color: #8c8c8c;
-        border-radius: 4px;
-        padding: 8px 16px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 #fff;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .lang-label {
-        color: #4c566c;
-        font-weight: bold;
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        text-shadow: 0 1px 0 #fff;
-        font-size: 0.95em;
-    }
-
-    .lang-select {
-        background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%);
-        color: #333;
-        border: 1px solid #abafb3;
-        padding: 4px 8px;
-        border-radius: 3px;
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: 0.9em;
-        cursor: pointer;
-        outline: none;
-        box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
-    }
-
-    /* Apple Skeuomorphic Heavy-Border Chalkboard */
     .chalkboard {
-        background: radial-gradient(circle at 50% 30%, #2f4f3e, #1b3327);
-        border: 14px solid #4a2711;
-        border-image: repeating-linear-gradient(45deg, #3d1f0d, #542d15 15px, #3d1f0d 30px) 14 stretch;
-        border-radius: 8px;
-        color: rgba(255, 255, 255, 0.95); 
-        text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8); 
         padding: 25px;
-        box-shadow: 
-            inset 0px 0px 15px rgba(0,0,0,0.6), 
-            0 8px 16px rgba(0, 0, 0, 0.5); 
+        border-radius: 8px;
         position: relative;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        transition: transform 0.2s ease;
-    }
-
-    .chalkboard:hover {
-        transform: scale(1.01);
-    }
-
-    /* Welcome Banner Spans 3 Columns */
-    .welcome-card {
-        grid-column: span 3;
-    }
-    @media (max-width: 1024px) { .welcome-card { grid-column: span 2; } }
-    @media (max-width: 768px) { .welcome-card { grid-column: span 1; } }
-
-    /* Yellow Legal Notepad Style for Project Ideas */
-    .notepad-card {
-        background: #fbf6d9;
-        background-image: linear-gradient(rgba(0,0,0,0.05) 1px, transparent 0);
-        background-size: 100% 28px;
-        border: 1px solid #e3dbb3;
-        border-radius: 6px;
-        box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-        color: #1a2332;
-        text-shadow: none;
-        padding: 30px 25px 25px 45px; /* Wide left padding for margin line */
-        position: relative;
-        font-family: 'Noteworthy', 'Chalkboard SE', sans-serif;
-    }
-
-    /* Yellow Notepad Red Margin Line */
-    .notepad-card::before {
-        content: '';
-        position: absolute;
-        top: 0; bottom: 0; left: 35px;
-        width: 1px;
-        border-left: 1px solid #ff9999;
+        transition: all 0.3s ease;
     }
 
     h1, h2 {
@@ -136,22 +91,12 @@
         margin-top: 0;
         letter-spacing: 0.5px;
     }
-    
-    h1 { color: #fff; font-size: 2.3em; }
-    h2 { color: #ffe699; font-size: 1.7em; } 
-    .notepad-card h2 { 
-        color: #3b5998; 
-        font-size: 1.6em;
-        border-bottom: 2px solid #3b5998;
-        padding-bottom: 5px;
-    }
 
     p {
         font-size: 1.15em;
         line-height: 1.5;
         text-align: center;
     }
-    .notepad-card p { text-align: left; }
 
     .board-list {
         display: flex;
@@ -161,30 +106,23 @@
         margin-top: 10px;
     }
 
-    /* iOS Stitching / Inset Row look */
     .board-item {
         display: flex;
         align-items: center;
-        background: rgba(0, 0, 0, 0.15);
-        padding: 10px 15px;
-        border-radius: 6px;
-        border: 1px dashed rgba(255, 255, 255, 0.1);
-        box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+        padding: 12px 18px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
     }
 
-    /* App Icon Frame */
     .wood-frame {
         width: 55px;
         height: 55px;
-        border: 2px solid #fff;
         border-radius: 10px;
         overflow: hidden;
         margin-right: 15px;
         display: flex;
         justify-content: center;
         align-items: center;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-        background-color: #111;
         flex-shrink: 0;
     }
 
@@ -198,36 +136,168 @@
         font-size: 1.4em;
         text-decoration: none;
         font-weight: bold;
-        transition: color 0.2s ease;
-    }
-
-    /* Classic bright chalk colors */
-    .x-link { color: #99ccff; }
-    .yt-link { color: #ff9999; }
-    .tt-link { color: #b3ffec; }
-    .granny-link { color: #ffb3ff; }
-
-    .chalk-link:hover {
-        color: #fff !important;
-        text-shadow: 0 0 8px rgba(255,255,255,0.7) !important;
+        transition: color 0.2s ease, text-shadow 0.2s ease;
     }
 
     .goal-item {
-        line-height: 28px !important; /* Locks text directly to legal pad lines */
-        margin: 0;
+        margin: 8px 0;
         font-size: 1.1em;
         font-weight: bold;
-        color: #2b3e56;
     }
+
+    /* ==========================================
+       2. THEME 1: OLD PASTEL RAINBOW
+       ========================================== */
+    body.theme-pastel {
+        background: linear-gradient(45deg, #FFB3BA, #FFDFBA, #FFFFBA, #BAFFC9, #BAE1FF, #D0BAFF, #FFB3BA);
+        background-size: 400% 400%;
+        animation: rainbowFade 16s ease infinite;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        color: rgba(245, 245, 245, 0.95);
+    }
+    @keyframes rainbowFade {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .theme-pastel .menu-container {
+        background: #2b3a32;
+        border: 4px solid #5c2c16;
+    }
+    .theme-pastel .menu-label { color: #ffe699; }
+    .theme-pastel .menu-select { background: #333; color: #fff; border: 1px dashed rgba(255,255,255,0.3); }
+    .theme-pastel .chalkboard, .theme-pastel .notepad-card {
+        background: radial-gradient(circle at 50% 30%, rgba(55, 75, 65, 0.9), rgba(35, 45, 40, 0.95)), #2b3a32;
+        border: 14px solid #5c2c16;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+        box-shadow: inset 0px 0px 20px rgba(0,0,0,0.7), 6px 8px 15px rgba(0,0,0,0.3);
+    }
+    .theme-pastel h1 { color: #fff; }
+    .theme-pastel h2 { color: #ffe699; }
+    .theme-pastel .board-item { background: rgba(255, 255, 255, 0.04); border: 1px dashed rgba(255, 255, 255, 0.15); }
+    .theme-pastel .board-item:hover { transform: scale(1.02); background: rgba(255, 255, 255, 0.08); }
+    .theme-pastel .wood-frame { border: 4px solid #5c2c16; background-color: #222; }
+    .theme-pastel .x-link { color: #99ccff; }
+    .theme-pastel .yt-link { color: #ff9999; }
+    .theme-pastel .tt-link { color: #b3ffec; }
+    .theme-pastel .granny-link { color: #ffb3ff; }
+    .theme-pastel .goal-item { text-align: center; color: #ffeb99; }
+
+    /* ==========================================
+       3. THEME 2: CYBER NEON GLASS
+       ========================================== */
+    body.theme-cyber {
+        background: linear-gradient(-45deg, #0f172a, #1e1b4b, #2e1065, #0f172a);
+        background-size: 400% 400%;
+        animation: cyberPulse 12s ease infinite;
+        font-family: 'Segoe UI', sans-serif;
+        color: #f8fafc;
+    }
+    @keyframes cyberPulse {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .theme-cyber .menu-container {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50px;
+    }
+    .theme-cyber .menu-label { color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
+    .theme-cyber .menu-select { background: #0f172a; color: #f1f5f9; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; }
+    .theme-cyber .chalkboard, .theme-cyber .notepad-card {
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    .theme-cyber .chalkboard:hover, .theme-cyber .notepad-card:hover { transform: translateY(-4px); }
+    .theme-cyber h1 { background: linear-gradient(to right, #ffffff, #cbd5e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .theme-cyber h2 { background: linear-gradient(to right, #fef08a, #fde047); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .theme-cyber p { color: #94a3b8; }
+    .theme-cyber .board-item { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; }
+    .theme-cyber .board-item:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.15); transform: translateX(6px); }
+    .theme-cyber .wood-frame { background-color: #0f172a; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; }
+    .theme-cyber .x-link { color: #38bdf8; }
+    .theme-cyber .yt-link { color: #f87171; }
+    .theme-cyber .tt-link { color: #2dd4bf; }
+    .theme-cyber .granny-link { color: #e879f9; }
+    .theme-cyber .board-item:hover .chalk-link { filter: drop-shadow(0 0 8px currentColor); }
+    .theme-cyber .goal-item { padding: 10px; background: rgba(255,255,255,0.02); border-left: 4px solid #64748b; border-radius: 0 8px 8px 0; }
+
+    /* ==========================================
+       4. THEME 3: SKEUOMORPHIC iOS 6 & NOTEPAD
+       ========================================== */
+    body.theme-ios6 {
+        background-color: #2e3138;
+        background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 0), radial-gradient(rgba(0,0,0,0.3) 1px, transparent 0);
+        background-size: 4px 4px;
+        background-position: 0 0, 2px 2px;
+        font-family: 'Marker Felt', 'Chalkboard SE', sans-serif;
+        color: #fff;
+    }
+    .theme-ios6 .menu-container {
+        background: linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 50%, #dddddd 50%, #cfcfcf 100%);
+        border: 1px solid #a6a6a6; border-top-color: #b3b3b3; border-bottom-color: #8c8c8c;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 #fff;
+    }
+    .theme-ios6 .menu-label { color: #4c566c; text-shadow: 0 1px 0 #fff; }
+    .theme-ios6 .menu-select { background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%); color: #333; border: 1px solid #abafb3; }
+    .theme-ios6 .chalkboard {
+        background: radial-gradient(circle at 50% 30%, #2f4f3e, #1b3327);
+        border: 14px solid #4a2711;
+        border-image: repeating-linear-gradient(45deg, #3d1f0d, #542d15 15px, #3d1f0d 30px) 14 stretch;
+        text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
+        box-shadow: inset 0px 0px 15px rgba(0,0,0,0.6), 0 8px 16px rgba(0, 0, 0, 0.5);
+    }
+    .theme-ios6 h1 { color: #fff; }
+    .theme-ios6 h2 { color: #ffe699; }
+    .theme-ios6 .board-item { background: rgba(0, 0, 0, 0.15); border: 1px dashed rgba(255, 255, 255, 0.1); box-shadow: inset 0 2px 4px rgba(0,0,0,0.4); }
+    .theme-ios6 .wood-frame { border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.5); background-color: #111; }
+    .theme-ios6 .x-link { color: #99ccff; }
+    .theme-ios6 .yt-link { color: #ff9999; }
+    .theme-ios6 .tt-link { color: #b3ffec; }
+    .theme-ios6 .granny-link { color: #ffb3ff; }
+    
+    /* Unique Notepad Styling in iOS 6 Theme */
+    .theme-ios6 .notepad-card {
+        background: #fbf6d9;
+        background-image: linear-gradient(rgba(0,0,0,0.05) 1px, transparent 0);
+        background-size: 100% 28px;
+        border: 1px solid #e3dbb3; border-radius: 6px;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+        color: #1a2332;
+        padding: 30px 25px 25px 45px;
+        font-family: 'Noteworthy', 'Helvetica Neue', sans-serif;
+    }
+    .theme-ios6 .notepad-card::before {
+        content: ''; position: absolute; top: 0; bottom: 0; left: 35px; width: 1px; border-left: 1px solid #ff9999;
+    }
+    .theme-ios6 .notepad-card h2 { color: #3b5998; border-bottom: 2px solid #3b5998; padding-bottom: 5px; text-shadow: none; }
+    .theme-ios6 .notepad-card .goal-item { line-height: 28px; margin: 0; color: #2b3e56; }
 </style>
 </head>
-<body>
+<body class="theme-ios6"> <!-- Default theme set to our new iOS 6 variant -->
 
-    <!-- Top Language Selection bar aligned grid width -->
-    <div style="width: 100%; max-width: 1300px; display: flex; justify-content: flex-end;">
-        <div class="lang-menu-container">
-            <span class="lang-label" id="lang-label">Language:</span>
-            <select class="lang-select" id="language-picker" onchange="changeLanguage(this.value)">
+    <!-- Top Action Toolbar -->
+    <div class="controls-wrapper">
+        
+        <!-- Theme Switcher Selector -->
+        <div class="menu-container">
+            <span class="menu-label">Theme:</span>
+            <select class="menu-select" id="theme-picker" onchange="changeTheme(this.value)">
+                <option value="theme-ios6">iOS 6 / Skeuomorphic</option>
+                <option value="theme-cyber">Cyber Neon / Glass</option>
+                <option value="theme-pastel">Classic Pastel Rainbow</option>
+            </select>
+        </div>
+
+        <!-- Language Selector -->
+        <div class="menu-container">
+            <span class="menu-label" id="lang-label">Language:</span>
+            <select class="menu-select" id="language-picker" onchange="changeLanguage(this.value)">
                 <option value="en">English</option>
                 <option value="at">Österreichisch (Standard Austrian)</option>
                 <option value="noe">Niederösterreichisch (Dialect)</option>
@@ -236,10 +306,10 @@
         </div>
     </div>
 
-    <!-- Main 3x3 Skeuomorphic Matrix -->
+    <!-- 3x3 Responsive Grid Content -->
     <div class="studio-wall">
 
-        <!-- Welcome Block (Top Spanner) -->
+        <!-- Welcome Banner -->
         <div class="chalkboard welcome-card">
             <div>
                 <h1 id="welcome-title">Welcome to My Chalkboard!</h1>
@@ -247,7 +317,7 @@
             </div>
         </div>
 
-        <!-- Granny's Corner -->
+        <!-- Granny's Area -->
         <div class="chalkboard">
             <div>
                 <h2 id="granny-title">Granny's Corner</h2>
@@ -263,7 +333,7 @@
             <p style="font-size: 0.95em; margin-top: 20px; color: #ff9999;" id="granny-warning">⚠️ She hears everything... watch your step!</p>
         </div>
 
-        <!-- Creative Studio Socials -->
+        <!-- Matrix Social Hub -->
         <div class="chalkboard" id="socials-chalkboard">
             <div>
                 <h2 id="socials-title">My Creative Studio Socials</h2>
@@ -292,7 +362,7 @@
             </div>
         </div>
 
-        <!-- Broadcast Schedule -->
+        <!-- Timetable Matrix -->
         <div class="chalkboard">
             <div>
                 <h2 id="schedule-title">Stream & Content Schedule</h2>
@@ -301,8 +371,8 @@
             <p style="font-size: 1em; color: #ffeb99;" id="schedule-placeholder">[ Scribble a schedule or milestone notes here later ]</p>
         </div>
 
-        <!-- Project Ideas Yellow Notepad Spans Full Width at Bottom -->
-        <div class="notepad-card" style="grid-column: span 3;">
+        <!-- Project Progression Tracker -->
+        <div class="notepad-card bottom-spanner">
             <h2 id="ideas-title">Next Project Ideas</h2>
             <div style="margin-top: 15px;">
                 <p class="goal-item" id="idea-1">✓ Hooked up granny.html with local image asset</p>
@@ -313,7 +383,15 @@
 
     </div>
 
+    <!-- ==========================================
+       5. INTERACTIVE JAVASCRIPT LOGIC
+       ========================================== */ -->
     <script>
+        // Runtime Dynamic Switcher Engine
+        function changeTheme(themeName) {
+            document.body.className = themeName;
+        }
+
         const translations = {
             en: {
                 langLabel: "Language:",
