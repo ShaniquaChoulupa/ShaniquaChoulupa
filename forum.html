@@ -96,16 +96,14 @@
     /* ==========================================
        2. ZOOMING CHALKBOARD FORUM COMPONENT
        ========================================== */
-    .forum-board-btn {
+    .chalkboard-card {
         padding: 0;
         background: none;
         border: none;
-        font-family: inherit;
-        color: inherit;
-        text-align: left;
         width: 100%;
         cursor: pointer;
         outline: none;
+        box-sizing: border-box;
     }
 
     .chalkboard {
@@ -121,7 +119,7 @@
         position: relative;
     }
 
-    .forum-board-btn:hover .chalkboard {
+    .chalkboard-card:hover .chalkboard {
         transform: translateY(-5px) scale(1.02);
     }
 
@@ -129,6 +127,7 @@
         margin: 0;
         font-size: 2em;
         letter-spacing: 0.5px;
+        text-align: center;
     }
 
     /* Hidden Internal View State */
@@ -182,6 +181,7 @@
         padding: 50px;
         justify-content: center;
         transform: none !important;
+        cursor: default; /* Stops pointer cursor when fully expanded */
     }
 
     .chalkboard.fullscreen-zoom .forum-title {
@@ -296,11 +296,11 @@
     <!-- Main Content Wall Matrix -->
     <div class="studio-wall">
 
-        <!-- Clickable Forum Board Button Element -->
-        <button class="forum-board-btn" onclick="openForum(this, event)">
+        <!-- Clickable Forum Board Card Element -->
+        <div class="chalkboard-card" onclick="openForum(this, event)" role="button" tabindex="0" onkeydown="if(event.key === 'Enter') openForum(this, event)">
             <div class="chalkboard" id="test-forum-board">
                 <!-- Smooth corner close element -->
-                <button class="forum-close-x" onclick="closeForum(this, event)">×</button>
+                <button class="forum-close-x" onclick="closeForum(this, event)" aria-label="Close forum">×</button>
                 
                 <h2 class="forum-title">test</h2>
                 
@@ -309,7 +309,7 @@
                     <p class="forum-text">test test this is a test 123123</p>
                 </div>
             </div>
-        </button>
+        </div>
 
     </div>
 
@@ -321,8 +321,8 @@
         }
 
         // Handles smoothly zooming into full-screen viewport layout
-        function openForum(buttonElement, event) {
-            const board = buttonElement.querySelector('.chalkboard');
+        function openForum(cardElement, event) {
+            const board = cardElement.querySelector('.chalkboard');
             
             // Check to avoid processing if it's already full view
             if (!board.classList.contains('fullscreen-zoom')) {
@@ -332,7 +332,7 @@
 
         // Handles closing the modal view structure without re-triggering the click frame event
         function closeForum(closeButton, event) {
-            // Stops event bubbling from clicking down to the underlying panel button
+            // Stops event bubbling from clicking down to the underlying panel block
             event.stopPropagation();
             
             const dynamicBoard = closeButton.closest('.chalkboard');
