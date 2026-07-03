@@ -104,6 +104,13 @@
         font-size: 1.8em;
     }
 
+    .board-desc {
+        font-size: 1.2em;
+        line-height: 1.6;
+        text-align: center;
+        margin: 15px 0 0 0;
+    }
+
     .board-list {
         display: flex;
         flex-direction: column;
@@ -225,6 +232,7 @@
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
     .theme-cyber h2 { background: linear-gradient(to right, #fef08a, #fde047); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .theme-cyber .board-desc { color: #94a3b8; }
     .theme-cyber .wood-frame { border: 1px solid rgba(255, 255, 255, 0.15); background: #0f172a; }
     .theme-cyber .chalk-link { color: #38bdf8; filter: drop-shadow(0 0 6px rgba(56,189,248,0.4)); }
     .theme-cyber .back-nav-btn:hover { border-color: #38bdf8; color: #38bdf8; box-shadow: 0 0 10px rgba(56,189,248,0.3); }
@@ -256,6 +264,7 @@
         box-shadow: inset 0px 0px 15px rgba(0,0,0,0.6), 0 8px 16px rgba(0, 0, 0, 0.5);
     }
     .theme-skeuo h2 { color: #ffe699; }
+    .theme-skeuo .board-desc { color: #e6f7ff; }
     .theme-skeuo .wood-frame {
         border: 8px solid #5c2c16;
         border-image: repeating-linear-gradient(45deg, #4a2210, #6a351c 15px, #4a2210 30px) 8 stretch;
@@ -271,14 +280,12 @@
 </head>
 <body class="theme-skeuo">
 
-    <!-- Top Action Control Toolbar Alignment System -->
     <div class="controls-wrapper">
         <div class="nav-buttons">
             <a href="khouzam.html" class="back-nav-btn" id="back-btn">← Back</a>
         </div>
 
         <div class="left-controls">
-            <!-- Theme Dynamic Switcher System -->
             <div class="menu-container" id="theme-menu-box">
                 <span class="menu-label" id="theme-label">Theme:</span>
                 <select class="menu-select" id="theme-picker" onchange="changeTheme(this.value)">
@@ -288,7 +295,6 @@
                 </select>
             </div>
 
-            <!-- Internationalization Engine -->
             <div class="menu-container" id="lang-menu-box">
                 <span class="menu-label" id="lang-label">Language:</span>
                 <select class="menu-select" id="language-picker" onchange="changeLanguage(this.value)">
@@ -303,12 +309,11 @@
 
     <div class="studio-wall">
 
-        <!-- Top Main Banner Chalkboard -->
         <div class="chalkboard" id="main-banner-chalkboard">
             <h2>Valoria.ly</h2>
+            <p class="board-desc" id="valoria-desc">Valoria.ly is an AMAZING musical.ly made by Valoria and other developers like MrAlozai, Ace, etc but that's just scratching the surface</p>
         </div>
 
-        <!-- Social Media Frame Chalkboard -->
         <div class="chalkboard" id="socials-chalkboard">
             <h2 id="socials-title">Socials</h2>
             <div class="board-list">
@@ -321,7 +326,6 @@
             </div>
         </div>
 
-        <!-- Discord Invitation Frame Chalkboard -->
         <div class="chalkboard" id="discord-chalkboard">
             <h2 id="discord-title">Join The Valoria.ly Discord</h2>
             <div class="board-list">
@@ -334,9 +338,20 @@
             </div>
         </div>
 
+        <div class="chalkboard" id="website-chalkboard">
+            <h2 id="website-title">Official Website</h2>
+            <div class="board-list">
+                <a href="https://valoria-social.com/" class="board-item" target="_blank">
+                    <div class="wood-frame">
+                        <img src="valoria.png" alt="Valoria Globe Icon">
+                    </div>
+                    <span class="chalk-link" id="website-link-label">Valoria Social Website</span>
+                </a>
+            </div>
+        </div>
+
     </div>
 
-    <!-- Interface Logic Switcher Handlers -->
     <script>
         // Runtime Dynamic Theme Switcher Engine
         function changeTheme(themeName) {
@@ -349,33 +364,45 @@
                 backBtn: "← Back",
                 themeLabel: "Theme:",
                 langLabel: "Language:",
+                valoriaDesc: "Valoria.ly is an AMAZING musical.ly made by Valoria and other developers like MrAlozai, Ace, etc but that's just scratching the surface",
                 socialsTitle: "Socials",
                 discordTitle: "Join The Valoria.ly Discord",
-                discordLinkLabel: "Discord Server"
+                discordLinkLabel: "Discord Server",
+                websiteTitle: "Official Website",
+                websiteLinkLabel: "Valoria Social Website"
             },
             at: {
                 backBtn: "← Zurück",
                 themeLabel: "Stil:",
                 langLabel: "Sprache:",
+                valoriaDesc: "Valoria.ly ist ein GROSSARTIGES musical.ly, entwickelt von Valoria und weiteren Entwicklern wie MrAlozai, Ace, etc., aber das kratzt erst an der Oberfläche",
                 socialsTitle: "Soziale Netzwerke",
                 discordTitle: "Tritt dem Valoria.ly Discord bei",
-                discordLinkLabel: "Discord-Server"
+                discordLinkLabel: "Discord-Server",
+                websiteTitle: "Offizielle Webseite",
+                websiteLinkLabel: "Valoria Social Webseite"
             },
             noe: {
                 backBtn: "← Zruck",
                 themeLabel: "Design:",
                 langLabel: "Sproch:",
+                valoriaDesc: "Valoria.ly is a WAUNSINDDIGES musical.ly, des wos vo da Valoria und aundan Entwicklern wia am MrAlozai, Ace, etc. bastelt wordn is, oba des is nua amoi da Aufong",
                 socialsTitle: "Social Media",
                 discordTitle: "Kumm in unsa Valoria.ly Discord",
-                discordLinkLabel: "Discord Gschpü"
+                discordLinkLabel: "Discord Gschpü",
+                websiteTitle: "Offizielle Netzseitn",
+                websiteLinkLabel: "Valoria Social Netzseitn"
             },
             es: {
                 backBtn: "← Volver",
                 themeLabel: "Tema:",
                 langLabel: "Idioma:",
+                valoriaDesc: "Valoria.ly es un INCREÍBLE musical.ly creado por Valoria y otros desarrolladores como MrAlozai, Ace, etc., pero eso es solo rascar la superficie",
                 socialsTitle: "Redes Sociales",
                 discordTitle: "Únete al Discord de Valoria.ly",
-                discordLinkLabel: "Servidor de Discord"
+                discordLinkLabel: "Servidor de Discord",
+                websiteTitle: "Sitio Web Oficial",
+                websiteLinkLabel: "Sitio Web Valoria Social"
             }
         };
 
@@ -385,9 +412,12 @@
             document.getElementById('back-btn').innerText = set.backBtn;
             document.getElementById('theme-label').innerText = set.themeLabel;
             document.getElementById('lang-label').innerText = set.langLabel;
+            document.getElementById('valoria-desc').innerText = set.valoriaDesc;
             document.getElementById('socials-title').innerText = set.socialsTitle;
             document.getElementById('discord-title').innerText = set.discordTitle;
             document.getElementById('discord-link-label').innerText = set.discordLinkLabel;
+            document.getElementById('website-title').innerText = set.websiteTitle;
+            document.getElementById('website-link-label').innerText = set.websiteLinkLabel;
             
             document.getElementById('language-picker').value = lang;
         }
