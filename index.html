@@ -111,6 +111,21 @@
         transition: all 0.3s ease;
     }
 
+    /* Schedule Image Frame Container styling */
+    .schedule-image-frame {
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+    }
+
+    .schedule-image-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
     h1, h2 {
         text-align: center;
         margin-top: 0;
@@ -164,12 +179,6 @@
         transition: color 0.2s ease, text-shadow 0.2s ease;
     }
 
-    .goal-item {
-        margin: 8px 0;
-        font-size: 1.1em;
-        font-weight: bold;
-    }
-
     /* ==========================================
        2. THEME 1: OLD PASTEL RAINBOW
        ========================================== */
@@ -192,11 +201,15 @@
     }
     .theme-pastel .menu-label { color: #ffe699; }
     .theme-pastel .menu-select { background: #333; color: #fff; border: 1px dashed rgba(255,255,255,0.3); }
-    .theme-pastel .chalkboard, .theme-pastel .notepad-card {
+    .theme-pastel .chalkboard {
         background: radial-gradient(circle at 50% 30%, rgba(55, 75, 65, 0.9), rgba(35, 45, 40, 0.95)), #2b3a32;
         border: 14px solid #5c2c16;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
         box-shadow: inset 0px 0px 20px rgba(0,0,0,0.7), 6px 8px 15px rgba(0,0,0,0.3);
+    }
+    .theme-pastel .schedule-image-frame {
+        border: 14px solid #5c2c16;
+        box-shadow: 6px 8px 15px rgba(0,0,0,0.3);
     }
     .theme-pastel h1 { color: #fff; }
     .theme-pastel h2 { color: #ffe699; }
@@ -207,7 +220,6 @@
     .theme-pastel .yt-link { color: #ff9999; }
     .theme-pastel .tt-link { color: #b3ffec; }
     .theme-pastel .granny-link { color: #ffb3ff; }
-    .theme-pastel .goal-item { text-align: center; color: #ffeb99; }
 
     /* ==========================================
        3. THEME 2: CYBER NEON GLASS
@@ -234,14 +246,14 @@
     .theme-cyber .menu-container { border-radius: 50px; }
     .theme-cyber .menu-label { color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
     .theme-cyber .menu-select { background: #0f172a; color: #f1f5f9; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; }
-    .theme-cyber .chalkboard, .theme-cyber .notepad-card {
+    .theme-cyber .chalkboard, .theme-cyber .schedule-image-frame {
         background: rgba(15, 23, 42, 0.6);
         backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
         border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 24px;
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
-    .theme-cyber .chalkboard:hover, .theme-cyber .notepad-card:hover { transform: translateY(-4px); }
+    .theme-cyber .chalkboard:hover, .theme-cyber .schedule-image-frame:hover { transform: translateY(-4px); }
     .theme-cyber h1 { background: linear-gradient(to right, #ffffff, #cbd5e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .theme-cyber h2 { background: linear-gradient(to right, #fef08a, #fde047); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .theme-cyber p { color: #94a3b8; }
@@ -253,7 +265,6 @@
     .theme-cyber .tt-link { color: #2dd4bf; }
     .theme-cyber .granny-link { color: #e879f9; }
     .theme-cyber .board-item:hover .chalk-link { filter: drop-shadow(0 0 8px currentColor); }
-    .theme-cyber .goal-item { padding: 10px; background: rgba(255,255,255,0.02); border-left: 4px solid #64748b; border-radius: 0 8px 8px 0; }
     .theme-cyber .forward-nav-btn:hover {
         box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
         border-color: #38bdf8;
@@ -261,7 +272,7 @@
     }
 
     /* ==========================================
-       4. THEME 3: SKEUOMORPHIC & NOTEPAD
+       4. THEME 3: SKEUOMORPHIC
        ========================================== */
     body.theme-skeuo {
         background-color: #2e3138;
@@ -286,6 +297,11 @@
         text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
         box-shadow: inset 0px 0px 15px rgba(0,0,0,0.6), 0 8px 16px rgba(0, 0, 0, 0.5);
     }
+    .theme-skeuo .schedule-image-frame {
+        border: 14px solid #4a2711;
+        border-image: repeating-linear-gradient(45deg, #3d1f0d, #542d15 15px, #3d1f0d 30px) 14 stretch;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    }
     .theme-skeuo h1 { color: #fff; }
     .theme-skeuo h2 { color: #ffe699; }
     .theme-skeuo .board-item { background: rgba(0, 0, 0, 0.15); border: 1px dashed rgba(255, 255, 255, 0.1); box-shadow: inset 0 2px 4px rgba(0,0,0,0.4); }
@@ -294,24 +310,6 @@
     .theme-skeuo .yt-link { color: #ff9999; }
     .theme-skeuo .tt-link { color: #b3ffec; }
     .theme-skeuo .granny-link { color: #ffb3ff; }
-     
-    /* Unique Notepad Styling in Skeuomorphic Theme */
-    .theme-skeuo .notepad-card {
-        background: #fbf6d9;
-        background-image: linear-gradient(rgba(0,0,0,0.05) 1px, transparent 0);
-        background-size: 100% 28px;
-        border: 1px solid #e3dbb3; border-radius: 6px;
-        box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-        color: #1a2332;
-        padding: 30px 25px 25px 45px;
-        font-family: 'Noteworthy', 'Helvetica Neue', sans-serif;
-        position: relative;
-    }
-    .theme-skeuo .notepad-card::before {
-        content: ''; position: absolute; top: 0; bottom: 0; left: 35px; width: 1px; border-left: 1px solid #ff9999;
-    }
-    .theme-skeuo .notepad-card h2 { color: #3b5998; border-bottom: 2px solid #3b5998; padding-bottom: 5px; text-shadow: none; }
-    .theme-skeuo .notepad-card .goal-item { line-height: 28px; margin: 0; color: #2b3e56; }
     
     .theme-skeuo .forward-nav-btn:active {
         background: linear-gradient(to bottom, #cccccc 0%, #dddddd 100%);
@@ -325,6 +323,7 @@
     <div class="controls-wrapper">
         <div class="nav-buttons">
             <a href="gallery.html" class="forward-nav-btn" id="forward-btn" title="Go to Gallery">Next →</a>
+            <a href="forum.html" class="forward-nav-btn" id="forum-btn" title="Go to Forum">Forum</a>
         </div>
          
         <div class="left-controls">
@@ -353,8 +352,8 @@
 
         <div class="chalkboard welcome-card">
             <div>
-                <h1 id="welcome-title">Welcome to My Chalkboard!</h1>
-                <p id="welcome-desc">This is where I'll keep all the fun things I'm working on! Come back here and tell me what you want to add or edit next!</p>
+                <h1 id="welcome-title">Welcome to my board</h1>
+                <p id="welcome-desc">this is where i will post about stuff</p>
             </div>
         </div>
 
@@ -375,7 +374,7 @@
 
         <div class="chalkboard" id="socials-chalkboard">
             <div>
-                <h2 id="socials-title">My Creative Studio Socials</h2>
+                <h2 id="socials-title">My Socials</h2>
                 <div class="board-list">
                     <div class="board-item">
                         <div class="wood-frame">
@@ -401,20 +400,14 @@
             </div>
         </div>
 
-        <div class="chalkboard">
-            <div>
-                <h2 id="schedule-title">Stream & Content Schedule</h2>
-                <p style="color: #ccffcc;" id="schedule-desc">Stay tuned for active upload and streaming days!</p>
-            </div>
-            <p style="font-size: 1em; color: #ffeb99;" id="schedule-placeholder">[ Scribble a schedule or milestone notes here later ]</p>
+        <!-- Schedule Chalkboard transformed into a styled Frame displaying the repository image -->
+        <div class="schedule-image-frame">
+            <img src="ShaniquaChoulupa.jpg" alt="Stream and Content Schedule">
         </div>
 
-        <div class="notepad-card bottom-spanner">
-            <h2 id="ideas-title">Next Project Ideas</h2>
-            <div style="margin-top: 15px;">
-                <p class="goal-item" id="idea-1">✓ Hooked up granny.html with local image asset</p>
-                <p class="goal-item" id="idea-2">⏳ Design the inner granny.html page</p>
-                <p class="goal-item" id="idea-3">⏳ Drop in your next idea here...</p>
+        <div class="chalkboard bottom-spanner">
+            <div>
+                <p id="bottom-text" style="font-size: 1.4em; font-weight: bold; margin: 0;">Idk what to put here yet</p>
             </div>
         </div>
 
@@ -431,71 +424,51 @@
         const translations = {
             en: {
                 forwardBtn: "Next →",
+                forumBtn: "Forum",
                 langLabel: "Language:",
-                welcomeTitle: "Welcome to My Chalkboard!",
-                welcomeDesc: "This is where I'll keep all the fun things I'm working on! Come back here and tell me what you want to add or edit next!",
+                welcomeTitle: "Welcome to my board",
+                welcomeDesc: "this is where i will post about stuff",
                 grannyTitle: "Granny's Corner",
                 grannyBtn: "Enter Granny's House",
                 grannyWarning: "⚠️ She hears everything... watch your step!",
-                socialsTitle: "My Creative Studio Socials",
-                scheduleTitle: "Stream & Content Schedule",
-                scheduleDesc: "Stay tuned for active upload and streaming days!",
-                schedulePlaceholder: "[ Scribble a schedule or milestone notes here later ]",
-                ideasTitle: "Next Project Ideas",
-                idea1: "✓ Hooked up granny.html with local image asset",
-                idea2: "⏳ Design the inner granny.html page",
-                idea3: "⏳ Drop in your next idea here..."
+                socialsTitle: "My Socials",
+                bottomText: "Idk what to put here yet"
             },
             at: {
                 forwardBtn: "Weiter →",
+                forumBtn: "Forum",
                 langLabel: "Sprache:",
-                welcomeTitle: "Servus auf meiner Kreidetafel!",
-                welcomeDesc: "Da herinnen sammle ich all den fetzigen Kram, an dem ich gerade herumbastle! Schau einfach wieder vorbei und sag mir, was wir als Nächstes drantackern oder ändern sollen!",
+                welcomeTitle: "Servus auf meiner Kreidetafel",
+                welcomeDesc: "Da herinnen sammle ich all den Kram, an dem ich gerade herumbastle!",
                 grannyTitle: "Omas Eck",
                 grannyBtn: "Geh in Oma ihr Haus",
                 grannyWarning: "⚠️ Die hört absolut alles... pass bloß auf deine Haxn auf!",
                 socialsTitle: "Meine sozialen Netzwerke",
-                scheduleTitle: "Sende- & Contentplan",
-                scheduleDesc: "Bleib dran für die fixen Upload- und Streaming-Tage!",
-                schedulePlaceholder: "[ Kritzel später hier den Fahrplan oder Meilensteine hin ]",
-                ideasTitle: "Nächste Projektideen",
-                idea1: "✓ granny.html mit lokalem Bild verknüpft",
-                idea2: "⏳ Das Innere der granny.html Seite gestalten",
-                idea3: "⏳ Pack deine nächste Idee einfach hier dazu..."
+                bottomText: "Ich weiß noch nicht, was ich hierhin tun soll"
             },
             noe: {
                 forwardBtn: "Weida →",
+                forumBtn: "Forum",
                 langLabel: "Sproch:",
-                welcomeTitle: "Grias di auf meiner Kraidntofl!",
-                welcomeDesc: "Da drinnen hob i oin den leiwandn Kram, an dem i grod herumwurschtl! Schau hoid amoi vorbei und sog ma, wos ma ois Nächstes auffetackan oda ändern soin!",
+                welcomeTitle: "Grias di auf meiner Kraidntofl",
+                welcomeDesc: "Da drinnen hob i oin den leiwandn Kram, an dem i grod herumwurschtl!",
                 grannyTitle: "Oma ihr Eckn",
                 grannyBtn: "Hupf in d'Hüttn von da Oma",
                 grannyWarning: "⚠️ De lodschte Hex head ois... pass ma gscheit auf deine Haxn auf!",
                 socialsTitle: "Meine Kanäle",
-                scheduleTitle: "Sende- & Video-Plan",
-                scheduleDesc: "Bleib gspannt auf de Fixitoge für d'Uploads und d'Streams!",
-                schedulePlaceholder: "[ Schmier speda do den Sprossnplan oda Zünotizn hin ]",
-                ideasTitle: "Nächste Ideen",
-                idea1: "✓ granny.html mid an lokaln Büdl zammghängt",
-                idea2: "⏳ Des Innere vo da granny.html Seitn herrichtn",
-                idea3: "⏳ Hau dei nächste Idee afoch do drunter..."
+                bottomText: "No plan wos i do herstoin soi"
             },
             es: {
                 forwardBtn: "Siguiente →",
+                forumBtn: "Foro",
                 langLabel: "Idioma:",
-                welcomeTitle: "¡Bienvenido a mi Pizarrón!",
-                welcomeDesc: "¡Aquí guardaré todas las cosas divertidas en las que estoy trabajando! ¡Regresa aquí y dime qué quieres agregar o editar después!",
+                welcomeTitle: "Bienvenido a mi pizarrón",
+                welcomeDesc: "Aquí es donde publicaré mis cosas",
                 grannyTitle: "El Rincón de Granny",
                 grannyBtn: "Entrar a la Casa de Granny",
                 grannyWarning: "⚠️ Ella lo escucha todo... ¡cuida tus pasos!",
-                socialsTitle: "Mis Redes del Estudio Creativo",
-                scheduleTitle: "Calendario de Transmisiones",
-                scheduleDesc: "¡Mantente al tanto para los días activos de videos y directos!",
-                schedulePlaceholder: "[ Escribe un horario o notas de metas aquí más tarde ]",
-                ideasTitle: "Próximas Ideas de Proyectos",
-                idea1: "✓ Conectado granny.html con archivo de imagen local",
-                idea2: "⏳ Diseñar la página interna granny.html",
-                idea3: "⏳ Pon tu próxima idea aquí..."
+                socialsTitle: "Mis Redes Sociales",
+                bottomText: "No sé qué poner aquí todavía"
             }
         };
 
@@ -503,6 +476,7 @@
             const set = translations[lang] || translations['en'];
             
             document.getElementById('forward-btn').innerText = set.forwardBtn;
+            document.getElementById('forum-btn').innerText = set.forumBtn;
             document.getElementById('lang-label').innerText = set.langLabel;
             document.getElementById('welcome-title').innerText = set.welcomeTitle;
             document.getElementById('welcome-desc').innerText = set.welcomeDesc;
@@ -510,13 +484,7 @@
             document.getElementById('granny-btn').innerText = set.grannyBtn;
             document.getElementById('granny-warning').innerText = set.grannyWarning;
             document.getElementById('socials-title').innerText = set.socialsTitle;
-            document.getElementById('schedule-title').innerText = set.scheduleTitle;
-            document.getElementById('schedule-desc').innerText = set.scheduleDesc;
-            document.getElementById('schedule-placeholder').innerText = set.schedulePlaceholder;
-            document.getElementById('ideas-title').innerText = set.ideasTitle;
-            document.getElementById('idea-1').innerText = set.idea1;
-            document.getElementById('idea-2').innerText = set.idea2;
-            document.getElementById('idea-3').innerText = set.idea3;
+            document.getElementById('bottom-text').innerText = set.bottomText;
             
             // Retain language picker selection state
             document.getElementById('language-picker').value = lang;
