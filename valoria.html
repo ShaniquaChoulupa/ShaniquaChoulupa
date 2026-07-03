@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Creative Chalkboard Studio - Valoria.ly</title>
+<style>
+    /* ==========================================
+       1. GLOBAL BASE STYLES & LAYOUT
+       ========================================== */
+    body {
+        margin: 0;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        box-sizing: border-box;
+        transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    /* Container for the chalkboard layout */
+    .studio-wall {
+        width: 100%;
+        max-width: 750px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px; 
+    }
+
+    /* Controls top bar alignment for theme/lang picks */
+    .controls-wrapper {
+        width: 100%;
+        max-width: 750px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        gap: 15px;
+    }
+
+    .left-controls {
+        display: flex;
+        gap: 15px;
+    }
+
+    .nav-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    /* Dropdown Selector Layout Containers */
+    .menu-container {
+        padding: 8px 16px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+    }
+
+    .menu-label {
+        font-weight: bold;
+        font-size: 0.95em;
+    }
+
+    .menu-select {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        cursor: pointer;
+        outline: none;
+    }
+
+    /* Interactive Navigation Button Structure */
+    .back-nav-btn {
+        padding: 8px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+    }
+    .back-nav-btn:hover {
+        transform: scale(1.05);
+    }
+
+    /* Ultra-Realistic Chalkboard and Framing Wrapper */
+    .chalkboard {
+        padding: 30px;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s ease;
+    }
+
+    h2 {
+        text-align: center;
+        margin-top: 0;
+        letter-spacing: 1px;
+        font-size: 1.8em;
+    }
+
+    .board-list {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        margin-top: 20px;
+    }
+
+    /* Entire item box is now an anchor link button */
+    .board-item {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.04);
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px dashed rgba(255, 255, 255, 0.15);
+        text-decoration: none;
+        cursor: pointer;
+        transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .board-item:hover {
+        transform: scale(1.02);
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    .wood-frame {
+        width: 85px;
+        height: 85px;
+        border-radius: 6px;
+        overflow: hidden;
+        margin-right: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5), 4px 4px 8px rgba(0,0,0,0.6);
+        background-color: #222;
+        flex-shrink: 0;
+    }
+
+    .wood-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .chalk-link {
+        font-size: 1.9em;
+        font-weight: bold;
+        transition: all 0.2s ease;
+    }
+
+    /* ==========================================
+       2. THEME 1: OLD PASTEL RAINBOW
+       ========================================== */
+    body.theme-pastel {
+        background: linear-gradient(45deg, #FFB3BA, #FFDFBA, #FFFFBA, #BAFFC9, #BAE1FF, #D0BAFF, #FFB3BA);
+        background-size: 400% 400%;
+        animation: rainbowFade 16s ease infinite;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        color: rgba(245, 245, 245, 0.95);
+    }
+    @keyframes rainbowFade {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .theme-pastel .menu-container, .theme-pastel .back-nav-btn {
+        background: #2b3a32;
+        border: 4px solid #5c2c16;
+        color: #ffe699;
+    }
+    .theme-pastel .menu-label { color: #ffe699; }
+    .theme-pastel .menu-select { background: #333; color: #fff; border: 1px dashed rgba(255,255,255,0.3); }
+    .theme-pastel .chalkboard {
+        background: radial-gradient(circle at 50% 30%, rgba(55, 75, 65, 0.9), rgba(35, 45, 40, 0.95)), #2b3a32;
+        border: 22px solid #5c2c16;
+        border-image: repeating-linear-gradient(0deg, #5c2c16, #4a2210 20px, #6a351c 40px, #4a2210 60px) 22 stretch;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+        box-shadow: inset 0px 0px 20px rgba(0,0,0,0.7), 12px 15px 25px rgba(0, 0, 0, 0.4);
+    }
+    .theme-pastel h2 { color: #ffe699; }
+    .theme-pastel .wood-frame {
+        border: 8px solid #5c2c16;
+        border-image: repeating-linear-gradient(45deg, #4a2210, #6a351c 15px, #4a2210 30px) 8 stretch;
+    }
+    .theme-pastel .chalk-link { color: #b3ffec; text-shadow: 0 0 5px rgba(179,255,236,0.4); }
+    .theme-pastel .board-item:hover .chalk-link { color: #fff !important; text-shadow: 0 0 10px rgba(255,255,255,0.8) !important; }
+
+    /* ==========================================
+       3. THEME 2: CYBER NEON GLASS
+       ========================================== */
+    body.theme-cyber {
+        background: linear-gradient(-45deg, #0f172a, #1e1b4b, #2e1065, #0f172a);
+        background-size: 400% 400%;
+        animation: cyberPulse 12s ease infinite;
+        font-family: 'Segoe UI', sans-serif;
+        color: #f8fafc;
+    }
+    @keyframes cyberPulse {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .theme-cyber .menu-container, .theme-cyber .back-nav-btn {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #f1f5f9;
+    }
+    .theme-cyber .back-nav-btn { border-radius: 20px; }
+    .theme-cyber .menu-container { border-radius: 50px; }
+    .theme-cyber .menu-label { color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
+    .theme-cyber .menu-select { background: #0f172a; color: #f1f5f9; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; }
+    .theme-cyber .chalkboard {
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    .theme-cyber h2 { background: linear-gradient(to right, #fef08a, #fde047); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .theme-cyber .wood-frame { border: 1px solid rgba(255, 255, 255, 0.15); background: #0f172a; }
+    .theme-cyber .chalk-link { color: #38bdf8; filter: drop-shadow(0 0 6px rgba(56,189,248,0.4)); }
+    .theme-cyber .back-nav-btn:hover { border-color: #38bdf8; color: #38bdf8; box-shadow: 0 0 10px rgba(56,189,248,0.3); }
+    .theme-cyber .board-item:hover .chalk-link { color: #fff !important; }
+
+    /* ==========================================
+       4. THEME 3: SKEUOMORPHIC & CHALKBOARD
+       ========================================== */
+    body.theme-skeuo {
+        background-color: #2e3138;
+        background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 0), radial-gradient(rgba(0,0,0,0.3) 1px, transparent 0);
+        background-size: 4px 4px;
+        background-position: 0 0, 2px 2px;
+        font-family: 'Marker Felt', 'Chalkboard SE', sans-serif;
+        color: #fff;
+    }
+    .theme-skeuo .menu-container, .theme-skeuo .back-nav-btn {
+        background: linear-gradient(to bottom, #ffffff 0%, #f2f2f2 49%, #e1e1e1 51%, #cccccc 100%);
+        border: 1px solid #a6a6a6; border-top-color: #b3b3b3; border-bottom-color: #8c8c8c;
+        color: #4c566c; text-shadow: 0 1px 0 #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 #fff;
+    }
+    .theme-skeuo .menu-label { color: #4c566c; }
+    .theme-skeuo .menu-select { background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%); color: #333; border: 1px solid #abafb3; }
+    .theme-skeuo .chalkboard {
+        background: radial-gradient(circle at 50% 30%, #2f4f3e, #1b3327);
+        border: 22px solid #4a2711;
+        border-image: repeating-linear-gradient(0deg, #5c2c16, #4a2210 20px, #6a351c 40px, #4a2210 60px) 22 stretch;
+        text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
+        box-shadow: inset 0px 0px 15px rgba(0,0,0,0.6), 0 8px 16px rgba(0, 0, 0, 0.5);
+    }
+    .theme-skeuo h2 { color: #ffe699; }
+    .theme-skeuo .wood-frame {
+        border: 8px solid #5c2c16;
+        border-image: repeating-linear-gradient(45deg, #4a2210, #6a351c 15px, #4a2210 30px) 8 stretch;
+    }
+    .theme-skeuo .chalk-link { color: #ffe699; }
+    .theme-skeuo .board-item:hover .chalk-link { color: #fff !important; text-shadow: 0 0 10px rgba(255,255,255,0.8) !important; }
+    .theme-skeuo .back-nav-btn:active {
+        background: linear-gradient(to bottom, #cccccc 0%, #dddddd 100%);
+        box-shadow: 0 1px 2px rgba(0,0,0,0.4), inset 0 2px 4px rgba(0,0,0,0.15);
+        transform: scale(0.98);
+    }
+</style>
+</head>
+<body class="theme-skeuo">
+
+    <!-- Top Action Control Toolbar Alignment System -->
+    <div class="controls-wrapper">
+        <div class="nav-buttons">
+            <a href="khouzam.html" class="back-nav-btn" id="back-btn">← Back</a>
+        </div>
+
+        <div class="left-controls">
+            <!-- Theme Dynamic Switcher System -->
+            <div class="menu-container" id="theme-menu-box">
+                <span class="menu-label" id="theme-label">Theme:</span>
+                <select class="menu-select" id="theme-picker" onchange="changeTheme(this.value)">
+                    <option value="theme-skeuo">Skeuomorphic</option>
+                    <option value="theme-cyber">Cyber Neon / Glass</option>
+                    <option value="theme-pastel">Classic Pastel Rainbow</option>
+                </select>
+            </div>
+
+            <!-- Internationalization Engine -->
+            <div class="menu-container" id="lang-menu-box">
+                <span class="menu-label" id="lang-label">Language:</span>
+                <select class="menu-select" id="language-picker" onchange="changeLanguage(this.value)">
+                    <option value="en">English</option>
+                    <option value="at">Österreichisch</option>
+                    <option value="noe">Niederösterreichisch</option>
+                    <option value="es">Español</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="studio-wall">
+
+        <!-- Top Main Banner Chalkboard -->
+        <div class="chalkboard" id="main-banner-chalkboard">
+            <h2>Valoria.ly</h2>
+        </div>
+
+        <!-- Social Media Frame Chalkboard -->
+        <div class="chalkboard" id="socials-chalkboard">
+            <h2 id="socials-title">Socials</h2>
+            <div class="board-list">
+                <a href="https://www.tiktok.com/@valoria.ly" class="board-item" target="_blank">
+                    <div class="wood-frame">
+                        <img src="valoria.png" alt="Valoria Profile Image">
+                    </div>
+                    <span class="chalk-link">TikTok</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Discord Invitation Frame Chalkboard -->
+        <div class="chalkboard" id="discord-chalkboard">
+            <h2 id="discord-title">Join The Valoria.ly Discord</h2>
+            <div class="board-list">
+                <a href="https://discord.gg/BHyxHudW4" class="board-item" target="_blank">
+                    <div class="wood-frame">
+                        <img src="valoria.png" alt="Valoria Discord Badge">
+                    </div>
+                    <span class="chalk-link" id="discord-link-label">Discord Server</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Interface Logic Switcher Handlers -->
+    <script>
+        // Runtime Dynamic Theme Switcher Engine
+        function changeTheme(themeName) {
+            document.body.className = themeName;
+            document.getElementById('theme-picker').value = themeName;
+        }
+
+        const translations = {
+            en: {
+                backBtn: "← Back",
+                themeLabel: "Theme:",
+                langLabel: "Language:",
+                socialsTitle: "Socials",
+                discordTitle: "Join The Valoria.ly Discord",
+                discordLinkLabel: "Discord Server"
+            },
+            at: {
+                backBtn: "← Zurück",
+                themeLabel: "Stil:",
+                langLabel: "Sprache:",
+                socialsTitle: "Soziale Netzwerke",
+                discordTitle: "Tritt dem Valoria.ly Discord bei",
+                discordLinkLabel: "Discord-Server"
+            },
+            noe: {
+                backBtn: "← Zruck",
+                themeLabel: "Design:",
+                langLabel: "Sproch:",
+                socialsTitle: "Social Media",
+                discordTitle: "Kumm in unsa Valoria.ly Discord",
+                discordLinkLabel: "Discord Gschpü"
+            },
+            es: {
+                backBtn: "← Volver",
+                themeLabel: "Tema:",
+                langLabel: "Idioma:",
+                socialsTitle: "Redes Sociales",
+                discordTitle: "Únete al Discord de Valoria.ly",
+                discordLinkLabel: "Servidor de Discord"
+            }
+        };
+
+        function changeLanguage(lang) {
+            const set = translations[lang] || translations['en'];
+            
+            document.getElementById('back-btn').innerText = set.backBtn;
+            document.getElementById('theme-label').innerText = set.themeLabel;
+            document.getElementById('lang-label').innerText = set.langLabel;
+            document.getElementById('socials-title').innerText = set.socialsTitle;
+            document.getElementById('discord-title').innerText = set.discordTitle;
+            document.getElementById('discord-link-label').innerText = set.discordLinkLabel;
+            
+            document.getElementById('language-picker').value = lang;
+        }
+    </script>
+</body>
+</html>
