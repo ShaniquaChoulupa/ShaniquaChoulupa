@@ -49,14 +49,22 @@
     body.layout-desktop .controls-wrapper { max-width: 1200px !important; }
     body.layout-mobile .controls-wrapper { max-width: 480px !important; }
 
-    .left-controls {
+    .nav-layout-row {
         display: flex;
+        align-items: center;
         gap: 15px;
     }
 
     .nav-buttons {
         display: flex;
         gap: 10px;
+        flex-shrink: 0;
+    }
+
+    .stacked-selectors {
+        display: flex;
+        gap: 15px;
+        align-items: center;
     }
 
     /* Dropdown Selector Layout Containers */
@@ -96,6 +104,66 @@
     }
     .back-nav-btn:hover {
         transform: scale(1.05);
+    }
+
+    /* ==========================================
+       STRICT MOBILE ENGINE STACKING CONFIGURATION
+       ========================================== */
+    
+    body.layout-mobile .controls-wrapper {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+    }
+    body.layout-mobile .nav-layout-row {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        width: 100% !important;
+        gap: 15px !important;
+    }
+    body.layout-mobile .stacked-selectors {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        width: 100% !important;
+        align-items: flex-start !important;
+    }
+    body.layout-mobile .stacked-selectors .menu-container {
+        width: 100% !important;
+        max-width: 400px;
+        box-sizing: border-box !important;
+        justify-content: space-between !important;
+    }
+
+    @media (max-width: 850px) {
+        .controls-wrapper {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 12px !important;
+        }
+        .nav-layout-row {
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: flex-start !important;
+            align-items: center !important;
+            width: 100% !important;
+            gap: 15px !important;
+        }
+        .stacked-selectors {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 12px !important;
+            width: 100% !important;
+            align-items: flex-start !important;
+        }
+        .stacked-selectors .menu-container {
+            width: 100% !important;
+            max-width: 400px;
+            box-sizing: border-box !important;
+            justify-content: space-between !important;
+        }
     }
 
     /* Ultra-Realistic Chalkboard and Framing Wrapper */
@@ -291,11 +359,12 @@
 <body class="theme-skeuo">
 
     <div class="controls-wrapper">
-        <div class="nav-buttons">
-            <a href="khouzam.html" class="back-nav-btn" id="back-btn">← Back</a>
-        </div>
+        <!-- Row 1: Back, Layout -->
+        <div class="nav-layout-row">
+            <div class="nav-buttons">
+                <a href="khouzam.html" class="back-nav-btn" id="back-btn">← Back</a>
+            </div>
 
-        <div class="left-controls">
             <div class="menu-container">
                 <span class="menu-label" id="layout-label">Layout:</span>
                 <select class="menu-select" id="layout-picker" onchange="changeLayout(this.value)">
@@ -304,7 +373,10 @@
                     <option value="layout-mobile">Mobile</option>
                 </select>
             </div>
+        </div>
 
+        <!-- Row 2 and 3: Theme and Language -->
+        <div class="stacked-selectors">
             <div class="menu-container" id="theme-menu-box">
                 <span class="menu-label" id="theme-label">Theme:</span>
                 <select class="menu-select" id="theme-picker" onchange="changeTheme(this.value)">
@@ -435,7 +507,7 @@
                 layoutLabel: "Ansicht:",
                 themeLabel: "Design:",
                 langLabel: "Sproch:",
-                valoriaDesc: "Valoria.ly is a WAUNSINDDIGES musical.ly, des wos vo da Valoria und aundan Entwicklern wia am MrAlozai, Ace, etc. bastelt wordn is, oba des is nua amoi da Aufong",
+                valoriaDesc: "Valoria.ly is a WAUNSINDDIGES musical.ly, des wos vo da Valoria und aundan Entwicklern wia am MrAlozai, Ace, etc. bastelt wordn is, ova des is nua amoi da Aufong",
                 socialsTitle: "Social Media",
                 discordTitle: "Kumm in unsa Valoria.ly Discord",
                 discordLinkLabel: "Discord Gschpü",
@@ -477,7 +549,5 @@
         // Initialize state configuration settings on load
         window.addEventListener('DOMContentLoaded', applySavedState);
     </script>
-</body>
-</html>
 </body>
 </html>
