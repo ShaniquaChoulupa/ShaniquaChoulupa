@@ -108,7 +108,7 @@
         .gallery-matrix { grid-template-columns: 1fr; }
     }
 
-    /* Strict Mobile Stacking Rules for Engine Mode or Mobile Screen Widths */
+    /* Strict Mobile Stacking Rules matching user specifications */
     body.layout-mobile .controls-wrapper,
     @media (max-width: 768px) {
         .controls-wrapper {
@@ -117,7 +117,7 @@
             gap: 12px !important;
         }
         
-        /* Enforce Back, Next, and Layout to span 100% width on row 1 */
+        /* Row 1: Back, Next, Layout stretched perfectly */
         .nav-layout-row {
             display: flex !important;
             flex-direction: row !important;
@@ -132,11 +132,11 @@
             justify-content: space-between !important;
         }
 
-        /* Enforce Theme and Language selectors to stack cleanly underneath */
+        /* Forces Theme and Language into distinct separate rows below */
         .stacked-selectors {
             display: flex !important;
             flex-direction: column !important;
-            gap: 10px !important;
+            gap: 12px !important;
             width: 100% !important;
         }
 
@@ -310,7 +310,7 @@
 <body class="theme-skeuo">
 
     <div class="controls-wrapper">
-        <!-- Top Row Panel: Keeps Nav buttons and Layout Picker strictly grouped -->
+        <!-- Row 1 Container: Keeps Nav buttons and Layout Picker grouped -->
         <div class="nav-layout-row">
             <div class="nav-buttons">
                 <a href="index.html" class="back-nav-btn" id="back-btn">← Back</a>
@@ -327,7 +327,7 @@
             </div>
         </div>
         
-        <!-- Stacking Panel: Houses Theme and Language underneath -->
+        <!-- Stacking Container: Each takes a full row underneath on mobile layouts -->
         <div class="stacked-selectors">
             <div class="menu-container">
                 <span class="menu-label" id="theme-label">Theme:</span>
