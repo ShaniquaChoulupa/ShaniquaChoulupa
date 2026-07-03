@@ -323,6 +323,7 @@
     <div class="controls-wrapper">
         <div class="nav-buttons">
             <a href="gallery.html" class="forward-nav-btn" id="forward-btn" title="Go to Gallery">Next →</a>
+            <a href="forum.html" class="forward-nav-btn" id="forum-btn" title="Go to Forum">Forum</a>
         </div>
          
         <div class="left-controls">
@@ -423,6 +424,7 @@
         const translations = {
             en: {
                 forwardBtn: "Next →",
+                forumBtn: "Forum",
                 langLabel: "Language:",
                 welcomeTitle: "Welcome to my board",
                 welcomeDesc: "this is where i will post about stuff",
@@ -434,6 +436,7 @@
             },
             at: {
                 forwardBtn: "Weiter →",
+                forumBtn: "Forum",
                 langLabel: "Sprache:",
                 welcomeTitle: "Servus auf meiner Kreidetafel",
                 welcomeDesc: "Da herinnen sammle ich all den Kram, an dem ich gerade herumbastle!",
@@ -445,6 +448,7 @@
             },
             noe: {
                 forwardBtn: "Weida →",
+                forumBtn: "Forum",
                 langLabel: "Sproch:",
                 welcomeTitle: "Grias di auf meiner Kraidntofl",
                 welcomeDesc: "Da drinnen hob i oin den leiwandn Kram, an dem i grod herumwurschtl!",
@@ -456,6 +460,7 @@
             },
             es: {
                 forwardBtn: "Siguiente →",
+                forumBtn: "Foro",
                 langLabel: "Idioma:",
                 welcomeTitle: "Bienvenido a mi pizarrón",
                 welcomeDesc: "Aquí es donde publicaré mis cosas",
@@ -471,6 +476,7 @@
             const set = translations[lang] || translations['en'];
             
             document.getElementById('forward-btn').innerText = set.forwardBtn;
+            document.getElementById('forum-btn').innerText = set.forumBtn;
             document.getElementById('lang-label').innerText = set.langLabel;
             document.getElementById('welcome-title').innerText = set.welcomeTitle;
             document.getElementById('welcome-desc').innerText = set.welcomeDesc;
