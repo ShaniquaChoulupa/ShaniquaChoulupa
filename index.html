@@ -111,6 +111,21 @@
         transition: all 0.3s ease;
     }
 
+    /* Schedule Image Frame Container styling */
+    .schedule-image-frame {
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+    }
+
+    .schedule-image-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
     h1, h2 {
         text-align: center;
         margin-top: 0;
@@ -198,6 +213,10 @@
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
         box-shadow: inset 0px 0px 20px rgba(0,0,0,0.7), 6px 8px 15px rgba(0,0,0,0.3);
     }
+    .theme-pastel .schedule-image-frame {
+        border: 14px solid #5c2c16;
+        box-shadow: 6px 8px 15px rgba(0,0,0,0.3);
+    }
     .theme-pastel h1 { color: #fff; }
     .theme-pastel h2 { color: #ffe699; }
     .theme-pastel .board-item { background: rgba(255, 255, 255, 0.04); border: 1px dashed rgba(255, 255, 255, 0.15); }
@@ -234,14 +253,14 @@
     .theme-cyber .menu-container { border-radius: 50px; }
     .theme-cyber .menu-label { color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
     .theme-cyber .menu-select { background: #0f172a; color: #f1f5f9; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; }
-    .theme-cyber .chalkboard, .theme-cyber .notepad-card {
+    .theme-cyber .chalkboard, .theme-cyber .notepad-card, .theme-cyber .schedule-image-frame {
         background: rgba(15, 23, 42, 0.6);
         backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
         border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 24px;
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
-    .theme-cyber .chalkboard:hover, .theme-cyber .notepad-card:hover { transform: translateY(-4px); }
+    .theme-cyber .chalkboard:hover, .theme-cyber .notepad-card:hover, .theme-cyber .schedule-image-frame:hover { transform: translateY(-4px); }
     .theme-cyber h1 { background: linear-gradient(to right, #ffffff, #cbd5e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .theme-cyber h2 { background: linear-gradient(to right, #fef08a, #fde047); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .theme-cyber p { color: #94a3b8; }
@@ -285,6 +304,11 @@
         border-image: repeating-linear-gradient(45deg, #3d1f0d, #542d15 15px, #3d1f0d 30px) 14 stretch;
         text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
         box-shadow: inset 0px 0px 15px rgba(0,0,0,0.6), 0 8px 16px rgba(0, 0, 0, 0.5);
+    }
+    .theme-skeuo .schedule-image-frame {
+        border: 14px solid #4a2711;
+        border-image: repeating-linear-gradient(45deg, #3d1f0d, #542d15 15px, #3d1f0d 30px) 14 stretch;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
     }
     .theme-skeuo h1 { color: #fff; }
     .theme-skeuo h2 { color: #ffe699; }
@@ -375,7 +399,7 @@
 
         <div class="chalkboard" id="socials-chalkboard">
             <div>
-                <h2 id="socials-title">My Creative Studio Socials</h2>
+                <h2 id="socials-title">My Socials</h2>
                 <div class="board-list">
                     <div class="board-item">
                         <div class="wood-frame">
@@ -401,12 +425,9 @@
             </div>
         </div>
 
-        <div class="chalkboard">
-            <div>
-                <h2 id="schedule-title">Stream & Content Schedule</h2>
-                <p style="color: #ccffcc;" id="schedule-desc">Stay tuned for active upload and streaming days!</p>
-            </div>
-            <p style="font-size: 1em; color: #ffeb99;" id="schedule-placeholder">[ Scribble a schedule or milestone notes here later ]</p>
+        <!-- Schedule Chalkboard transformed into a styled Frame displaying the repository image -->
+        <div class="schedule-image-frame">
+            <img src="ShaniquaChoulupa.jpg" alt="Stream and Content Schedule">
         </div>
 
         <div class="notepad-card bottom-spanner">
@@ -437,10 +458,7 @@
                 grannyTitle: "Granny's Corner",
                 grannyBtn: "Enter Granny's House",
                 grannyWarning: "⚠️ She hears everything... watch your step!",
-                socialsTitle: "My Creative Studio Socials",
-                scheduleTitle: "Stream & Content Schedule",
-                scheduleDesc: "Stay tuned for active upload and streaming days!",
-                schedulePlaceholder: "[ Scribble a schedule or milestone notes here later ]",
+                socialsTitle: "My Socials",
                 ideasTitle: "Next Project Ideas",
                 idea1: "✓ Hooked up granny.html with local image asset",
                 idea2: "⏳ Design the inner granny.html page",
@@ -455,9 +473,6 @@
                 grannyBtn: "Geh in Oma ihr Haus",
                 grannyWarning: "⚠️ Die hört absolut alles... pass bloß auf deine Haxn auf!",
                 socialsTitle: "Meine sozialen Netzwerke",
-                scheduleTitle: "Sende- & Contentplan",
-                scheduleDesc: "Bleib dran für die fixen Upload- und Streaming-Tage!",
-                schedulePlaceholder: "[ Kritzel später hier den Fahrplan oder Meilensteine hin ]",
                 ideasTitle: "Nächste Projektideen",
                 idea1: "✓ granny.html mit lokalem Bild verknüpft",
                 idea2: "⏳ Das Innere der granny.html Seite gestalten",
@@ -472,9 +487,6 @@
                 grannyBtn: "Hupf in d'Hüttn von da Oma",
                 grannyWarning: "⚠️ De lodschte Hex head ois... pass ma gscheit auf deine Haxn auf!",
                 socialsTitle: "Meine Kanäle",
-                scheduleTitle: "Sende- & Video-Plan",
-                scheduleDesc: "Bleib gspannt auf de Fixitoge für d'Uploads und d'Streams!",
-                schedulePlaceholder: "[ Schmier speda do den Sprossnplan oda Zünotizn hin ]",
                 ideasTitle: "Nächste Ideen",
                 idea1: "✓ granny.html mid an lokaln Büdl zammghängt",
                 idea2: "⏳ Des Innere vo da granny.html Seitn herrichtn",
@@ -488,10 +500,7 @@
                 grannyTitle: "El Rincón de Granny",
                 grannyBtn: "Entrar a la Casa de Granny",
                 grannyWarning: "⚠️ Ella lo escucha todo... ¡cuida tus pasos!",
-                socialsTitle: "Mis Redes del Estudio Creativo",
-                scheduleTitle: "Calendario de Transmisiones",
-                scheduleDesc: "¡Mantente al tanto para los días activos de videos y directos!",
-                schedulePlaceholder: "[ Escribe un horario o notas de metas aquí más tarde ]",
+                socialsTitle: "Mis Redes Sociales",
                 ideasTitle: "Próximas Ideas de Proyectos",
                 idea1: "✓ Conectado granny.html con archivo de imagen local",
                 idea2: "⏳ Diseñar la página interna granny.html",
@@ -510,9 +519,6 @@
             document.getElementById('granny-btn').innerText = set.grannyBtn;
             document.getElementById('granny-warning').innerText = set.grannyWarning;
             document.getElementById('socials-title').innerText = set.socialsTitle;
-            document.getElementById('schedule-title').innerText = set.scheduleTitle;
-            document.getElementById('schedule-desc').innerText = set.scheduleDesc;
-            document.getElementById('schedule-placeholder').innerText = set.schedulePlaceholder;
             document.getElementById('ideas-title').innerText = set.ideasTitle;
             document.getElementById('idea-1').innerText = set.idea1;
             document.getElementById('idea-2').innerText = set.idea2;
