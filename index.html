@@ -305,6 +305,7 @@
         color: #1a2332;
         padding: 30px 25px 25px 45px;
         font-family: 'Noteworthy', 'Helvetica Neue', sans-serif;
+        position: relative;
     }
     .theme-skeuo .notepad-card::before {
         content: ''; position: absolute; top: 0; bottom: 0; left: 35px; width: 1px; border-left: 1px solid #ff9999;
@@ -423,6 +424,8 @@
         // Runtime Dynamic Switcher Engine
         function changeTheme(themeName) {
             document.body.className = themeName;
+            // Maintain selection in picker state
+            document.getElementById('theme-picker').value = themeName;
         }
 
         const translations = {
@@ -492,7 +495,7 @@
                 ideasTitle: "Próximas Ideas de Proyectos",
                 idea1: "✓ Conectado granny.html con archivo de imagen local",
                 idea2: "⏳ Diseñar la página interna granny.html",
-                idea3: "⏳ Pon tu próxima idea aquí...",
+                idea3: "⏳ Pon tu próxima idea aquí..."
             }
         };
 
@@ -514,6 +517,9 @@
             document.getElementById('idea-1').innerText = set.idea1;
             document.getElementById('idea-2').innerText = set.idea2;
             document.getElementById('idea-3').innerText = set.idea3;
+            
+            // Retain language picker selection state
+            document.getElementById('language-picker').value = lang;
         }
     </script>
 </body>
