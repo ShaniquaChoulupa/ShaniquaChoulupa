@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Creative Chalkboard Studio - Forum</title>
+<style>
+    /* ==========================================
+       1. GLOBAL BASE STYLES & LAYOUT
+       ========================================== */
+    body {
+        margin: 0;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        box-sizing: border-box;
+        transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    .controls-wrapper {
+        width: 100%;
+        max-width: 1300px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        gap: 15px;
+    }
+
+    .left-controls {
+        display: flex;
+        gap: 15px;
+    }
+
+    .nav-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .menu-container {
+        padding: 8px 16px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+    }
+
+    .menu-label {
+        font-weight: bold;
+        font-size: 0.95em;
+    }
+
+    .menu-select {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .forward-nav-btn {
+        padding: 8px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    .forward-nav-btn:hover {
+        transform: scale(1.05);
+    }
+
+    /* 3x3 Grid Matrix System */
+    .studio-wall {
+        width: 100%;
+        max-width: 1300px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px; 
+    }
+
+    @media (max-width: 1024px) {
+        .studio-wall { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+        .studio-wall { grid-template-columns: 1fr; }
+    }
+
+    /* ==========================================
+       2. ZOOMING CHALKBOARD FORUM COMPONENT
+       ========================================== */
+    .forum-board-btn {
+        padding: 0;
+        background: none;
+        border: none;
+        font-family: inherit;
+        color: inherit;
+        text-align: left;
+        width: 100%;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .chalkboard {
+        padding: 30px;
+        border-radius: 8px;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        box-sizing: border-box;
+    }
+
+    .forum-board-btn:hover .chalkboard {
+        transform: translateY(-5px) scale(1.02);
+    }
+
+    .forum-title {
+        margin: 0;
+        font-size: 2em;
+        letter-spacing: 0.5px;
+    }
+
+    /* Hidden Internal View State */
+    .forum-content-view {
+        display: none;
+        opacity: 0;
+        text-align: center;
+        transition: opacity 0.3s ease;
+        width: 100%;
+    }
+
+    .forum-text {
+        font-size: 1.5em;
+        line-height: 1.6;
+        margin-bottom: 30px;
+    }
+
+    /* Fullscreen Zoom Class Activated via JavaScript */
+    .chalkboard.fullscreen-zoom {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 9999;
+        border-radius: 0 !important;
+        margin: 0;
+        padding: 50px;
+        justify-content: center;
+        transform: none !important;
+    }
+
+    .chalkboard.fullscreen-zoom .forum-title {
+        font-size: 3.5em;
+        margin-bottom: 20px;
+    }
+
+    .chalkboard.fullscreen-zoom .forum-content-view {
+        display: block;
+        opacity: 1;
+    }
+
+    /* ==========================================
+       3. THEME VARIATIONS (MATCHED SYSTEM)
+       ========================================== */
+    /* PASTEL RAINBOW */
+    body.theme-pastel {
+        background: linear-gradient(45deg, #FFB3BA, #FFDFBA, #FFFFBA, #BAFFC9, #BAE1FF, #D0BAFF, #FFB3BA);
+        background-size: 400% 400%;
+        animation: rainbowFade 16s ease infinite;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        color: rgba(245, 245, 245, 0.95);
+    }
+    @keyframes rainbowFade {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .theme-pastel .menu-container, .theme-pastel .forward-nav-btn {
+        background: #2b3a32; border: 4px solid #5c2c16; color: #ffeb99;
+    }
+    .theme-pastel .menu-select { background: #333; color: #fff; border: 1px dashed rgba(255,255,255,0.3); }
+    .theme-pastel .chalkboard {
+        background: radial-gradient(circle at 50% 30%, rgba(55, 75, 65, 0.9), rgba(35, 45, 40, 0.95)), #2b3a32;
+        border: 14px solid #5c2c16;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+        box-shadow: inset 0px 0px 20px rgba(0,0,0,0.7), 6px 8px 15px rgba(0,0,0,0.3);
+    }
+
+    /* CYBER NEON GLASS */
+    body.theme-cyber {
+        background: linear-gradient(-45deg, #0f172a, #1e1b4b, #2e1065, #0f172a);
+        background-size: 400% 400%;
+        animation: cyberPulse 12s ease infinite;
+        font-family: 'Segoe UI', sans-serif;
+        color: #f8fafc;
+    }
+    @keyframes cyberPulse {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .theme-cyber .menu-container, .theme-cyber .forward-nav-btn {
+        background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1); color: #f1f5f9;
+    }
+    .theme-cyber .menu-select { background: #0f172a; color: #f1f5f9; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; }
+    .theme-cyber .chalkboard {
+        background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    .theme-cyber .forward-nav-btn:hover { box-shadow: 0 0 15px rgba(56, 189, 248, 0.6); border-color: #38bdf8; color: #38bdf8; }
+
+    /* SKEUOMORPHIC */
+    body.theme-skeuo {
+        background-color: #2e3138;
+        background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 0), radial-gradient(rgba(0,0,0,0.3) 1px, transparent 0);
+        background-size: 4px 4px; background-position: 0 0, 2px 2px;
+        font-family: 'Marker Felt', 'Chalkboard SE', sans-serif; color: #fff;
+    }
+    .theme-skeuo .menu-container, .theme-skeuo .forward-nav-btn {
+        background: linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 50%, #dddddd 50%, #cfcfcf 100%);
+        border: 1px solid #a6a6a6; color: #4c566c; text-shadow: 0 1px 0 #fff;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 #fff;
+    }
+    .theme-skeuo .menu-select { background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%); color: #333; border: 1px solid #abafb3; }
+    .theme-skeuo .chalkboard {
+        background: radial-gradient(circle at 50% 30%, #2f4f3e, #1b3327);
+        border: 14px solid #4a2711;
+        border-image: repeating-linear-gradient(45deg, #3d1f0d, #542d15 15px, #3d1f0d 30px) 14 stretch;
+        text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
+        box-shadow: inset 0px 0px 15px rgba(0,0,0,0.6), 0 8px 16px rgba(0, 0, 0, 0.5);
+    }
+</style>
+</head>
+<body class="theme-skeuo">
+
+    <!-- Top Action Control Toolbar Alignment System -->
+    <div class="controls-wrapper">
+        <div class="nav-buttons">
+            <a href="index.html" class="forward-nav-btn" id="back-btn" title="Back to Home">← Home</a>
+            <a href="gallery.html" class="forward-nav-btn" id="forward-btn" title="Go to Gallery">Next →</a>
+        </div>
+         
+        <div class="left-controls">
+            <div class="menu-container">
+                <span class="menu-label">Theme:</span>
+                <select class="menu-select" id="theme-picker" onchange="changeTheme(this.value)">
+                    <option value="theme-skeuo">Skeuomorphic</option>
+                    <option value="theme-cyber">Cyber Neon / Glass</option>
+                    <option value="theme-pastel">Classic Pastel Rainbow</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Wall Matrix -->
+    <div class="studio-wall">
+
+        <!-- Clickable Forum Board Button Element -->
+        <button class="forum-board-btn" onclick="openForum(this, event)">
+            <div class="chalkboard" id="test-forum-board">
+                <h2 class="forum-title">test</h2>
+                
+                <!-- Internal Hidden Container Revealed Upon Full-Screen Zoom Transitions -->
+                <div class="forum-content-view">
+                    <p class="forum-text">test test this is a test 123123</p>
+                    <button class="forward-nav-btn" onclick="closeForum(this, event)">← Back to Forums</button>
+                </div>
+            </div>
+        </button>
+
+    </div>
+
+    <script>
+        // System Theme Handler Switcher
+        function changeTheme(themeName) {
+            document.body.className = themeName;
+            document.getElementById('theme-picker').value = themeName;
+        }
+
+        // Handles smoothly zooming into full-screen viewport layout
+        function openForum(buttonElement, event) {
+            const board = buttonElement.querySelector('.chalkboard');
+            
+            // Check to avoid processing if it's already full view
+            if (!board.classList.contains('fullscreen-zoom')) {
+                board.classList.add('fullscreen-zoom');
+            }
+        }
+
+        // Handles closing the modal view structure without re-triggering the click frame event
+        function closeForum(closeButton, event) {
+            // Stops event bubbling from clicking down to the underlying panel button
+            event.stopPropagation();
+            
+            const dynamicBoard = closeButton.closest('.chalkboard');
+            dynamicBoard.classList.remove('fullscreen-zoom');
+        }
+    </script>
+</body>
+</html>
