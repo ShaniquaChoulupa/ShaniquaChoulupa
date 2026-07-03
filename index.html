@@ -6,7 +6,7 @@
 <title>The Creative Chalkboard Studio</title>
 <style>
     /* ==========================================
-       1. GLOBAL BASE STYLES & LAYOUT (Common to All)
+       1. GLOBAL BASE STYLES & LAYOUT
        ========================================== */
     body {
         margin: 0;
@@ -16,9 +16,10 @@
         align-items: center;
         min-height: 100vh;
         box-sizing: border-box;
-        transition: background 0.3s ease, color 0.3s ease;
+        transition: background 0.5s ease, color 0.5s ease;
     }
 
+    /* Controls the top bar layout for selectors */
     .controls-wrapper {
         width: 100%;
         max-width: 1300px;
@@ -28,18 +29,32 @@
         margin-bottom: 25px;
     }
 
+    /* Dropdown UI Containers */
     .menu-container {
         padding: 8px 16px;
         border-radius: 6px;
         display: flex;
         align-items: center;
         gap: 10px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
     }
 
-    .menu-label { font-weight: bold; font-size: 0.95em; }
-    .menu-select { padding: 4px 8px; border-radius: 4px; font-size: 0.9em; cursor: pointer; outline: none; }
+    .menu-label {
+        font-weight: bold;
+        font-size: 0.95em;
+    }
 
+    .menu-select {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        cursor: pointer;
+        outline: none;
+    }
+
+    /* 3x3 Grid Matrix System */
     .studio-wall {
         width: 100%;
         max-width: 1300px;
@@ -48,7 +63,9 @@
         gap: 30px; 
     }
 
-    .welcome-card, .bottom-spanner { grid-column: span 3; }
+    .welcome-card, .bottom-spanner {
+        grid-column: span 3;
+    }
 
     @media (max-width: 1024px) {
         .studio-wall { grid-template-columns: repeat(2, 1fr); }
@@ -69,33 +86,165 @@
         transition: all 0.3s ease;
     }
 
-    h1, h2 { text-align: center; margin-top: 0; letter-spacing: 0.5px; }
-    p { font-size: 1.15em; line-height: 1.5; text-align: center; }
-    .board-list { display: flex; flex-direction: column; gap: 16px; width: 100%; margin-top: 10px; }
-    .board-item { display: flex; align-items: center; padding: 12px 18px; border-radius: 8px; transition: all 0.3s ease; }
-    
-    .wood-frame {
-        width: 55px; height: 55px; border-radius: 10px; overflow: hidden;
-        margin-right: 15px; display: flex; justify-content: center; align-items: center; flex-shrink: 0;
+    h1, h2 {
+        text-align: center;
+        margin-top: 0;
+        letter-spacing: 0.5px;
     }
-    .wood-frame img { width: 100%; height: 100%; object-fit: cover; }
-    .chalk-link { font-size: 1.4em; text-decoration: none; font-weight: bold; }
-    .goal-item { margin: 8px 0; font-size: 1.1em; font-weight: bold; }
+
+    p {
+        font-size: 1.15em;
+        line-height: 1.5;
+        text-align: center;
+    }
+
+    .board-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .board-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 18px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .wood-frame {
+        width: 55px;
+        height: 55px;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-right: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    .wood-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .chalk-link {
+        font-size: 1.4em;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.2s ease, text-shadow 0.2s ease;
+    }
+
+    .goal-item {
+        margin: 8px 0;
+        font-size: 1.1em;
+        font-weight: bold;
+    }
 
     /* ==========================================
-       2. THEME DEFINITIONS (Enforced via body classes)
+       2. THEME 1: OLD PASTEL RAINBOW
        ========================================== */
+    body.theme-pastel {
+        background: linear-gradient(45deg, #FFB3BA, #FFDFBA, #FFFFBA, #BAFFC9, #BAE1FF, #D0BAFF, #FFB3BA);
+        background-size: 400% 400%;
+        animation: rainbowFade 16s ease infinite;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        color: rgba(245, 245, 245, 0.95);
+    }
+    @keyframes rainbowFade {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .theme-pastel .menu-container {
+        background: #2b3a32;
+        border: 4px solid #5c2c16;
+    }
+    .theme-pastel .menu-label { color: #ffe699; }
+    .theme-pastel .menu-select { background: #333; color: #fff; border: 1px dashed rgba(255,255,255,0.3); }
+    .theme-pastel .chalkboard, .theme-pastel .notepad-card {
+        background: radial-gradient(circle at 50% 30%, rgba(55, 75, 65, 0.9), rgba(35, 45, 40, 0.95)), #2b3a32;
+        border: 14px solid #5c2c16;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+        box-shadow: inset 0px 0px 20px rgba(0,0,0,0.7), 6px 8px 15px rgba(0,0,0,0.3);
+    }
+    .theme-pastel h1 { color: #fff; }
+    .theme-pastel h2 { color: #ffe699; }
+    .theme-pastel .board-item { background: rgba(255, 255, 255, 0.04); border: 1px dashed rgba(255, 255, 255, 0.15); }
+    .theme-pastel .board-item:hover { transform: scale(1.02); background: rgba(255, 255, 255, 0.08); }
+    .theme-pastel .wood-frame { border: 4px solid #5c2c16; background-color: #222; }
+    .theme-pastel .x-link { color: #99ccff; }
+    .theme-pastel .yt-link { color: #ff9999; }
+    .theme-pastel .tt-link { color: #b3ffec; }
+    .theme-pastel .granny-link { color: #ffb3ff; }
+    .theme-pastel .goal-item { text-align: center; color: #ffeb99; }
 
-    /* ----- THEME: SKEUOMORPHIC iOS 6 ----- */
+    /* ==========================================
+       3. THEME 2: CYBER NEON GLASS
+       ========================================== */
+    body.theme-cyber {
+        background: linear-gradient(-45deg, #0f172a, #1e1b4b, #2e1065, #0f172a);
+        background-size: 400% 400%;
+        animation: cyberPulse 12s ease infinite;
+        font-family: 'Segoe UI', sans-serif;
+        color: #f8fafc;
+    }
+    @keyframes cyberPulse {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .theme-cyber .menu-container {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50px;
+    }
+    .theme-cyber .menu-label { color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
+    .theme-cyber .menu-select { background: #0f172a; color: #f1f5f9; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; }
+    .theme-cyber .chalkboard, .theme-cyber .notepad-card {
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    .theme-cyber .chalkboard:hover, .theme-cyber .notepad-card:hover { transform: translateY(-4px); }
+    .theme-cyber h1 { background: linear-gradient(to right, #ffffff, #cbd5e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .theme-cyber h2 { background: linear-gradient(to right, #fef08a, #fde047); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .theme-cyber p { color: #94a3b8; }
+    .theme-cyber .board-item { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; }
+    .theme-cyber .board-item:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.15); transform: translateX(6px); }
+    .theme-cyber .wood-frame { background-color: #0f172a; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; }
+    .theme-cyber .x-link { color: #38bdf8; }
+    .theme-cyber .yt-link { color: #f87171; }
+    .theme-cyber .tt-link { color: #2dd4bf; }
+    .theme-cyber .granny-link { color: #e879f9; }
+    .theme-cyber .board-item:hover .chalk-link { filter: drop-shadow(0 0 8px currentColor); }
+    .theme-cyber .goal-item { padding: 10px; background: rgba(255,255,255,0.02); border-left: 4px solid #64748b; border-radius: 0 8px 8px 0; }
+
+    /* ==========================================
+       4. THEME 3: SKEUOMORPHIC iOS 6 & NOTEPAD
+       ========================================== */
     body.theme-ios6 {
         background-color: #2e3138;
         background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 0), radial-gradient(rgba(0,0,0,0.3) 1px, transparent 0);
-        background-size: 4px 4px; background-position: 0 0, 2px 2px;
+        background-size: 4px 4px;
+        background-position: 0 0, 2px 2px;
         font-family: 'Marker Felt', 'Chalkboard SE', sans-serif;
         color: #fff;
     }
-    .theme-ios6 .menu-container { background: linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 50%, #dddddd 50%, #cfcfcf 100%); border: 1px solid #a6a6a6; }
+    .theme-ios6 .menu-container {
+        background: linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 50%, #dddddd 50%, #cfcfcf 100%);
+        border: 1px solid #a6a6a6; border-top-color: #b3b3b3; border-bottom-color: #8c8c8c;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 #fff;
+    }
     .theme-ios6 .menu-label { color: #4c566c; text-shadow: 0 1px 0 #fff; }
+    .theme-ios6 .menu-select { background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%); color: #333; border: 1px solid #abafb3; }
     .theme-ios6 .chalkboard {
         background: radial-gradient(circle at 50% 30%, #2f4f3e, #1b3327);
         border: 14px solid #4a2711;
@@ -111,80 +260,31 @@
     .theme-ios6 .yt-link { color: #ff9999; }
     .theme-ios6 .tt-link { color: #b3ffec; }
     .theme-ios6 .granny-link { color: #ffb3ff; }
-    
-    /* Specific Notepad layout for iOS6 */
+     
+    /* Unique Notepad Styling in iOS 6 Theme */
     .theme-ios6 .notepad-card {
         background: #fbf6d9;
         background-image: linear-gradient(rgba(0,0,0,0.05) 1px, transparent 0);
         background-size: 100% 28px;
         border: 1px solid #e3dbb3; border-radius: 6px;
         box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-        color: #1a2332; padding: 30px 25px 25px 45px;
+        color: #1a2332;
+        padding: 30px 25px 25px 45px;
         font-family: 'Noteworthy', 'Helvetica Neue', sans-serif;
-        position: relative;
     }
-    .theme-ios6 .notepad-card::before { content: ''; position: absolute; top: 0; bottom: 0; left: 35px; width: 1px; border-left: 1px solid #ff9999; }
+    .theme-ios6 .notepad-card::before {
+        content: ''; position: absolute; top: 0; bottom: 0; left: 35px; width: 1px; border-left: 1px solid #ff9999;
+    }
     .theme-ios6 .notepad-card h2 { color: #3b5998; border-bottom: 2px solid #3b5998; padding-bottom: 5px; text-shadow: none; }
-    .theme-ios6 .notepad-card .goal-item { line-height: 28px; margin: 0; color: #2b3e56; text-align: left; }
-
-    /* ----- THEME: CYBER NEON ----- */
-    body.theme-cyber {
-        background: linear-gradient(-45deg, #0f172a, #1e1b4b, #2e1065, #0f172a);
-        background-size: 400% 400%; animation: cyberPulse 12s ease infinite;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #f8fafc;
-    }
-    .theme-cyber .menu-container { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.1); }
-    .theme-cyber .menu-label { color: #94a3b8; }
-    .theme-cyber .menu-select { background: #0f172a; color: #fff; border: 1px solid rgba(255,255,255,0.2); }
-    .theme-cyber .chalkboard, .theme-cyber .notepad-card {
-        background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-        border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 30px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        text-shadow: none;
-    }
-    .theme-cyber .notepad-card::before { display: none; }
-    .theme-cyber h1 { background: linear-gradient(to right, #ffffff, #cbd5e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .theme-cyber h2 { background: linear-gradient(to right, #fef08a, #fde047); -webkit-background-clip: text; -webkit-text-fill-color: transparent; border: none; padding: 0; }
-    .theme-cyber p { color: #94a3b8; }
-    .theme-cyber .board-item { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; }
-    .theme-cyber .wood-frame { background-color: #0f172a; border: 1px solid rgba(255, 255, 255, 0.1); }
-    .theme-cyber .x-link { color: #38bdf8; }
-    .theme-cyber .yt-link { color: #f87171; }
-    .theme-cyber .tt-link { color: #2dd4bf; }
-    .theme-cyber .granny-link { color: #e879f9; }
-    .theme-cyber .goal-item { text-align: left; padding: 12px 16px; background: rgba(255, 255, 255, 0.02); border-left: 4px solid #64748b; border-radius: 0 12px 12px 0; color: #cbd5e1; }
-
-    /* ----- THEME: CLASSIC PASTEL RAINBOW ----- */
-    body.theme-pastel {
-        background: linear-gradient(45deg, #FFB3BA, #FFDFBA, #FFFFBA, #BAFFC9, #BAE1FF, #D0BAFF, #FFB3BA);
-        background-size: 400% 400%; animation: rainbowFade 16s ease infinite;
-        font-family: 'Comic Sans MS', cursive, sans-serif; color: rgba(245, 245, 245, 0.95);
-    }
-    .theme-pastel .menu-container { background: #2b3a32; border: 3px solid #5c2c16; }
-    .theme-pastel .menu-label { color: #ffe699; }
-    .theme-pastel .chalkboard, .theme-pastel .notepad-card {
-        background: radial-gradient(circle at 50% 30%, #374b41, #232d28);
-        border: 14px solid #5c2c16; border-radius: 8px; padding: 25px;
-        box-shadow: inset 0px 0px 20px rgba(0,0,0,0.7), 6px 8px 15px rgba(0,0,0,0.3);
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); color: rgba(255, 255, 255, 0.95);
-    }
-    .theme-pastel .notepad-card::before { display: none; }
-    .theme-pastel h1 { color: #fff; }
-    .theme-pastel h2 { color: #ffe699; border: none; padding: 0; }
-    .theme-pastel p { color: rgba(245, 245, 245, 0.85); text-align: center; }
-    .theme-pastel .board-item { background: rgba(255, 255, 255, 0.04); border: 1px dashed rgba(255, 255, 255, 0.15); border-radius: 8px; }
-    .theme-pastel .wood-frame { border: 3px solid #5c2c16; background-color: #222; }
-    .theme-pastel .x-link { color: #99ccff; }
-    .theme-pastel .yt-link { color: #ff9999; }
-    .theme-pastel .tt-link { color: #b3ffec; }
-    .theme-pastel .granny-link { color: #ffb3ff; }
-    .theme-pastel .goal-item { text-align: center; color: #ffeb99; border: none; background: none; padding: 0; }
+    .theme-ios6 .notepad-card .goal-item { line-height: 28px; margin: 0; color: #2b3e56; }
 </style>
 </head>
-<body class="theme-ios6">
+<body class="theme-ios6"> <!-- Default theme set to our new iOS 6 variant -->
 
+    <!-- Top Action Toolbar -->
     <div class="controls-wrapper">
-        
+         
+        <!-- Theme Switcher Selector -->
         <div class="menu-container">
             <span class="menu-label">Theme:</span>
             <select class="menu-select" id="theme-picker" onchange="changeTheme(this.value)">
@@ -194,6 +294,7 @@
             </select>
         </div>
 
+        <!-- Language Selector -->
         <div class="menu-container">
             <span class="menu-label" id="lang-label">Language:</span>
             <select class="menu-select" id="language-picker" onchange="changeLanguage(this.value)">
@@ -205,8 +306,10 @@
         </div>
     </div>
 
+    <!-- 3x3 Responsive Grid Content -->
     <div class="studio-wall">
 
+        <!-- Welcome Banner -->
         <div class="chalkboard welcome-card">
             <div>
                 <h1 id="welcome-title">Welcome to My Chalkboard!</h1>
@@ -214,6 +317,7 @@
             </div>
         </div>
 
+        <!-- Granny's Area -->
         <div class="chalkboard">
             <div>
                 <h2 id="granny-title">Granny's Corner</h2>
@@ -229,6 +333,7 @@
             <p style="font-size: 0.95em; margin-top: 20px; color: #ff9999;" id="granny-warning">⚠️ She hears everything... watch your step!</p>
         </div>
 
+        <!-- Matrix Social Hub -->
         <div class="chalkboard" id="socials-chalkboard">
             <div>
                 <h2 id="socials-title">My Creative Studio Socials</h2>
@@ -257,6 +362,7 @@
             </div>
         </div>
 
+        <!-- Timetable Matrix -->
         <div class="chalkboard">
             <div>
                 <h2 id="schedule-title">Stream & Content Schedule</h2>
@@ -265,6 +371,7 @@
             <p style="font-size: 1em; color: #ffeb99;" id="schedule-placeholder">[ Scribble a schedule or milestone notes here later ]</p>
         </div>
 
+        <!-- Project Progression Tracker -->
         <div class="notepad-card bottom-spanner">
             <h2 id="ideas-title">Next Project Ideas</h2>
             <div style="margin-top: 15px;">
@@ -276,7 +383,11 @@
 
     </div>
 
+    <!-- ==========================================
+       5. INTERACTIVE JAVASCRIPT LOGIC
+       ========================================== */ -->
     <script>
+        // Runtime Dynamic Switcher Engine
         function changeTheme(themeName) {
             document.body.className = themeName;
         }
@@ -350,6 +461,7 @@
 
         function changeLanguage(lang) {
             const set = translations[lang] || translations['en'];
+            
             document.getElementById('lang-label').innerText = set.langLabel;
             document.getElementById('welcome-title').innerText = set.welcomeTitle;
             document.getElementById('welcome-desc').innerText = set.welcomeDesc;
