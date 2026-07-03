@@ -35,6 +35,11 @@
         gap: 15px;
     }
 
+    .nav-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
     /* Dropdown Selector Layout Containers */
     .menu-container {
         padding: 8px 16px;
@@ -60,8 +65,8 @@
         outline: none;
     }
 
-    /* Interactive Back Button Structure */
-    .back-nav-btn {
+    /* Interactive Navigation Buttons Structure */
+    .back-nav-btn, .forward-nav-btn {
         padding: 8px 20px;
         border-radius: 6px;
         text-decoration: none;
@@ -70,7 +75,7 @@
         box-shadow: 0 2px 5px rgba(0,0,0,0.15);
         transition: all 0.3s ease;
     }
-    .back-nav-btn:hover {
+    .back-nav-btn:hover, .forward-nav-btn:hover {
         transform: scale(1.05);
     }
 
@@ -132,40 +137,6 @@
         text-align: center;
     }
 
-    /* Skeuomorphic Fixed Floating Navigation Arrow Button */
-    .forward-nav-btn {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 65px;
-        height: 65px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 2.2em;
-        text-decoration: none;
-        z-index: 9999;
-        background: linear-gradient(to bottom, #ffffff 0%, #f2f2f2 49%, #e1e1e1 51%, #cccccc 100%);
-        border: 2px solid #8c8c8c;
-        border-top-color: #b3b3b3;
-        border-bottom-color: #666666;
-        color: #4c566c;
-        text-shadow: 0 1px 0 #ffffff;
-        box-shadow: 0 6px 12px rgba(0,0,0,0.35), inset 0 1px 0 #ffffff;
-        font-weight: bold;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .forward-nav-btn:hover {
-        transform: scale(1.08);
-        box-shadow: 0 8px 16px rgba(0,0,0,0.45), inset 0 1px 0 #ffffff;
-    }
-    .forward-nav-btn:active {
-        background: linear-gradient(to bottom, #cccccc 0%, #dddddd 100%);
-        box-shadow: 0 2px 4px rgba(0,0,0,0.5), inset 0 2px 4px rgba(0,0,0,0.2);
-        transform: scale(0.98);
-    }
-
     /* ==========================================
        2. THEME 1: OLD PASTEL RAINBOW
        ========================================== */
@@ -181,7 +152,7 @@
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
-    .theme-pastel .menu-container, .theme-pastel .back-nav-btn {
+    .theme-pastel .menu-container, .theme-pastel .back-nav-btn, .theme-pastel .forward-nav-btn {
         background: #2b3a32;
         border: 4px solid #5c2c16;
         color: #ffe699;
@@ -217,13 +188,13 @@
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
-    .theme-cyber .menu-container, .theme-cyber .back-nav-btn {
+    .theme-cyber .menu-container, .theme-cyber .back-nav-btn, .theme-cyber .forward-nav-btn {
         background: rgba(255, 255, 255, 0.03);
         backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 255, 255, 0.1);
         color: #f1f5f9;
     }
-    .theme-cyber .back-nav-btn { border-radius: 20px; }
+    .theme-cyber .back-nav-btn, .theme-cyber .forward-nav-btn { border-radius: 20px; }
     .theme-cyber .menu-container { border-radius: 50px; }
     .theme-cyber .menu-label { color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
     .theme-cyber .menu-select { background: #0f172a; color: #f1f5f9; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; }
@@ -241,7 +212,7 @@
         background: #0f172a;
     }
     .theme-cyber .image-caption { color: #38bdf8; filter: drop-shadow(0 0 6px rgba(56,189,248,0.4)); }
-    .theme-cyber .back-nav-btn:hover { border-color: #38bdf8; color: #38bdf8; box-shadow: 0 0 10px rgba(56,189,248,0.3); }
+    .theme-cyber .back-nav-btn:hover, .theme-cyber .forward-nav-btn:hover { border-color: #38bdf8; color: #38bdf8; box-shadow: 0 0 10px rgba(56,189,248,0.3); }
 
     /* ==========================================
        4. THEME 3: SKEUOMORPHIC & CHALKBOARD
@@ -254,7 +225,7 @@
         font-family: 'Marker Felt', 'Chalkboard SE', sans-serif;
         color: #fff;
     }
-    .theme-skeuo .menu-container, .theme-skeuo .back-nav-btn {
+    .theme-skeuo .menu-container, .theme-skeuo .back-nav-btn, .theme-skeuo .forward-nav-btn {
         background: linear-gradient(to bottom, #ffffff 0%, #f2f2f2 49%, #e1e1e1 51%, #cccccc 100%);
         border: 1px solid #a6a6a6; border-top-color: #b3b3b3; border-bottom-color: #8c8c8c;
         color: #4c566c; text-shadow: 0 1px 0 #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 #fff;
@@ -275,7 +246,7 @@
         border-image: repeating-linear-gradient(0deg, #5c2c16, #4a2210 20px, #6a351c 40px, #4a2210 60px) 12 stretch;
     }
     .theme-skeuo .image-caption { color: #ffe699; }
-    .theme-skeuo .back-nav-btn:active {
+    .theme-skeuo .back-nav-btn:active, .theme-skeuo .forward-nav-btn:active {
         background: linear-gradient(to bottom, #cccccc 0%, #dddddd 100%);
         box-shadow: 0 1px 2px rgba(0,0,0,0.4), inset 0 2px 4px rgba(0,0,0,0.15);
     }
@@ -283,15 +254,13 @@
 </head>
 <body class="theme-skeuo">
 
-    <!-- Fixed Floating Navigation Arrow linking to khouzam.html -->
-    <a href="khouzam.html" class="forward-nav-btn" title="Go to Khouzam Page">→</a>
-
-    <!-- Top Action Control Toolbar Alignment System -->
     <div class="controls-wrapper">
-        <a href="index.html" class="back-nav-btn" id="back-btn">← Back</a>
+        <div class="nav-buttons">
+            <a href="index.html" class="back-nav-btn" id="back-btn">← Back</a>
+            <a href="khouzam.html" class="forward-nav-btn" id="forward-btn" title="Go to Khouzam Page">Next →</a>
+        </div>
         
         <div class="left-controls">
-            <!-- Theme Dynamic Switcher System -->
             <div class="menu-container">
                 <span class="menu-label">Theme:</span>
                 <select class="menu-select" id="theme-picker" onchange="changeTheme(this.value)">
@@ -301,7 +270,6 @@
                 </select>
             </div>
 
-            <!-- Internationalization Engine -->
             <div class="menu-container">
                 <span class="menu-label" id="lang-label">Language:</span>
                 <select class="menu-select" id="language-picker" onchange="changeLanguage(this.value)">
@@ -314,10 +282,8 @@
         </div>
     </div>
 
-    <!-- Gallery 2x2 Device Showcase Grid System system -->
     <div class="gallery-matrix">
 
-        <!-- iPad Back Frame -->
         <div class="chalkboard">
             <div class="gallery-wood-frame">
                 <img src="iPadBack.JPG" alt="iPad Back View">
@@ -325,7 +291,6 @@
             <div class="image-caption" id="cap-ipad-back">iPad Collection - Back View</div>
         </div>
 
-        <!-- iPad Front Frame -->
         <div class="chalkboard">
             <div class="gallery-wood-frame">
                 <img src="iPadFront.JPG" alt="iPad Front View">
@@ -333,7 +298,6 @@
             <div class="image-caption" id="cap-ipad-front">iPad Collection - Front View</div>
         </div>
 
-        <!-- iPhone Back Frame -->
         <div class="chalkboard">
             <div class="gallery-wood-frame">
                 <img src="iPhoneBack.JPG" alt="iPhone Back View">
@@ -341,7 +305,6 @@
             <div class="image-caption" id="cap-iphone-back">iPhone Collection - Back View</div>
         </div>
 
-        <!-- iPhone Front Frame -->
         <div class="chalkboard">
             <div class="gallery-wood-frame">
                 <img src="iPhoneFront.JPG" alt="iPhone Front View">
@@ -351,9 +314,6 @@
 
     </div>
 
-    <!-- ==========================================
-       5. INTERACTIVE JAVASCRIPT LOGIC
-       ========================================== */ -->
     <script>
         // Runtime Dynamic Selector Switcher Engine
         function changeTheme(themeName) {
@@ -365,6 +325,7 @@
         const translations = {
             en: {
                 backBtn: "← Back",
+                forwardBtn: "Next →",
                 langLabel: "Language:",
                 capIpadBack: "iPad Collection - Back View",
                 capIpadFront: "iPad Collection - Front View",
@@ -373,6 +334,7 @@
             },
             at: {
                 backBtn: "← Zurück",
+                forwardBtn: "Weiter →",
                 langLabel: "Sprache:",
                 capIpadBack: "iPad Sammlung - Rückansicht",
                 capIpadFront: "iPad Sammlung - Vorderseite",
@@ -381,6 +343,7 @@
             },
             noe: {
                 backBtn: "← Zruck",
+                forwardBtn: "Weida →",
                 langLabel: "Sproch:",
                 capIpadBack: "iPad Sammlung - hintn glesn",
                 capIpadFront: "iPad Sammlung - vuarn glesn",
@@ -389,6 +352,7 @@
             },
             es: {
                 backBtn: "← Volver",
+                forwardBtn: "Siguiente →",
                 langLabel: "Idioma:",
                 capIpadBack: "Colección iPad - Vista Posterior",
                 capIpadFront: "Colección iPad - Vista Frontal",
@@ -401,6 +365,7 @@
             const set = translations[lang] || translations['en'];
             
             document.getElementById('back-btn').innerText = set.backBtn;
+            document.getElementById('forward-btn').innerText = set.forwardBtn;
             document.getElementById('lang-label').innerText = set.langLabel;
             document.getElementById('cap-ipad-back').innerText = set.capIpadBack;
             document.getElementById('cap-ipad-front').innerText = set.capIpadFront;

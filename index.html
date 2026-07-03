@@ -19,14 +19,25 @@
         transition: background 0.5s ease, color 0.5s ease;
     }
 
-    /* Controls the top bar layout for selectors */
+    /* Controls the top bar layout for selectors and navigation */
     .controls-wrapper {
         width: 100%;
         max-width: 1300px;
         display: flex;
-        justify-content: flex-end;
-        gap: 15px;
+        justify-content: space-between;
+        align-items: center;
         margin-bottom: 25px;
+        gap: 15px;
+    }
+
+    .left-controls {
+        display: flex;
+        gap: 15px;
+    }
+
+    .nav-buttons {
+        display: flex;
+        gap: 10px;
     }
 
     /* Dropdown UI Containers */
@@ -52,6 +63,20 @@
         font-size: 0.9em;
         cursor: pointer;
         outline: none;
+    }
+
+    /* Interactive Navigation Button Structure */
+    .forward-nav-btn {
+        padding: 8px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+    }
+    .forward-nav-btn:hover {
+        transform: scale(1.05);
     }
 
     /* 3x3 Grid Matrix System */
@@ -145,27 +170,6 @@
         font-weight: bold;
     }
 
-    /* Fixed Floating Navigation Arrow */
-    .forward-nav-btn {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 60px;
-        height: 60px;
-        border-radius: 50px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 2em;
-        text-decoration: none;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        transition: all 0.3s ease;
-        z-index: 9999;
-    }
-    .forward-nav-btn:hover {
-        transform: scale(1.1);
-    }
-
     /* ==========================================
        2. THEME 1: OLD PASTEL RAINBOW
        ========================================== */
@@ -181,9 +185,10 @@
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
-    .theme-pastel .menu-container {
+    .theme-pastel .menu-container, .theme-pastel .forward-nav-btn {
         background: #2b3a32;
         border: 4px solid #5c2c16;
+        color: #ffeb99;
     }
     .theme-pastel .menu-label { color: #ffe699; }
     .theme-pastel .menu-select { background: #333; color: #fff; border: 1px dashed rgba(255,255,255,0.3); }
@@ -203,11 +208,6 @@
     .theme-pastel .tt-link { color: #b3ffec; }
     .theme-pastel .granny-link { color: #ffb3ff; }
     .theme-pastel .goal-item { text-align: center; color: #ffeb99; }
-    .theme-pastel .forward-nav-btn {
-        background: #2b3a32;
-        border: 3px solid #5c2c16;
-        color: #ffeb99;
-    }
 
     /* ==========================================
        3. THEME 2: CYBER NEON GLASS
@@ -224,12 +224,14 @@
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
-    .theme-cyber .menu-container {
+    .theme-cyber .menu-container, .theme-cyber .forward-nav-btn {
         background: rgba(255, 255, 255, 0.03);
         backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 50px;
+        color: #f1f5f9;
     }
+    .theme-cyber .forward-nav-btn { border-radius: 20px; }
+    .theme-cyber .menu-container { border-radius: 50px; }
     .theme-cyber .menu-label { color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
     .theme-cyber .menu-select { background: #0f172a; color: #f1f5f9; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; }
     .theme-cyber .chalkboard, .theme-cyber .notepad-card {
@@ -252,12 +254,6 @@
     .theme-cyber .granny-link { color: #e879f9; }
     .theme-cyber .board-item:hover .chalk-link { filter: drop-shadow(0 0 8px currentColor); }
     .theme-cyber .goal-item { padding: 10px; background: rgba(255,255,255,0.02); border-left: 4px solid #64748b; border-radius: 0 8px 8px 0; }
-    .theme-cyber .forward-nav-btn {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: #f1f5f9;
-    }
     .theme-cyber .forward-nav-btn:hover {
         box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
         border-color: #38bdf8;
@@ -275,10 +271,11 @@
         font-family: 'Marker Felt', 'Chalkboard SE', sans-serif;
         color: #fff;
     }
-    .theme-skeuo .menu-container {
+    .theme-skeuo .menu-container, .theme-skeuo .forward-nav-btn {
         background: linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 50%, #dddddd 50%, #cfcfcf 100%);
         border: 1px solid #a6a6a6; border-top-color: #b3b3b3; border-bottom-color: #8c8c8c;
         box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 #fff;
+        color: #4c566c; text-shadow: 0 1px 0 #fff;
     }
     .theme-skeuo .menu-label { color: #4c566c; text-shadow: 0 1px 0 #fff; }
     .theme-skeuo .menu-select { background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%); color: #333; border: 1px solid #abafb3; }
@@ -308,6 +305,7 @@
         color: #1a2332;
         padding: 30px 25px 25px 45px;
         font-family: 'Noteworthy', 'Helvetica Neue', sans-serif;
+        position: relative;
     }
     .theme-skeuo .notepad-card::before {
         content: ''; position: absolute; top: 0; bottom: 0; left: 35px; width: 1px; border-left: 1px solid #ff9999;
@@ -315,44 +313,39 @@
     .theme-skeuo .notepad-card h2 { color: #3b5998; border-bottom: 2px solid #3b5998; padding-bottom: 5px; text-shadow: none; }
     .theme-skeuo .notepad-card .goal-item { line-height: 28px; margin: 0; color: #2b3e56; }
     
-    /* Skeuomorphic Glass-Cap/Glossy Navigation Arrow Overrides */
-    .theme-skeuo .forward-nav-btn {
-        background: linear-gradient(to bottom, #ffffff 0%, #f2f2f2 49%, #e1e1e1 51%, #cccccc 100%);
-        border: 1px solid #8c8c8c;
-        border-top-color: #b3b3b3;
-        border-bottom-color: #666666;
-        color: #4c566c;
-        text-shadow: 0 1px 0 #ffffff;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.35), inset 0 1px 0 #ffffff;
-        font-weight: bold;
-    }
     .theme-skeuo .forward-nav-btn:active {
         background: linear-gradient(to bottom, #cccccc 0%, #dddddd 100%);
         box-shadow: 0 1px 3px rgba(0,0,0,0.5), inset 0 2px 4px rgba(0,0,0,0.2);
     }
 </style>
 </head>
-<body class="theme-skeuo"> <a href="gallery.html" class="forward-nav-btn" title="Go to Gallery">→</a>
+<body class="theme-skeuo">
 
+    <!-- Top Action Control Toolbar Alignment System -->
     <div class="controls-wrapper">
-         
-        <div class="menu-container">
-            <span class="menu-label">Theme:</span>
-            <select class="menu-select" id="theme-picker" onchange="changeTheme(this.value)">
-                <option value="theme-skeuo">Skeuomorphic</option>
-                <option value="theme-cyber">Cyber Neon / Glass</option>
-                <option value="theme-pastel">Classic Pastel Rainbow</option>
-            </select>
+        <div class="nav-buttons">
+            <a href="gallery.html" class="forward-nav-btn" id="forward-btn" title="Go to Gallery">Next →</a>
         </div>
+         
+        <div class="left-controls">
+            <div class="menu-container">
+                <span class="menu-label">Theme:</span>
+                <select class="menu-select" id="theme-picker" onchange="changeTheme(this.value)">
+                    <option value="theme-skeuo">Skeuomorphic</option>
+                    <option value="theme-cyber">Cyber Neon / Glass</option>
+                    <option value="theme-pastel">Classic Pastel Rainbow</option>
+                </select>
+            </div>
 
-        <div class="menu-container">
-            <span class="menu-label" id="lang-label">Language:</span>
-            <select class="menu-select" id="language-picker" onchange="changeLanguage(this.value)">
-                <option value="en">English</option>
-                <option value="at">Österreichisch (Standard Austrian)</option>
-                <option value="noe">Niederösterreichisch (Dialect)</option>
-                <option value="es">Español</option>
-            </select>
+            <div class="menu-container">
+                <span class="menu-label" id="lang-label">Language:</span>
+                <select class="menu-select" id="language-picker" onchange="changeLanguage(this.value)">
+                    <option value="en">English</option>
+                    <option value="at">Österreichisch (Standard Austrian)</option>
+                    <option value="noe">Niederösterreichisch (Dialect)</option>
+                    <option value="es">Español</option>
+                </select>
+            </div>
         </div>
     </div>
 
@@ -431,10 +424,13 @@
         // Runtime Dynamic Switcher Engine
         function changeTheme(themeName) {
             document.body.className = themeName;
+            // Maintain selection in picker state
+            document.getElementById('theme-picker').value = themeName;
         }
 
         const translations = {
             en: {
+                forwardBtn: "Next →",
                 langLabel: "Language:",
                 welcomeTitle: "Welcome to My Chalkboard!",
                 welcomeDesc: "This is where I'll keep all the fun things I'm working on! Come back here and tell me what you want to add or edit next!",
@@ -451,6 +447,7 @@
                 idea3: "⏳ Drop in your next idea here..."
             },
             at: {
+                forwardBtn: "Weiter →",
                 langLabel: "Sprache:",
                 welcomeTitle: "Servus auf meiner Kreidetafel!",
                 welcomeDesc: "Da herinnen sammle ich all den fetzigen Kram, an dem ich gerade herumbastle! Schau einfach wieder vorbei und sag mir, was wir als Nächstes drantackern oder ändern sollen!",
@@ -467,6 +464,7 @@
                 idea3: "⏳ Pack deine nächste Idee einfach hier dazu..."
             },
             noe: {
+                forwardBtn: "Weida →",
                 langLabel: "Sproch:",
                 welcomeTitle: "Grias di auf meiner Kraidntofl!",
                 welcomeDesc: "Da drinnen hob i oin den leiwandn Kram, an dem i grod herumwurschtl! Schau hoid amoi vorbei und sog ma, wos ma ois Nächstes auffetackan oda ändern soin!",
@@ -483,6 +481,7 @@
                 idea3: "⏳ Hau dei nächste Idee afoch do drunter..."
             },
             es: {
+                forwardBtn: "Siguiente →",
                 langLabel: "Idioma:",
                 welcomeTitle: "¡Bienvenido a mi Pizarrón!",
                 welcomeDesc: "¡Aquí guardaré todas las cosas divertidas en las que estoy trabajando! ¡Regresa aquí y dime qué quieres agregar o editar después!",
@@ -496,13 +495,14 @@
                 ideasTitle: "Próximas Ideas de Proyectos",
                 idea1: "✓ Conectado granny.html con archivo de imagen local",
                 idea2: "⏳ Diseñar la página interna granny.html",
-                idea3: "⏳ Pon tu próxima idea aquí...",
+                idea3: "⏳ Pon tu próxima idea aquí..."
             }
         };
 
         function changeLanguage(lang) {
             const set = translations[lang] || translations['en'];
             
+            document.getElementById('forward-btn').innerText = set.forwardBtn;
             document.getElementById('lang-label').innerText = set.langLabel;
             document.getElementById('welcome-title').innerText = set.welcomeTitle;
             document.getElementById('welcome-desc').innerText = set.welcomeDesc;
@@ -517,6 +517,9 @@
             document.getElementById('idea-1').innerText = set.idea1;
             document.getElementById('idea-2').innerText = set.idea2;
             document.getElementById('idea-3').innerText = set.idea3;
+            
+            // Retain language picker selection state
+            document.getElementById('language-picker').value = lang;
         }
     </script>
 </body>
