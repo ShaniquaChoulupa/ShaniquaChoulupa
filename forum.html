@@ -94,7 +94,7 @@
     }
 
     /* ==========================================
-       2. ZOOMING CHALKBOARD FORUM COMPONENT
+       2. ZOOMING & SCROLLING CHALKBOARD FORUM
        ========================================== */
     .chalkboard-card {
         padding: 0;
@@ -117,6 +117,7 @@
         transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         box-sizing: border-box;
         position: relative;
+        overflow: hidden;
     }
 
     .chalkboard-card:hover .chalkboard {
@@ -137,21 +138,26 @@
         text-align: center;
         transition: opacity 0.3s ease;
         width: 100%;
+        max-width: 900px;
+        margin-top: 20px;
+        box-sizing: border-box;
     }
 
-    .forum-text {
-        font-size: 1.5em;
+    /* Paragraph limits and styling inside forums */
+    .forum-text p {
+        font-size: 1.25em;
         line-height: 1.6;
-        margin: 0;
+        margin: 0 0 20px 0;
+        text-align: left;
     }
 
-    /* Sleek Corner "X" Close Button System */
+    /* Sleek Corner "X" Close Button System (Stays Fixed on Screen) */
     .forum-close-x {
         display: none;
-        position: absolute;
+        position: fixed;
         top: 25px;
-        right: 35px;
-        font-size: 2.2em;
+        right: 45px;
+        font-size: 2.5em;
         font-weight: bold;
         background: none;
         border: none;
@@ -161,7 +167,7 @@
         padding: 5px 10px;
         transition: transform 0.2s ease, opacity 0.2s ease;
         opacity: 0.7;
-        z-index: 10000;
+        z-index: 10005;
     }
     .forum-close-x:hover {
         transform: scale(1.15);
@@ -178,15 +184,33 @@
         z-index: 9999;
         border-radius: 0 !important;
         margin: 0;
-        padding: 50px;
-        justify-content: center;
+        padding: 60px 40px;
+        justify-content: flex-start; /* Aligns content to top so it can scroll down */
+        align-items: center;
         transform: none !important;
-        cursor: default; /* Stops pointer cursor when fully expanded */
+        cursor: default;
+        overflow-y: auto; /* Activates scrolling natively */
+    }
+
+    /* Custom Chalkboard Scrollbars */
+    .chalkboard.fullscreen-zoom::-webkit-scrollbar {
+        width: 10px;
+    }
+    .chalkboard.fullscreen-zoom::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+    }
+    .chalkboard.fullscreen-zoom::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+    }
+    .chalkboard.fullscreen-zoom::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.4);
     }
 
     .chalkboard.fullscreen-zoom .forum-title {
         font-size: 3.5em;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
+        width: 100%;
     }
 
     .chalkboard.fullscreen-zoom .forum-content-view {
@@ -196,6 +220,11 @@
 
     .chalkboard.fullscreen-zoom .forum-close-x {
         display: block;
+    }
+
+    /* Prevent document body from scrolling when a forum board is open */
+    body.modal-open {
+        overflow: hidden;
     }
 
     /* ==========================================
@@ -274,7 +303,6 @@
 </head>
 <body class="theme-skeuo">
 
-    <!-- Top Action Control Toolbar Alignment System -->
     <div class="controls-wrapper">
         <div class="nav-buttons">
             <a href="index.html" class="forward-nav-btn" id="back-btn" title="Back to Home">← Home</a>
@@ -293,20 +321,32 @@
         </div>
     </div>
 
-    <!-- Main Content Wall Matrix -->
     <div class="studio-wall">
 
-        <!-- Clickable Forum Board Card Element -->
         <div class="chalkboard-card" onclick="openForum(this, event)" role="button" tabindex="0" onkeydown="if(event.key === 'Enter') openForum(this, event)">
             <div class="chalkboard" id="test-forum-board">
-                <!-- Smooth corner close element -->
                 <button class="forum-close-x" onclick="closeForum(this, event)" aria-label="Close forum">×</button>
                 
                 <h2 class="forum-title">test</h2>
                 
-                <!-- Internal Container Revealed Upon Full-Screen Zoom Transitions -->
                 <div class="forum-content-view">
-                    <p class="forum-text">test test this is a test 123123</p>
+                    <div class="forum-text">
+                        <p><strong>[Paragraph 1]</strong> test test this is a test 123123. Welcome to the long forum verification checkpoint. Here we test if our structural components scale beautifully when packed with extreme vertical lengths.</p>
+                        <p><strong>[Paragraph 2]</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <p><strong>[Paragraph 3]</strong> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <p><strong>[Paragraph 4]</strong> Moving onto the next phase of content, layout blocks must remain uniform. On a chalkboard style board, longer items shouldn't bleed out or vanish beneath the layout horizon.</p>
+                        <p><strong>[Paragraph 5]</strong> Fun fact: The custom track scrollbar has been engineered directly into the CSS layout rules above. This forces the scroll bar thumb component to change from clear dark overlays to glass panels depending on your current active theme.</p>
+                        <p><strong>[Paragraph 6]</strong> Here is paragraph six checking in. If you are reading this while checking the interface, it means the scrolling physics are working exactly as intended. The "X" button should still look firmly anchored in the top right quadrant of your active monitor view layout.</p>
+                        <p><strong>[Paragraph 7]</strong> Let's double check alignment systems. Everything within our main content framework wrapper system runs cleanly down a centered linear track system to maximize responsive readability guidelines across small screen frames.</p>
+                        <p><strong>[Paragraph 8]</strong> Halfway through the scroll evaluation matrix! This text acts as standard procedural fill material, but it's crucial for stress-testing how the HTML container tracks height attributes under extreme runtime conditions.</p>
+                        <p><strong>[Paragraph 9]</strong> This studio wall template system uses semantic HTML structural elements like role="button" to replace bad button nesting configurations, which guarantees stable deployments across staging tools.</p>
+                        <p><strong>[Paragraph 10]</strong> Paragraph ten is now active. Feel free to replace all of this randomized draft layout copy down the line with actual conversations, patch updates, or creative community project logs.</p>
+                        <p><strong>[Paragraph 11]</strong> Checking code rendering speeds. The modal expansion script runs on raw hardware CSS transitions via cubic-bezier pacing modules. This makes the zoom mechanics look extremely liquid instead of rigid or choppy.</p>
+                        <p><strong>[Paragraph 12]</strong> Nearly to the base boundary grid line! As the scrolling wrapper engine moves lower, check to ensure that header objects don't stack roughly or smash into active typography elements.</p>
+                        <p><strong>[Paragraph 13]</strong> Tracking variations between environments... Everything continues to run nicely. If you choose the Cyber Neon layout view right now, notice how the text drops back to clean slate tones with glowing hover reflections.</p>
+                        <p><strong>[Paragraph 14]</strong> Almost there. Penultimate test sequence paragraph block entering live view window boundaries. Checking edge margins to guarantee clean spacing at the bottom of the scroll target zone.</p>
+                        <p><strong>[Paragraph 15]</strong> Final Paragraph! You made it all the way to the floor of the test data stack. The scroll test is complete, everything is completely stable, and clicking the "X" in the top corner will gracefully compress this window right back to its original slot on the grid.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -324,19 +364,22 @@
         function openForum(cardElement, event) {
             const board = cardElement.querySelector('.chalkboard');
             
-            // Check to avoid processing if it's already full view
             if (!board.classList.contains('fullscreen-zoom')) {
                 board.classList.add('fullscreen-zoom');
+                document.body.classList.add('modal-open'); // Stops the background page from scrolling
             }
         }
 
         // Handles closing the modal view structure without re-triggering the click frame event
         function closeForum(closeButton, event) {
-            // Stops event bubbling from clicking down to the underlying panel block
             event.stopPropagation();
             
             const dynamicBoard = closeButton.closest('.chalkboard');
             dynamicBoard.classList.remove('fullscreen-zoom');
+            document.body.classList.remove('modal-open'); // Restores normal page scrolling
+            
+            // Instantly snap the forum internal scroll position back to top for the next time it opens
+            dynamicBoard.scrollTop = 0;
         }
     </script>
 </body>
