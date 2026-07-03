@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Creative Chalkboard Studio</title>
+<title>The Creative Chalkboard Studio - Khouzam</title>
 <style>
     /* Animated Pastel Rainbow Background */
     body {
@@ -35,9 +35,37 @@
         gap: 40px; 
     }
 
+    /* Top Action Control Toolbar Alignment System */
+    .controls-wrapper {
+        width: 100%;
+        max-width: 750px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        gap: 15px;
+    }
+
+    /* Wood Framed Back Button */
+    .back-nav-btn {
+        background: #2b3a32;
+        padding: 8px 20px;
+        border: 6px solid #5c2c16;
+        border-image: repeating-linear-gradient(45deg, #4a2210, #6a351c 10px, #4a2210 20px) 6 stretch;
+        border-radius: 6px;
+        box-shadow: 4px 4px 10px rgba(0,0,0,0.3);
+        color: #ffe699;
+        text-decoration: none;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        transition: transform 0.2s ease;
+    }
+    .back-nav-btn:hover {
+        transform: scale(1.05);
+    }
+
     /* Wood Framed Language Picker */
     .lang-menu-container {
-        align-self: flex-end;
         background: #2b3a32;
         padding: 8px 15px;
         border: 6px solid #5c2c16;
@@ -166,52 +194,13 @@
         color: #fff !important;
         text-shadow: 0 0 10px rgba(255,255,255,0.8) !important;
     }
-
-    .goal-item {
-        text-align: left;
-        padding-left: 20px;
-    }
-
-    /* Skeuomorphic Fixed Floating Navigation Arrow Button */
-    .forward-nav-btn {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 65px;
-        height: 65px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 2.2em;
-        text-decoration: none;
-        z-index: 9999;
-        background: linear-gradient(to bottom, #ffffff 0%, #f2f2f2 49%, #e1e1e1 51%, #cccccc 100%);
-        border: 2px solid #8c8c8c;
-        border-top-color: #b3b3b3;
-        border-bottom-color: #666666;
-        color: #4c566c;
-        text-shadow: 0 1px 0 #ffffff;
-        box-shadow: 0 6px 12px rgba(0,0,0,0.35), inset 0 1px 0 #ffffff;
-        font-weight: bold;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .forward-nav-btn:hover {
-        transform: scale(1.08);
-        box-shadow: 0 8px 16px rgba(0,0,0,0.45), inset 0 1px 0 #ffffff;
-    }
-    .forward-nav-btn:active {
-        background: linear-gradient(to bottom, #cccccc 0%, #dddddd 100%);
-        box-shadow: 0 2px 4px rgba(0,0,0,0.5), inset 0 2px 4px rgba(0,0,0,0.2);
-        transform: scale(0.98);
-    }
 </style>
 </head>
 <body>
 
-    <a href="gallery.html" class="forward-nav-btn" title="Go to Gallery">→</a>
-
-    <div class="studio-wall">
+    <!-- Toolbar with Back Nav and Language Picker -->
+    <div class="controls-wrapper">
+        <a href="gallery.html" class="back-nav-btn" id="back-btn">← Back</a>
 
         <div class="lang-menu-container">
             <span class="lang-label" id="lang-label">Language:</span>
@@ -222,19 +211,19 @@
                 <option value="es">Español</option>
             </select>
         </div>
+    </div>
 
-        <div class="chalkboard">
-            <h1 id="welcome-title">Thanks to Khouzam for making a roblox game with me</h1>
-            <p id="welcome-desc">This is where we'll keep all the fun things we're working on! Come back here and tell me what you want to add or edit next!</p>
-        </div>
+    <div class="studio-wall">
 
+        <!-- Social Media Chalkboard Base -->
         <div class="chalkboard" id="socials-chalkboard">
-            <h2 id="socials-title">Creative Studio Socials</h2>
+            <h2 id="socials-title">Follow Khouzam!</h2>
             <div class="board-list">
 
                 <div class="board-item">
                     <div class="wood-frame">
-                        <img src="https://p16-common-sign.tiktokcdn-us.com/tos-useast5-avt-0068-tx2/c83455a6d58a689dd2f5e70c0baa47a8~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=9640&refresh_token=3fbf93f2&x-expires=1783220400&x-signature=OLVb3CB1%2F2F0d3Y8tFwVdgf13Qw%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=useast5" alt="Khouzam TikTok PFP">
+                        <!-- Pulls directly from repository asset root -->
+                        <img src="khouzam.png" alt="Khouzam Profile Image">
                     </div>
                     <a href="https://www.tiktok.com/@khouzam85" class="chalk-link tt-link" target="_blank">TikTok</a>
                 </div>
@@ -242,70 +231,38 @@
             </div>
         </div>
 
-        <div class="chalkboard">
-            <h2 id="ideas-title">Next Project Ideas</h2>
-            <p class="goal-item" style="color: #ffccff;" id="idea-1">✓ Created an awesome Roblox game experience together</p>
-            <p class="goal-item" style="color: #ccffcc;" id="idea-2">⏳ Design the next studio space component</p>
-            <p class="goal-item" style="color: #ffeb99;" id="idea-3">⏳ Drop in your next idea here...</p>
-        </div>
-
     </div>
 
     <script>
         const translations = {
             en: {
+                backBtn: "← Back",
                 langLabel: "Language:",
-                welcomeTitle: "Thanks to Khouzam for making a roblox game with me",
-                welcomeDesc: "This is where we'll keep all the fun things we're working on! Come back here and tell me what you want to add or edit next!",
-                socialsTitle: "Creative Studio Socials",
-                ideasTitle: "Next Project Ideas",
-                idea1: "✓ Created an awesome Roblox game experience together",
-                idea2: "⏳ Design the next studio space component",
-                idea3: "⏳ Drop in your next idea here..."
+                socialsTitle: "Follow Khouzam!"
             },
             at: {
+                backBtn: "← Zurück",
                 langLabel: "Sprache:",
-                welcomeTitle: "Danke an Khouzam, dass er mit mir ein Roblox-Spiel gemacht hat",
-                welcomeDesc: "Da herinnen sammle ich all den fetzigen Kram, an dem wir gerade herumbasteln! Schau einfach wieder vorbei und sag mir, was wir als Nächstes tun sollen!",
-                socialsTitle: "Soziale Netzwerke",
-                ideasTitle: "Nächste Projektideen",
-                idea1: "✓ Tolles Roblox-Spielerlebnis zusammen erstellt",
-                idea2: "⏳ Die nächste Studio-Komponente gestalten",
-                idea3: "⏳ Pack deine nächste Idee einfach hier dazu..."
+                socialsTitle: "Folge Khouzam!"
             },
             noe: {
+                backBtn: "← Zruck",
                 langLabel: "Sproch:",
-                welcomeTitle: "A gscheits Danke an Khouzam fürs Roblox-Spü mitsamm",
-                welcomeDesc: "Da drinnen hob i oin den leiwandn Kram, an dem wir grod herumwurschtl! Schau hoid amoi vorbei und sog ma, wos ma ois Nächstes tuan soin!",
-                socialsTitle: "Unsere Kanäle",
-                ideasTitle: "Nächste Ideen",
-                idea1: "✓ A leiwandes Roblox-Spü mitnand gschaffn",
-                idea2: "⏳ Des nächste Studioteil herrichtn",
-                idea3: "⏳ Hau dei nächste Idee afoch do drunter..."
+                socialsTitle: "Schau vorbei beim Khouzam!"
             },
             es: {
+                backBtn: "← Volver",
                 langLabel: "Idioma:",
-                welcomeTitle: "Gracias a Khouzam por hacer un juego de Roblox conmigo",
-                welcomeDesc: "¡Aquí guardaremos todas las cosas divertidas en las que estamos trabajando! ¡Regresa aquí y dime qué quieres agregar o editar después!",
-                socialsTitle: "Redes del Estudio Creativo",
-                ideasTitle: "Próximas Ideas de Proyectos",
-                idea1: "✓ Creamos una increíble experiencia de juego en Roblox juntos",
-                idea2: "⏳ Diseñar el próximo componente del estudio",
-                idea3: "⏳ Pon tu próxima idea aquí...",
+                socialsTitle: "¡Sigue a Khouzam!"
             }
         };
 
         function changeLanguage(lang) {
             const set = translations[lang] || translations['en'];
             
+            document.getElementById('back-btn').innerText = set.backBtn;
             document.getElementById('lang-label').innerText = set.langLabel;
-            document.getElementById('welcome-title').innerText = set.welcomeTitle;
-            document.getElementById('welcome-desc').innerText = set.welcomeDesc;
             document.getElementById('socials-title').innerText = set.socialsTitle;
-            document.getElementById('ideas-title').innerText = set.ideasTitle;
-            document.getElementById('idea-1').innerText = set.idea1;
-            document.getElementById('idea-2').innerText = set.idea2;
-            document.getElementById('idea-3').innerText = set.idea3;
         }
     </script>
 </body>
