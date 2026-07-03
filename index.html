@@ -228,9 +228,9 @@
     .theme-cyber .goal-item { padding: 10px; background: rgba(255,255,255,0.02); border-left: 4px solid #64748b; border-radius: 0 8px 8px 0; }
 
     /* ==========================================
-       4. THEME 3: SKEUOMORPHIC iOS 6 & NOTEPAD
+       4. THEME 3: SKEUOMORPHIC & NOTEPAD
        ========================================== */
-    body.theme-ios6 {
+    body.theme-skeuo {
         background-color: #2e3138;
         background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 0), radial-gradient(rgba(0,0,0,0.3) 1px, transparent 0);
         background-size: 4px 4px;
@@ -238,31 +238,31 @@
         font-family: 'Marker Felt', 'Chalkboard SE', sans-serif;
         color: #fff;
     }
-    .theme-ios6 .menu-container {
+    .theme-skeuo .menu-container {
         background: linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 50%, #dddddd 50%, #cfcfcf 100%);
         border: 1px solid #a6a6a6; border-top-color: #b3b3b3; border-bottom-color: #8c8c8c;
         box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 #fff;
     }
-    .theme-ios6 .menu-label { color: #4c566c; text-shadow: 0 1px 0 #fff; }
-    .theme-ios6 .menu-select { background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%); color: #333; border: 1px solid #abafb3; }
-    .theme-ios6 .chalkboard {
+    .theme-skeuo .menu-label { color: #4c566c; text-shadow: 0 1px 0 #fff; }
+    .theme-skeuo .menu-select { background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%); color: #333; border: 1px solid #abafb3; }
+    .theme-skeuo .chalkboard {
         background: radial-gradient(circle at 50% 30%, #2f4f3e, #1b3327);
         border: 14px solid #4a2711;
         border-image: repeating-linear-gradient(45deg, #3d1f0d, #542d15 15px, #3d1f0d 30px) 14 stretch;
         text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
         box-shadow: inset 0px 0px 15px rgba(0,0,0,0.6), 0 8px 16px rgba(0, 0, 0, 0.5);
     }
-    .theme-ios6 h1 { color: #fff; }
-    .theme-ios6 h2 { color: #ffe699; }
-    .theme-ios6 .board-item { background: rgba(0, 0, 0, 0.15); border: 1px dashed rgba(255, 255, 255, 0.1); box-shadow: inset 0 2px 4px rgba(0,0,0,0.4); }
-    .theme-ios6 .wood-frame { border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.5); background-color: #111; }
-    .theme-ios6 .x-link { color: #99ccff; }
-    .theme-ios6 .yt-link { color: #ff9999; }
-    .theme-ios6 .tt-link { color: #b3ffec; }
-    .theme-ios6 .granny-link { color: #ffb3ff; }
+    .theme-skeuo h1 { color: #fff; }
+    .theme-skeuo h2 { color: #ffe699; }
+    .theme-skeuo .board-item { background: rgba(0, 0, 0, 0.15); border: 1px dashed rgba(255, 255, 255, 0.1); box-shadow: inset 0 2px 4px rgba(0,0,0,0.4); }
+    .theme-skeuo .wood-frame { border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.5); background-color: #111; }
+    .theme-skeuo .x-link { color: #99ccff; }
+    .theme-skeuo .yt-link { color: #ff9999; }
+    .theme-skeuo .tt-link { color: #b3ffec; }
+    .theme-skeuo .granny-link { color: #ffb3ff; }
      
-    /* Unique Notepad Styling in iOS 6 Theme */
-    .theme-ios6 .notepad-card {
+    /* Unique Notepad Styling in Skeuomorphic Theme */
+    .theme-skeuo .notepad-card {
         background: #fbf6d9;
         background-image: linear-gradient(rgba(0,0,0,0.05) 1px, transparent 0);
         background-size: 100% 28px;
@@ -272,14 +272,14 @@
         padding: 30px 25px 25px 45px;
         font-family: 'Noteworthy', 'Helvetica Neue', sans-serif;
     }
-    .theme-ios6 .notepad-card::before {
+    .theme-skeuo .notepad-card::before {
         content: ''; position: absolute; top: 0; bottom: 0; left: 35px; width: 1px; border-left: 1px solid #ff9999;
     }
-    .theme-ios6 .notepad-card h2 { color: #3b5998; border-bottom: 2px solid #3b5998; padding-bottom: 5px; text-shadow: none; }
-    .theme-ios6 .notepad-card .goal-item { line-height: 28px; margin: 0; color: #2b3e56; }
+    .theme-skeuo .notepad-card h2 { color: #3b5998; border-bottom: 2px solid #3b5998; padding-bottom: 5px; text-shadow: none; }
+    .theme-skeuo .notepad-card .goal-item { line-height: 28px; margin: 0; color: #2b3e56; }
 </style>
 </head>
-<body class="theme-ios6"> <!-- Default theme set to our new iOS 6 variant -->
+<body class="theme-skeuo"> <!-- Default theme set to our skeuomorphic variant -->
 
     <!-- Top Action Toolbar -->
     <div class="controls-wrapper">
@@ -288,7 +288,7 @@
         <div class="menu-container">
             <span class="menu-label">Theme:</span>
             <select class="menu-select" id="theme-picker" onchange="changeTheme(this.value)">
-                <option value="theme-ios6">iOS 6 / Skeuomorphic</option>
+                <option value="theme-skeuo">Skeuomorphic</option>
                 <option value="theme-cyber">Cyber Neon / Glass</option>
                 <option value="theme-pastel">Classic Pastel Rainbow</option>
             </select>
