@@ -142,7 +142,7 @@
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         text-shadow: none;
     }
-    .theme-cyber .notepad-card::before { display: none; } /* Remove red lines if any */
+    .theme-cyber .notepad-card::before { display: none; }
     .theme-cyber h1 { background: linear-gradient(to right, #ffffff, #cbd5e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .theme-cyber h2 { background: linear-gradient(to right, #fef08a, #fde047); -webkit-background-clip: text; -webkit-text-fill-color: transparent; border: none; padding: 0; }
     .theme-cyber p { color: #94a3b8; }
@@ -181,7 +181,9 @@
     .theme-pastel .goal-item { text-align: center; color: #ffeb99; border: none; background: none; padding: 0; }
 </style>
 </head>
-<body class="theme-ios6"> <div class="controls-wrapper">
+<body class="theme-ios6">
+
+    <div class="controls-wrapper">
         
         <div class="menu-container">
             <span class="menu-label">Theme:</span>
@@ -242,4 +244,127 @@
                         <div class="wood-frame">
                             <img src="https://yt3.googleusercontent.com/POKwmI3ynJ3ozLspb19iALs652zdBzm3nHcMPAKd2qYVIh3nK1kD7MEqRGWd51FGgzv1kfu3Fw=s160-c-k-c0x00ffffff-no-rj" alt="YouTube PFP">
                         </div>
-                        <a href="https://youtube.com/@boogybunz?si=tosvdsOepbzazPAP" class
+                        <a href="https://youtube.com/@boogybunz?si=tosvdsOepbzazPAP" class="chalk-link yt-link" target="_blank">YouTube</a>
+                    </div>
+
+                    <div class="board-item">
+                        <div class="wood-frame">
+                            <img src="https://p19-common-sign.tiktokcdn-us.com/tos-useast8-avt-0068-tx2/1650acf60dc81df7488861dbfaebabed~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=9640&refresh_token=69f9653b&x-expires=1783137600&x-signature=cTzkQUmNOby%2B19AeJ6oScf6EtEE%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=useast5" alt="TikTok PFP">
+                        </div>
+                        <a href="https://www.tiktok.com/@brandinittie?_r=1&_t=ZP-97gg9jo0sQw" class="chalk-link tt-link" target="_blank">TikTok</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chalkboard">
+            <div>
+                <h2 id="schedule-title">Stream & Content Schedule</h2>
+                <p style="color: #ccffcc;" id="schedule-desc">Stay tuned for active upload and streaming days!</p>
+            </div>
+            <p style="font-size: 1em; color: #ffeb99;" id="schedule-placeholder">[ Scribble a schedule or milestone notes here later ]</p>
+        </div>
+
+        <div class="notepad-card bottom-spanner">
+            <h2 id="ideas-title">Next Project Ideas</h2>
+            <div style="margin-top: 15px;">
+                <p class="goal-item" id="idea-1">✓ Hooked up granny.html with local image asset</p>
+                <p class="goal-item" id="idea-2">⏳ Design the inner granny.html page</p>
+                <p class="goal-item" id="idea-3">⏳ Drop in your next idea here...</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function changeTheme(themeName) {
+            document.body.className = themeName;
+        }
+
+        const translations = {
+            en: {
+                langLabel: "Language:",
+                welcomeTitle: "Welcome to My Chalkboard!",
+                welcomeDesc: "This is where I'll keep all the fun things I'm working on! Come back here and tell me what you want to add or edit next!",
+                grannyTitle: "Granny's Corner",
+                grannyBtn: "Enter Granny's House",
+                grannyWarning: "⚠️ She hears everything... watch your step!",
+                socialsTitle: "My Creative Studio Socials",
+                scheduleTitle: "Stream & Content Schedule",
+                scheduleDesc: "Stay tuned for active upload and streaming days!",
+                schedulePlaceholder: "[ Scribble a schedule or milestone notes here later ]",
+                ideasTitle: "Next Project Ideas",
+                idea1: "✓ Hooked up granny.html with local image asset",
+                idea2: "⏳ Design the inner granny.html page",
+                idea3: "⏳ Drop in your next idea here..."
+            },
+            at: {
+                langLabel: "Sprache:",
+                welcomeTitle: "Servus auf meiner Kreidetafel!",
+                welcomeDesc: "Da herinnen sammle ich all den fetzigen Kram, an dem ich gerade herumbastle! Schau einfach wieder vorbei und sag mir, was wir als Nächstes drantackern oder ändern sollen!",
+                grannyTitle: "Omas Eck",
+                grannyBtn: "Geh in Oma ihr Haus",
+                grannyWarning: "⚠️ Die hört absolut alles... pass bloß auf deine Haxn auf!",
+                socialsTitle: "Meine sozialen Netzwerke",
+                scheduleTitle: "Sende- & Contentplan",
+                scheduleDesc: "Bleib dran für die fixen Upload- und Streaming-Tage!",
+                schedulePlaceholder: "[ Kritzel später hier den Fahrplan oder Meilensteine hin ]",
+                ideasTitle: "Nächste Projektideen",
+                idea1: "✓ granny.html mit lokalem Bild verknüpft",
+                idea2: "⏳ Das Innere der granny.html Seite gestalten",
+                idea3: "⏳ Pack deine nächste Idee einfach hier dazu..."
+            },
+            noe: {
+                langLabel: "Sproch:",
+                welcomeTitle: "Grias di auf meiner Kraidntofl!",
+                welcomeDesc: "Da drinnen hob i oin den leiwandn Kram, an dem i grod herumwurschtl! Schau hoid amoi vorbei und sog ma, wos ma ois Nächstes auffetackan oda ändern soin!",
+                grannyTitle: "Oma ihr Eckn",
+                grannyBtn: "Hupf in d'Hüttn von da Oma",
+                grannyWarning: "⚠️ De lodschte Hex head ois... pass ma gscheit auf deine Haxn auf!",
+                socialsTitle: "Meine Kanäle",
+                scheduleTitle: "Sende- & Video-Plan",
+                scheduleDesc: "Bleib gspannt auf de Fixitoge für d'Uploads und d'Streams!",
+                schedulePlaceholder: "[ Schmier speda do den Sprossnplan oda Zünotizn hin ]",
+                ideasTitle: "Nächste Ideen",
+                idea1: "✓ granny.html mid an lokaln Büdl zammghängt",
+                idea2: "⏳ Des Innere vo da granny.html Seitn herrichtn",
+                idea3: "⏳ Hau dei nächste Idee afoch do drunter..."
+            },
+            es: {
+                langLabel: "Idioma:",
+                welcomeTitle: "¡Bienvenido a mi Pizarrón!",
+                welcomeDesc: "¡Aquí guardaré todas las cosas divertidas en las que estoy trabajando! ¡Regresa aquí y dime qué quieres agregar o editar después!",
+                grannyTitle: "El Rincón de Granny",
+                grannyBtn: "Entrar a la Casa de Granny",
+                grannyWarning: "⚠️ Ella lo escucha todo... ¡cuida tus pasos!",
+                socialsTitle: "Mis Redes del Estudio Creativo",
+                scheduleTitle: "Calendario de Transmisiones",
+                scheduleDesc: "¡Mantente al tanto para los días activos de videos y directos!",
+                schedulePlaceholder: "[ Escribe un horario o notas de metas aquí más tarde ]",
+                ideasTitle: "Próximas Ideas de Proyectos",
+                idea1: "✓ Conectado granny.html con archivo de imagen local",
+                idea2: "⏳ Diseñar la página interna granny.html",
+                idea3: "⏳ Pon tu próxima idea aquí...",
+            }
+        };
+
+        function changeLanguage(lang) {
+            const set = translations[lang] || translations['en'];
+            document.getElementById('lang-label').innerText = set.langLabel;
+            document.getElementById('welcome-title').innerText = set.welcomeTitle;
+            document.getElementById('welcome-desc').innerText = set.welcomeDesc;
+            document.getElementById('granny-title').innerText = set.grannyTitle;
+            document.getElementById('granny-btn').innerText = set.grannyBtn;
+            document.getElementById('granny-warning').innerText = set.grannyWarning;
+            document.getElementById('socials-title').innerText = set.socialsTitle;
+            document.getElementById('schedule-title').innerText = set.scheduleTitle;
+            document.getElementById('schedule-desc').innerText = set.scheduleDesc;
+            document.getElementById('schedule-placeholder').innerText = set.schedulePlaceholder;
+            document.getElementById('ideas-title').innerText = set.ideasTitle;
+            document.getElementById('idea-1').innerText = set.idea1;
+            document.getElementById('idea-2').innerText = set.idea2;
+            document.getElementById('idea-3').innerText = set.idea3;
+        }
+    </script>
+</body>
+</html>
