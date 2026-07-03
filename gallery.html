@@ -30,16 +30,22 @@
         gap: 15px;
     }
 
-    .left-controls {
+    .nav-layout-row {
         display: flex;
+        align-items: center;
         gap: 15px;
-        flex-wrap: wrap;
     }
 
     .nav-buttons {
         display: flex;
         gap: 10px;
         flex-shrink: 0;
+    }
+
+    .stacked-selectors {
+        display: flex;
+        gap: 15px;
+        align-items: center;
     }
 
     /* Dropdown Selector Layout Containers */
@@ -98,12 +104,11 @@
         grid-template-columns: 1fr !important;
     }
 
-    /* Mobile Layout Rule for forced mobile engine or actual phone widths */
     @media (max-width: 768px) {
         .gallery-matrix { grid-template-columns: 1fr; }
     }
 
-    /* Stacking logic matching layout engines and phone viewports */
+    /* Strict Mobile Stacking Rules for Engine Mode or Mobile Screen Widths */
     body.layout-mobile .controls-wrapper,
     @media (max-width: 768px) {
         .controls-wrapper {
@@ -111,22 +116,33 @@
             align-items: stretch !important;
             gap: 12px !important;
         }
-        .left-controls {
-            display: grid !important;
-            grid-template-columns: 1fr !important;
-            gap: 10px !important;
-            width: 100% !important;
-        }
-        /* Put Nav bar and Layout selector together on top */
+        
+        /* Enforce Back, Next, and Layout to span 100% width on row 1 */
         .nav-layout-row {
             display: flex !important;
+            flex-direction: row !important;
             justify-content: space-between !important;
             align-items: center !important;
             width: 100% !important;
             gap: 10px !important;
         }
+
         .nav-layout-row .menu-container {
             flex-grow: 1 !important;
+            justify-content: space-between !important;
+        }
+
+        /* Enforce Theme and Language selectors to stack cleanly underneath */
+        .stacked-selectors {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 10px !important;
+            width: 100% !important;
+        }
+
+        .stacked-selectors .menu-container {
+            width: 100% !important;
+            box-sizing: border-box !important;
             justify-content: space-between !important;
         }
     }
@@ -294,6 +310,7 @@
 <body class="theme-skeuo">
 
     <div class="controls-wrapper">
+        <!-- Top Row Panel: Keeps Nav buttons and Layout Picker strictly grouped -->
         <div class="nav-layout-row">
             <div class="nav-buttons">
                 <a href="index.html" class="back-nav-btn" id="back-btn">← Back</a>
@@ -310,7 +327,8 @@
             </div>
         </div>
         
-        <div class="left-controls">
+        <!-- Stacking Panel: Houses Theme and Language underneath -->
+        <div class="stacked-selectors">
             <div class="menu-container">
                 <span class="menu-label" id="theme-label">Theme:</span>
                 <select class="menu-select" id="theme-picker" onchange="changeTheme(this.value)">
@@ -371,20 +389,16 @@
             const currentLayout = localStorage.getItem('savedLayout') || 'layout-auto';
             const currentLang = localStorage.getItem('savedLang') || 'en';
 
-            // Cleanly reset structure selectors without wiping layouts or localization states
             document.body.className = '';
 
-            // Apply active variables back to document context
             document.body.classList.add(currentTheme);
             if (currentLayout !== 'layout-auto') {
                 document.body.classList.add(currentLayout);
             }
 
-            // Align selector menu items values visually
             document.getElementById('theme-picker').value = currentTheme;
             document.getElementById('layout-picker').value = currentLayout;
             
-            // Execute localization
             changeLanguage(currentLang);
         }
 
@@ -462,7 +476,6 @@
             document.getElementById('language-picker').value = lang;
         }
 
-        // Run engine deployment on startup load
         window.addEventListener('DOMContentLoaded', applySavedState);
     </script>
 </body>
