@@ -175,4 +175,199 @@
     .theme-pastel .chalkboard {
         background: radial-gradient(circle at 50% 30%, rgba(55, 75, 65, 0.9), rgba(35, 45, 40, 0.95)), #2b3a32;
         border: 22px solid #5c2c16;
-        border-image: repeating-linear-gradient(0deg, #5c2c16, #4a2210 20px, #6a351c 40px, #4a2210
+        border-image: repeating-linear-gradient(0deg, #5c2c16, #4a2210 20px, #6a351c 40px, #4a2210 60px) 22 stretch;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+        box-shadow: inset 0px 0px 20px rgba(0,0,0,0.7), 12px 15px 25px rgba(0, 0, 0, 0.4);
+    }
+    .theme-pastel h2 { color: #ffe699; }
+    .theme-pastel .wood-frame {
+        border: 8px solid #5c2c16;
+        border-image: repeating-linear-gradient(45deg, #4a2210, #6a351c 15px, #4a2210 30px) 8 stretch;
+    }
+    .theme-pastel .chalk-link { color: #b3ffec; text-shadow: 0 0 5px rgba(179,255,236,0.4); }
+    .theme-pastel .board-item:hover .chalk-link { color: #fff !important; text-shadow: 0 0 10px rgba(255,255,255,0.8) !important; }
+
+    /* ==========================================
+       3. THEME 2: CYBER NEON GLASS
+       ========================================== */
+    body.theme-cyber {
+        background: linear-gradient(-45deg, #0f172a, #1e1b4b, #2e1065, #0f172a);
+        background-size: 400% 400%;
+        animation: cyberPulse 12s ease infinite;
+        font-family: 'Segoe UI', sans-serif;
+        color: #f8fafc;
+    }
+    @keyframes cyberPulse {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .theme-cyber .menu-container, .theme-cyber .back-nav-btn {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #f1f5f9;
+    }
+    .theme-cyber .back-nav-btn { border-radius: 20px; }
+    .theme-cyber .menu-container { border-radius: 50px; }
+    .theme-cyber .menu-label { color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
+    .theme-cyber .menu-select { background: #0f172a; color: #f1f5f9; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; }
+    .theme-cyber .chalkboard {
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    .theme-cyber h2 { background: linear-gradient(to right, #fef08a, #fde047); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .theme-cyber .wood-frame { border: 1px solid rgba(255, 255, 255, 0.15); background: #0f172a; }
+    .theme-cyber .chalk-link { color: #38bdf8; filter: drop-shadow(0 0 6px rgba(56,189,248,0.4)); }
+    .theme-cyber .back-nav-btn:hover { border-color: #38bdf8; color: #38bdf8; box-shadow: 0 0 10px rgba(56,189,248,0.3); }
+    .theme-cyber .board-item:hover .chalk-link { color: #fff !important; }
+
+    /* ==========================================
+       4. THEME 3: SKEUOMORPHIC & CHALKBOARD
+       ========================================== */
+    body.theme-skeuo {
+        background-color: #2e3138;
+        background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 0), radial-gradient(rgba(0,0,0,0.3) 1px, transparent 0);
+        background-size: 4px 4px;
+        background-position: 0 0, 2px 2px;
+        font-family: 'Marker Felt', 'Chalkboard SE', sans-serif;
+        color: #fff;
+    }
+    .theme-skeuo .menu-container, .theme-skeuo .back-nav-btn {
+        background: linear-gradient(to bottom, #ffffff 0%, #f2f2f2 49%, #e1e1e1 51%, #cccccc 100%);
+        border: 1px solid #a6a6a6; border-top-color: #b3b3b3; border-bottom-color: #8c8c8c;
+        color: #4c566c; text-shadow: 0 1px 0 #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 #fff;
+    }
+    .theme-skeuo .menu-label { color: #4c566c; }
+    .theme-skeuo .menu-select { background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%); color: #333; border: 1px solid #abafb3; }
+    .theme-skeuo .chalkboard {
+        background: radial-gradient(circle at 50% 30%, #2f4f3e, #1b3327);
+        border: 22px solid #4a2711;
+        border-image: repeating-linear-gradient(0deg, #5c2c16, #4a2210 20px, #6a351c 40px, #4a2210 60px) 22 stretch;
+        text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
+        box-shadow: inset 0px 0px 15px rgba(0,0,0,0.6), 0 8px 16px rgba(0, 0, 0, 0.5);
+    }
+    .theme-skeuo h2 { color: #ffe699; }
+    .theme-skeuo .wood-frame {
+        border: 8px solid #5c2c16;
+        border-image: repeating-linear-gradient(45deg, #4a2210, #6a351c 15px, #4a2210 30px) 8 stretch;
+    }
+    .theme-skeuo .chalk-link { color: #ffe699; }
+    .theme-skeuo .board-item:hover .chalk-link { color: #fff !important; text-shadow: 0 0 10px rgba(255,255,255,0.8) !important; }
+    .theme-skeuo .back-nav-btn:active {
+        background: linear-gradient(to bottom, #cccccc 0%, #dddddd 100%);
+        box-shadow: 0 1px 2px rgba(0,0,0,0.4), inset 0 2px 4px rgba(0,0,0,0.15);
+        transform: scale(0.98);
+    }
+</style>
+</head>
+<body class="theme-skeuo">
+
+    <div class="controls-wrapper">
+        <a href="gallery.html" class="back-nav-btn" id="back-btn">← Back</a>
+
+        <div class="left-controls">
+            <div class="menu-container" id="theme-menu-box">
+                <span class="menu-label" id="theme-label">Theme:</span>
+                <select class="menu-select" id="theme-picker" onchange="changeTheme(this.value)">
+                    <option value="theme-skeuo">Skeuomorphic</option>
+                    <option value="theme-cyber">Cyber Neon / Glass</option>
+                    <option value="theme-pastel">Classic Pastel Rainbow</option>
+                </select>
+            </div>
+
+            <div class="menu-container" id="lang-menu-box">
+                <span class="menu-label" id="lang-label">Language:</span>
+                <select class="menu-select" id="language-picker" onchange="changeLanguage(this.value)">
+                    <option value="en">English</option>
+                    <option value="at">Österreichisch</option>
+                    <option value="noe">Niederösterreichisch</option>
+                    <option value="es">Español</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="studio-wall">
+
+        <div class="chalkboard" id="socials-chalkboard">
+            <h2 id="socials-title">Follow Khouzam!</h2>
+            <div class="board-list">
+                <a href="https://www.tiktok.com/@khouzam85" class="board-item" target="_blank">
+                    <div class="wood-frame">
+                        <img src="khouzam.png" alt="Khouzam Profile Image">
+                    </div>
+                    <span class="chalk-link">TikTok</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="chalkboard" id="project-chalkboard">
+            <h2 id="project-title">Our Roblox Game</h2>
+            <div class="board-list">
+                <a href="https://www.roblox.com/games/96551542053675/Ragdoll-Window" class="board-item" target="_blank">
+                    <div class="wood-frame">
+                        <img src="https://images.rbxcdn.com/1ff991d6cc47c32cf93db4c6a6e700a9.png" alt="Roblox Game Logo">
+                    </div>
+                    <span class="chalk-link" id="project-game-link">Ragdoll Window</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Runtime Dynamic Theme Switcher Engine
+        function changeTheme(themeName) {
+            document.body.className = themeName;
+            document.getElementById('theme-picker').value = themeName;
+        }
+
+        const translations = {
+            en: {
+                backBtn: "← Back",
+                themeLabel: "Theme:",
+                langLabel: "Language:",
+                socialsTitle: "Follow Khouzam!",
+                projectTitle: "Our Roblox Game"
+            },
+            at: {
+                backBtn: "← Zurück",
+                themeLabel: "Stil:",
+                langLabel: "Sprache:",
+                socialsTitle: "Folge Khouzam!",
+                projectTitle: "Unser Roblox Spiel"
+            },
+            noe: {
+                backBtn: "← Zruck",
+                themeLabel: "Design:",
+                langLabel: "Sproch:",
+                socialsTitle: "Schau vorbei beim Khouzam!",
+                projectTitle: "Unsa Roblox Gschpü"
+            },
+            es: {
+                backBtn: "← Volver",
+                themeLabel: "Tema:",
+                langLabel: "Idioma:",
+                socialsTitle: "¡Sigue a Khouzam!",
+                projectTitle: "Nuestro Juego de Roblox"
+            }
+        };
+
+        function changeLanguage(lang) {
+            const set = translations[lang] || translations['en'];
+            
+            document.getElementById('back-btn').innerText = set.backBtn;
+            document.getElementById('theme-label').innerText = set.themeLabel;
+            document.getElementById('lang-label').innerText = set.langLabel;
+            document.getElementById('socials-title').innerText = set.socialsTitle;
+            document.getElementById('project-title').innerText = set.projectTitle;
+            
+            document.getElementById('language-picker').value = lang;
+        }
+    </script>
+</body>
+</html>
