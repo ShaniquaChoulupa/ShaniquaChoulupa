@@ -5,158 +5,187 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Creative Chalkboard Studio</title>
 <style>
-    /* Animated Dynamic Dark Cyber Gradient */
+    /* iOS 6 Linen Style Background texture */
     body {
         margin: 0;
-        padding: 60px 20px;
+        padding: 40px;
         display: flex;
         flex-direction: column;
         align-items: center;
         min-height: 100vh;
-        background: linear-gradient(-45deg, #0f172a, #1e1b4b, #2e1065, #0f172a);
-        background-size: 400% 400%;
-        animation: cyberPulse 12s ease infinite;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #2e3138;
+        background-image: 
+            radial-gradient(rgba(255,255,255,0.15) 1px, transparent 0),
+            radial-gradient(rgba(0,0,0,0.3) 1px, transparent 0);
+        background-size: 4px 4px;
+        background-position: 0 0, 2px 2px;
+        font-family: 'Marker Felt', 'Comic Sans MS', sans-serif;
         box-sizing: border-box;
-        color: #f8fafc;
+        color: #fff;
     }
 
-    @keyframes cyberPulse {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
-    /* Container for all chalkboards */
+    /* 3x3 Skeuomorphic Grid Layout */
     .studio-wall {
         width: 100%;
-        max-width: 800px;
-        display: flex;
-        flex-direction: column;
-        gap: 35px; 
+        max-width: 1300px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px; 
+        margin-top: 25px;
     }
 
-    /* Premium Sleek Language Container */
+    @media (max-width: 1024px) {
+        .studio-wall { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+        .studio-wall { grid-template-columns: 1fr; }
+    }
+
+    /* iOS 6 Glossy Silver / Aluminum Language Bar */
     .lang-menu-container {
         align-self: flex-end;
-        background: rgba(255, 255, 255, 0.03);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        padding: 10px 20px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 50px;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 50%, #dddddd 50%, #cfcfcf 100%);
+        border: 1px solid #a6a6a6;
+        border-top-color: #b3b3b3;
+        border-bottom-color: #8c8c8c;
+        border-radius: 4px;
+        padding: 8px 16px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 #fff;
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
     }
 
     .lang-label {
-        color: #94a3b8; 
-        font-weight: 600; 
-        font-size: 0.9em;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        color: #4c566c;
+        font-weight: bold;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        text-shadow: 0 1px 0 #fff;
+        font-size: 0.95em;
     }
 
     .lang-select {
-        background: #0f172a; 
-        color: #f1f5f9; 
-        border: 1px solid rgba(255, 255, 255, 0.2); 
-        padding: 6px 12px; 
-        border-radius: 20px; 
-        font-family: inherit; 
-        font-size: 0.9em; 
-        cursor: pointer; 
-        outline: none; 
+        background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%);
+        color: #333;
+        border: 1px solid #abafb3;
+        padding: 4px 8px;
+        border-radius: 3px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 0.9em;
+        cursor: pointer;
+        outline: none;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
     }
 
-    /* Next-Gen Glassmorphic Chalkboard Frame */
+    /* Apple Skeuomorphic Heavy-Border Chalkboard */
     .chalkboard {
-        background: rgba(15, 23, 42, 0.6);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 24px;
-        padding: 40px;
+        background: radial-gradient(circle at 50% 30%, #2f4f3e, #1b3327);
+        border: 14px solid #4a2711;
+        border-image: repeating-linear-gradient(45deg, #3d1f0d, #542d15 15px, #3d1f0d 30px) 14 stretch;
+        border-radius: 8px;
+        color: rgba(255, 255, 255, 0.95); 
+        text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8); 
+        padding: 25px;
         box-shadow: 
-            0 20px 40px rgba(0, 0, 0, 0.3),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            inset 0px 0px 15px rgba(0,0,0,0.6), 
+            0 8px 16px rgba(0, 0, 0, 0.5); 
         position: relative;
-        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.2s ease;
     }
 
     .chalkboard:hover {
-        transform: translateY(-4px);
-        box-shadow: 
-            0 30px 60px rgba(0, 0, 0, 0.4),
-            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        transform: scale(1.01);
+    }
+
+    /* Welcome Banner Spans 3 Columns */
+    .welcome-card {
+        grid-column: span 3;
+    }
+    @media (max-width: 1024px) { .welcome-card { grid-column: span 2; } }
+    @media (max-width: 768px) { .welcome-card { grid-column: span 1; } }
+
+    /* Yellow Legal Notepad Style for Project Ideas */
+    .notepad-card {
+        background: #fbf6d9;
+        background-image: linear-gradient(rgba(0,0,0,0.05) 1px, transparent 0);
+        background-size: 100% 28px;
+        border: 1px solid #e3dbb3;
+        border-radius: 6px;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+        color: #1a2332;
+        text-shadow: none;
+        padding: 30px 25px 25px 45px; /* Wide left padding for margin line */
+        position: relative;
+        font-family: 'Noteworthy', 'Chalkboard SE', sans-serif;
+    }
+
+    /* Yellow Notepad Red Margin Line */
+    .notepad-card::before {
+        content: '';
+        position: absolute;
+        top: 0; bottom: 0; left: 35px;
+        width: 1px;
+        border-left: 1px solid #ff9999;
     }
 
     h1, h2 {
         text-align: center;
         margin-top: 0;
-        font-weight: 800;
-        letter-spacing: -0.5px;
+        letter-spacing: 0.5px;
     }
     
-    h1 { 
-        font-size: 2.6em; 
-        background: linear-gradient(to right, #ffffff, #cbd5e1);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+    h1 { color: #fff; font-size: 2.3em; }
+    h2 { color: #ffe699; font-size: 1.7em; } 
+    .notepad-card h2 { 
+        color: #3b5998; 
+        font-size: 1.6em;
+        border-bottom: 2px solid #3b5998;
+        padding-bottom: 5px;
     }
-    
-    h2 { 
-        font-size: 1.8em; 
-        background: linear-gradient(to right, #fef08a, #fde047);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 25px;
-    } 
 
     p {
-        font-size: 1.1em; 
-        line-height: 1.7; 
-        text-align: center; 
-        color: #94a3b8;
+        font-size: 1.15em;
+        line-height: 1.5;
+        text-align: center;
     }
+    .notepad-card p { text-align: left; }
 
     .board-list {
-        display: flex; 
-        flex-direction: column; 
-        gap: 16px; 
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+        margin-top: 10px;
     }
 
+    /* iOS Stitching / Inset Row look */
     .board-item {
-        display: flex; 
-        align-items: center; 
-        background: rgba(255, 255, 255, 0.02); 
-        padding: 16px 24px; 
-        border-radius: 16px; 
-        border: 1px solid rgba(255, 255, 255, 0.05); 
-        transition: all 0.3s ease;
-    }
-
-    .board-item:hover {
-        background: rgba(255, 255, 255, 0.05); 
-        border-color: rgba(255, 255, 255, 0.15);
-        transform: translateX(6px);
-    }
-
-    /* Cyber Geometric Frame */
-    .wood-frame {
-        width: 60px; 
-        height: 60px; 
-        border-radius: 12px; 
-        overflow: hidden; 
-        margin-right: 20px; 
-        display: flex; 
-        justify-content: center; 
+        display: flex;
         align-items: center;
-        background-color: #0f172a;
+        background: rgba(0, 0, 0, 0.15);
+        padding: 10px 15px;
+        border-radius: 6px;
+        border: 1px dashed rgba(255, 255, 255, 0.1);
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+    }
+
+    /* App Icon Frame */
+    .wood-frame {
+        width: 55px;
+        height: 55px;
+        border: 2px solid #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-right: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        background-color: #111;
         flex-shrink: 0;
-        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .wood-frame img {
@@ -166,37 +195,36 @@
     }
 
     .chalk-link {
-        font-size: 1.4em; 
-        text-decoration: none; 
-        font-weight: 700; 
-        transition: all 0.2s ease; 
-        letter-spacing: -0.2px;
+        font-size: 1.4em;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.2s ease;
     }
 
-    .x-link { color: #38bdf8; }
-    .yt-link { color: #f87171; }
-    .tt-link { color: #2dd4bf; }
-    .granny-link { color: #e879f9; }
+    /* Classic bright chalk colors */
+    .x-link { color: #99ccff; }
+    .yt-link { color: #ff9999; }
+    .tt-link { color: #b3ffec; }
+    .granny-link { color: #ffb3ff; }
 
-    .board-item:hover .chalk-link {
-        filter: drop-shadow(0 0 8px currentColor);
+    .chalk-link:hover {
+        color: #fff !important;
+        text-shadow: 0 0 8px rgba(255,255,255,0.7) !important;
     }
 
     .goal-item {
-        text-align: left; 
-        padding: 14px 20px; 
-        background: rgba(255, 255, 255, 0.02);
-        border-left: 4px solid #64748b;
-        margin: 10px 0;
-        border-radius: 0 12px 12px 0;
-        font-weight: 600;
+        line-height: 28px !important; /* Locks text directly to legal pad lines */
+        margin: 0;
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #2b3e56;
     }
 </style>
 </head>
 <body>
 
-    <div class="studio-wall">
-
+    <!-- Top Language Selection bar aligned grid width -->
+    <div style="width: 100%; max-width: 1300px; display: flex; justify-content: flex-end;">
         <div class="lang-menu-container">
             <span class="lang-label" id="lang-label">Language:</span>
             <select class="lang-select" id="language-picker" onchange="changeLanguage(this.value)">
@@ -206,64 +234,81 @@
                 <option value="es">Español</option>
             </select>
         </div>
+    </div>
 
-        <div class="chalkboard">
-            <h1 id="welcome-title">Welcome to My Chalkboard!</h1>
-            <p id="welcome-desc">This is where I'll keep all the fun things I'm working on! Come back here and tell me what you want to add or edit next!</p>
+    <!-- Main 3x3 Skeuomorphic Matrix -->
+    <div class="studio-wall">
+
+        <!-- Welcome Block (Top Spanner) -->
+        <div class="chalkboard welcome-card">
+            <div>
+                <h1 id="welcome-title">Welcome to My Chalkboard!</h1>
+                <p id="welcome-desc">This is where I'll keep all the fun things I'm working on! Come back here and tell me what you want to add or edit next!</p>
+            </div>
         </div>
 
+        <!-- Granny's Corner -->
         <div class="chalkboard">
-            <h2 id="granny-title">Granny's Corner</h2>
-            <div class="board-list">
-                <div class="board-item">
-                    <div class="wood-frame">
-                        <img src="granny_icon.png" alt="Granny Logo">
+            <div>
+                <h2 id="granny-title">Granny's Corner</h2>
+                <div class="board-list">
+                    <div class="board-item">
+                        <div class="wood-frame">
+                            <img src="granny_icon.png" alt="Granny Logo">
+                        </div>
+                        <a href="granny.html" class="chalk-link granny-link" id="granny-btn">Enter Granny's House</a>
                     </div>
-                    <a href="granny.html" class="chalk-link granny-link" id="granny-btn">Enter Granny's House</a>
                 </div>
             </div>
-            <p style="font-size: 0.95em; margin-top: 20px; color: #f43f5e; font-weight: 600;" id="granny-warning">⚠️ She hears everything... watch your step!</p>
+            <p style="font-size: 0.95em; margin-top: 20px; color: #ff9999;" id="granny-warning">⚠️ She hears everything... watch your step!</p>
         </div>
 
+        <!-- Creative Studio Socials -->
         <div class="chalkboard" id="socials-chalkboard">
-            <h2 id="socials-title">My Creative Studio Socials</h2>
-            <div class="board-list">
-
-                <div class="board-item">
-                    <div class="wood-frame">
-                        <img src="https://yt3.googleusercontent.com/POKwmI3ynJ3ozLspb19iALs652zdBzm3nHcMPAKd2qYVIh3nK1kD7MEqRGWd51FGgzv1kfu3Fw=s160-c-k-c0x00ffffff-no-rj" alt="X PFP">
+            <div>
+                <h2 id="socials-title">My Creative Studio Socials</h2>
+                <div class="board-list">
+                    <div class="board-item">
+                        <div class="wood-frame">
+                            <img src="https://yt3.googleusercontent.com/POKwmI3ynJ3ozLspb19iALs652zdBzm3nHcMPAKd2qYVIh3nK1kD7MEqRGWd51FGgzv1kfu3Fw=s160-c-k-c0x00ffffff-no-rj" alt="X PFP">
+                        </div>
+                        <a href="https://x.com/boogybunz?s=11" class="chalk-link x-link" target="_blank">X</a>
                     </div>
-                    <a href="https://x.com/boogybunz?s=11" class="chalk-link x-link" target="_blank">X</a>
-                </div>
 
-                <div class="board-item">
-                    <div class="wood-frame">
-                        <img src="https://yt3.googleusercontent.com/POKwmI3ynJ3ozLspb19iALs652zdBzm3nHcMPAKd2qYVIh3nK1kD7MEqRGWd51FGgzv1kfu3Fw=s160-c-k-c0x00ffffff-no-rj" alt="YouTube PFP">
+                    <div class="board-item">
+                        <div class="wood-frame">
+                            <img src="https://yt3.googleusercontent.com/POKwmI3ynJ3ozLspb19iALs652zdBzm3nHcMPAKd2qYVIh3nK1kD7MEqRGWd51FGgzv1kfu3Fw=s160-c-k-c0x00ffffff-no-rj" alt="YouTube PFP">
+                        </div>
+                        <a href="https://youtube.com/@boogybunz?si=tosvdsOepbzazPAP" class="chalk-link yt-link" target="_blank">YouTube</a>
                     </div>
-                    <a href="https://youtube.com/@boogybunz?si=tosvdsOepbzazPAP" class="chalk-link yt-link" target="_blank">YouTube</a>
-                </div>
 
-                <div class="board-item">
-                    <div class="wood-frame">
-                        <img src="https://p19-common-sign.tiktokcdn-us.com/tos-useast8-avt-0068-tx2/1650acf60dc81df7488861dbfaebabed~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=9640&refresh_token=69f9653b&x-expires=1783137600&x-signature=cTzkQUmNOby%2B19AeJ6oScf6EtEE%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=useast5" alt="TikTok PFP">
+                    <div class="board-item">
+                        <div class="wood-frame">
+                            <img src="https://p19-common-sign.tiktokcdn-us.com/tos-useast8-avt-0068-tx2/1650acf60dc81df7488861dbfaebabed~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=9640&refresh_token=69f9653b&x-expires=1783137600&x-signature=cTzkQUmNOby%2B19AeJ6oScf6EtEE%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=useast5" alt="TikTok PFP">
+                        </div>
+                        <a href="https://www.tiktok.com/@brandinittie?_r=1&_t=ZP-97gg9jo0sQw" class="chalk-link tt-link" target="_blank">TikTok</a>
                     </div>
-                    <a href="https://www.tiktok.com/@brandinittie?_r=1&_t=ZP-97gg9jo0sQw" class="chalk-link tt-link" target="_blank">TikTok</a>
                 </div>
-
             </div>
         </div>
 
+        <!-- Broadcast Schedule -->
         <div class="chalkboard">
-            <h2 id="schedule-title">Stream & Content Schedule</h2>
-            <p style="color: #34d399; font-weight: 600;" id="schedule-desc">Stay tuned for active upload and streaming days!</p>
-            <p style="font-size: 1em; color: #fbbf24; font-style: italic;" id="schedule-placeholder">[ Scribble a schedule or milestone notes here later ]</p>
+            <div>
+                <h2 id="schedule-title">Stream & Content Schedule</h2>
+                <p style="color: #ccffcc;" id="schedule-desc">Stay tuned for active upload and streaming days!</p>
+            </div>
+            <p style="font-size: 1em; color: #ffeb99;" id="schedule-placeholder">[ Scribble a schedule or milestone notes here later ]</p>
         </div>
 
-        <div class="chalkboard">
+        <!-- Project Ideas Yellow Notepad Spans Full Width at Bottom -->
+        <div class="notepad-card" style="grid-column: span 3;">
             <h2 id="ideas-title">Next Project Ideas</h2>
-            <p class="goal-item" style="border-color: #e879f9; color: #f5d0fe;" id="idea-1">✓ Hooked up granny.html with local image asset</p>
-            <p class="goal-item" style="border-color: #34d399; color: #d1fae5;" id="idea-2">⏳ Design the inner granny.html page</p>
-            <p class="goal-item" style="border-color: #fbbf24; color: #fef3c7;" id="idea-3">⏳ Drop in your next idea here...</p>
+            <div style="margin-top: 15px;">
+                <p class="goal-item" id="idea-1">✓ Hooked up granny.html with local image asset</p>
+                <p class="goal-item" id="idea-2">⏳ Design the inner granny.html page</p>
+                <p class="goal-item" id="idea-3">⏳ Drop in your next idea here...</p>
+            </div>
         </div>
 
     </div>
