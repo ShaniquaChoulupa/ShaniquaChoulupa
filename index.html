@@ -145,6 +145,27 @@
         font-weight: bold;
     }
 
+    /* Fixed Floating Navigation Arrow */
+    .forward-nav-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2em;
+        text-decoration: none;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        transition: all 0.3s ease;
+        z-index: 9999;
+    }
+    .forward-nav-btn:hover {
+        transform: scale(1.1);
+    }
+
     /* ==========================================
        2. THEME 1: OLD PASTEL RAINBOW
        ========================================== */
@@ -182,6 +203,11 @@
     .theme-pastel .tt-link { color: #b3ffec; }
     .theme-pastel .granny-link { color: #ffb3ff; }
     .theme-pastel .goal-item { text-align: center; color: #ffeb99; }
+    .theme-pastel .forward-nav-btn {
+        background: #2b3a32;
+        border: 3px solid #5c2c16;
+        color: #ffeb99;
+    }
 
     /* ==========================================
        3. THEME 2: CYBER NEON GLASS
@@ -226,6 +252,17 @@
     .theme-cyber .granny-link { color: #e879f9; }
     .theme-cyber .board-item:hover .chalk-link { filter: drop-shadow(0 0 8px currentColor); }
     .theme-cyber .goal-item { padding: 10px; background: rgba(255,255,255,0.02); border-left: 4px solid #64748b; border-radius: 0 8px 8px 0; }
+    .theme-cyber .forward-nav-btn {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #f1f5f9;
+    }
+    .theme-cyber .forward-nav-btn:hover {
+        box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+        border-color: #38bdf8;
+        color: #38bdf8;
+    }
 
     /* ==========================================
        4. THEME 3: SKEUOMORPHIC & NOTEPAD
@@ -277,206 +314,18 @@
     }
     .theme-skeuo .notepad-card h2 { color: #3b5998; border-bottom: 2px solid #3b5998; padding-bottom: 5px; text-shadow: none; }
     .theme-skeuo .notepad-card .goal-item { line-height: 28px; margin: 0; color: #2b3e56; }
+    .theme-skeuo .forward-nav-btn {
+        background: linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 50%, #dddddd 50%, #cfcfcf 100%);
+        border: 1px solid #a6a6a6;
+        color: #4c566c;
+        text-shadow: 0 1px 0 #fff;
+    }
 </style>
 </head>
-<body class="theme-skeuo"> <!-- Default theme set to our skeuomorphic variant -->
+<body class="theme-skeuo"> <a href="gallery.html" class="forward-nav-btn" title="Go to Gallery">→</a>
 
-    <!-- Top Action Toolbar -->
     <div class="controls-wrapper">
          
-        <!-- Theme Switcher Selector -->
         <div class="menu-container">
             <span class="menu-label">Theme:</span>
-            <select class="menu-select" id="theme-picker" onchange="changeTheme(this.value)">
-                <option value="theme-skeuo">Skeuomorphic</option>
-                <option value="theme-cyber">Cyber Neon / Glass</option>
-                <option value="theme-pastel">Classic Pastel Rainbow</option>
-            </select>
-        </div>
-
-        <!-- Language Selector -->
-        <div class="menu-container">
-            <span class="menu-label" id="lang-label">Language:</span>
-            <select class="menu-select" id="language-picker" onchange="changeLanguage(this.value)">
-                <option value="en">English</option>
-                <option value="at">Österreichisch (Standard Austrian)</option>
-                <option value="noe">Niederösterreichisch (Dialect)</option>
-                <option value="es">Español</option>
-            </select>
-        </div>
-    </div>
-
-    <!-- 3x3 Responsive Grid Content -->
-    <div class="studio-wall">
-
-        <!-- Welcome Banner -->
-        <div class="chalkboard welcome-card">
-            <div>
-                <h1 id="welcome-title">Welcome to My Chalkboard!</h1>
-                <p id="welcome-desc">This is where I'll keep all the fun things I'm working on! Come back here and tell me what you want to add or edit next!</p>
-            </div>
-        </div>
-
-        <!-- Granny's Area -->
-        <div class="chalkboard">
-            <div>
-                <h2 id="granny-title">Granny's Corner</h2>
-                <div class="board-list">
-                    <div class="board-item">
-                        <div class="wood-frame">
-                            <img src="granny_icon.png" alt="Granny Logo">
-                        </div>
-                        <a href="granny.html" class="chalk-link granny-link" id="granny-btn">Enter Granny's House</a>
-                    </div>
-                </div>
-            </div>
-            <p style="font-size: 0.95em; margin-top: 20px; color: #ff9999;" id="granny-warning">⚠️ She hears everything... watch your step!</p>
-        </div>
-
-        <!-- Matrix Social Hub -->
-        <div class="chalkboard" id="socials-chalkboard">
-            <div>
-                <h2 id="socials-title">My Creative Studio Socials</h2>
-                <div class="board-list">
-                    <div class="board-item">
-                        <div class="wood-frame">
-                            <img src="https://yt3.googleusercontent.com/POKwmI3ynJ3ozLspb19iALs652zdBzm3nHcMPAKd2qYVIh3nK1kD7MEqRGWd51FGgzv1kfu3Fw=s160-c-k-c0x00ffffff-no-rj" alt="X PFP">
-                        </div>
-                        <a href="https://x.com/boogybunz?s=11" class="chalk-link x-link" target="_blank">X</a>
-                    </div>
-
-                    <div class="board-item">
-                        <div class="wood-frame">
-                            <img src="https://yt3.googleusercontent.com/POKwmI3ynJ3ozLspb19iALs652zdBzm3nHcMPAKd2qYVIh3nK1kD7MEqRGWd51FGgzv1kfu3Fw=s160-c-k-c0x00ffffff-no-rj" alt="YouTube PFP">
-                        </div>
-                        <a href="https://youtube.com/@boogybunz?si=tosvdsOepbzazPAP" class="chalk-link yt-link" target="_blank">YouTube</a>
-                    </div>
-
-                    <div class="board-item">
-                        <div class="wood-frame">
-                            <img src="https://p19-common-sign.tiktokcdn-us.com/tos-useast8-avt-0068-tx2/1650acf60dc81df7488861dbfaebabed~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=9640&refresh_token=69f9653b&x-expires=1783137600&x-signature=cTzkQUmNOby%2B19AeJ6oScf6EtEE%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=useast5" alt="TikTok PFP">
-                        </div>
-                        <a href="https://www.tiktok.com/@brandinittie?_r=1&_t=ZP-97gg9jo0sQw" class="chalk-link tt-link" target="_blank">TikTok</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Timetable Matrix -->
-        <div class="chalkboard">
-            <div>
-                <h2 id="schedule-title">Stream & Content Schedule</h2>
-                <p style="color: #ccffcc;" id="schedule-desc">Stay tuned for active upload and streaming days!</p>
-            </div>
-            <p style="font-size: 1em; color: #ffeb99;" id="schedule-placeholder">[ Scribble a schedule or milestone notes here later ]</p>
-        </div>
-
-        <!-- Project Progression Tracker -->
-        <div class="notepad-card bottom-spanner">
-            <h2 id="ideas-title">Next Project Ideas</h2>
-            <div style="margin-top: 15px;">
-                <p class="goal-item" id="idea-1">✓ Hooked up granny.html with local image asset</p>
-                <p class="goal-item" id="idea-2">⏳ Design the inner granny.html page</p>
-                <p class="goal-item" id="idea-3">⏳ Drop in your next idea here...</p>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- ==========================================
-       5. INTERACTIVE JAVASCRIPT LOGIC
-       ========================================== */ -->
-    <script>
-        // Runtime Dynamic Switcher Engine
-        function changeTheme(themeName) {
-            document.body.className = themeName;
-        }
-
-        const translations = {
-            en: {
-                langLabel: "Language:",
-                welcomeTitle: "Welcome to My Chalkboard!",
-                welcomeDesc: "This is where I'll keep all the fun things I'm working on! Come back here and tell me what you want to add or edit next!",
-                grannyTitle: "Granny's Corner",
-                grannyBtn: "Enter Granny's House",
-                grannyWarning: "⚠️ She hears everything... watch your step!",
-                socialsTitle: "My Creative Studio Socials",
-                scheduleTitle: "Stream & Content Schedule",
-                scheduleDesc: "Stay tuned for active upload and streaming days!",
-                schedulePlaceholder: "[ Scribble a schedule or milestone notes here later ]",
-                ideasTitle: "Next Project Ideas",
-                idea1: "✓ Hooked up granny.html with local image asset",
-                idea2: "⏳ Design the inner granny.html page",
-                idea3: "⏳ Drop in your next idea here..."
-            },
-            at: {
-                langLabel: "Sprache:",
-                welcomeTitle: "Servus auf meiner Kreidetafel!",
-                welcomeDesc: "Da herinnen sammle ich all den fetzigen Kram, an dem ich gerade herumbastle! Schau einfach wieder vorbei und sag mir, was wir als Nächstes drantackern oder ändern sollen!",
-                grannyTitle: "Omas Eck",
-                grannyBtn: "Geh in Oma ihr Haus",
-                grannyWarning: "⚠️ Die hört absolut alles... pass bloß auf deine Haxn auf!",
-                socialsTitle: "Meine sozialen Netzwerke",
-                scheduleTitle: "Sende- & Contentplan",
-                scheduleDesc: "Bleib dran für die fixen Upload- und Streaming-Tage!",
-                schedulePlaceholder: "[ Kritzel später hier den Fahrplan oder Meilensteine hin ]",
-                ideasTitle: "Nächste Projektideen",
-                idea1: "✓ granny.html mit lokalem Bild verknüpft",
-                idea2: "⏳ Das Innere der granny.html Seite gestalten",
-                idea3: "⏳ Pack deine nächste Idee einfach hier dazu..."
-            },
-            noe: {
-                langLabel: "Sproch:",
-                welcomeTitle: "Grias di auf meiner Kraidntofl!",
-                welcomeDesc: "Da drinnen hob i oin den leiwandn Kram, an dem i grod herumwurschtl! Schau hoid amoi vorbei und sog ma, wos ma ois Nächstes auffetackan oda ändern soin!",
-                grannyTitle: "Oma ihr Eckn",
-                grannyBtn: "Hupf in d'Hüttn von da Oma",
-                grannyWarning: "⚠️ De lodschte Hex head ois... pass ma gscheit auf deine Haxn auf!",
-                socialsTitle: "Meine Kanäle",
-                scheduleTitle: "Sende- & Video-Plan",
-                scheduleDesc: "Bleib gspannt auf de Fixitoge für d'Uploads und d'Streams!",
-                schedulePlaceholder: "[ Schmier speda do den Sprossnplan oda Zünotizn hin ]",
-                ideasTitle: "Nächste Ideen",
-                idea1: "✓ granny.html mid an lokaln Büdl zammghängt",
-                idea2: "⏳ Des Innere vo da granny.html Seitn herrichtn",
-                idea3: "⏳ Hau dei nächste Idee afoch do drunter..."
-            },
-            es: {
-                langLabel: "Idioma:",
-                welcomeTitle: "¡Bienvenido a mi Pizarrón!",
-                welcomeDesc: "¡Aquí guardaré todas las cosas divertidas en las que estoy trabajando! ¡Regresa aquí y dime qué quieres agregar o editar después!",
-                grannyTitle: "El Rincón de Granny",
-                grannyBtn: "Entrar a la Casa de Granny",
-                grannyWarning: "⚠️ Ella lo escucha todo... ¡cuida tus pasos!",
-                socialsTitle: "Mis Redes del Estudio Creativo",
-                scheduleTitle: "Calendario de Transmisiones",
-                scheduleDesc: "¡Mantente al tanto para los días activos de videos y directos!",
-                schedulePlaceholder: "[ Escribe un horario o notas de metas aquí más tarde ]",
-                ideasTitle: "Próximas Ideas de Proyectos",
-                idea1: "✓ Conectado granny.html con archivo de imagen local",
-                idea2: "⏳ Diseñar la página interna granny.html",
-                idea3: "⏳ Pon tu próxima idea aquí...",
-            }
-        };
-
-        function changeLanguage(lang) {
-            const set = translations[lang] || translations['en'];
-            
-            document.getElementById('lang-label').innerText = set.langLabel;
-            document.getElementById('welcome-title').innerText = set.welcomeTitle;
-            document.getElementById('welcome-desc').innerText = set.welcomeDesc;
-            document.getElementById('granny-title').innerText = set.grannyTitle;
-            document.getElementById('granny-btn').innerText = set.grannyBtn;
-            document.getElementById('granny-warning').innerText = set.grannyWarning;
-            document.getElementById('socials-title').innerText = set.socialsTitle;
-            document.getElementById('schedule-title').innerText = set.scheduleTitle;
-            document.getElementById('schedule-desc').innerText = set.scheduleDesc;
-            document.getElementById('schedule-placeholder').innerText = set.schedulePlaceholder;
-            document.getElementById('ideas-title').innerText = set.ideasTitle;
-            document.getElementById('idea-1').innerText = set.idea1;
-            document.getElementById('idea-2').innerText = set.idea2;
-            document.getElementById('idea-3').innerText = set.idea3;
-        }
-    </script>
-</body>
-</html>
+            <select class="menu-select" id="theme-
