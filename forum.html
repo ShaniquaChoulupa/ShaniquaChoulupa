@@ -20,9 +20,12 @@
 
     /* Responsive Studio Wall Matrix Framework */
     .studio-wall { width: 100%; max-width: 1300px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-    /* Override for Manual Layout Persistence */
-    body.layout-mobile .studio-wall { grid-template-columns: 1fr !important; }
-    body.layout-desktop .studio-wall { grid-template-columns: repeat(3, 1fr) !important; }
+
+    /* Manual Layout Overrides */
+    body.mode-mobile .studio-wall { grid-template-columns: 1fr !important; }
+    body.mode-desktop .studio-wall { grid-template-columns: repeat(3, 1fr) !important; }
+
+    /* Original Media Queries */
     @media (max-width: 1024px) { .studio-wall { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 768px) { .studio-wall { grid-template-columns: 1fr; } }
 
@@ -45,12 +48,11 @@
     body.modal-open { overflow: hidden; }
 
     /* ==========================================
-       3. THEME VARIATIONS
+       3. THEME VARIATIONS (MATCHED SYSTEM)
        ========================================== */
-    body.theme-skeuo { background-color: #2e3138; color: #fff; }
-    body.theme-pastel { background: #2b3a32; color: #ffeb99; }
+    body.theme-pastel { background: linear-gradient(45deg, #FFB3BA, #FFDFBA, #FFFFBA, #BAFFC9, #BAE1FF, #D0BAFF, #FFB3BA); color: #f5f5f5; }
     body.theme-cyber { background: #0f172a; color: #f8fafc; }
-    /* Note: Add original theme gradients back here as needed */
+    body.theme-skeuo { background-color: #2e3138; color: #fff; }
 </style>
 </head>
 <body class="theme-skeuo">
@@ -80,25 +82,28 @@
     </div>
 
     <div class="studio-wall">
+        <!-- Forum Board -->
         <div class="chalkboard-card" onclick="openForum(this, event)">
             <div class="chalkboard">
                 <button class="forum-close-x" onclick="closeForum(this, event)">×</button>
                 <h2 class="forum-title">Ulterior Motives</h2>
-                <div class="forum-content-view"><div class="forum-text"><p>Content...</p></div></div>
+                <div class="forum-content-view"><p>Content...</p></div>
             </div>
         </div>
     </div>
 
     <script>
         function applyTheme(theme) {
-            document.body.className = theme;
+            document.body.classList.remove('theme-skeuo', 'theme-cyber', 'theme-pastel');
+            document.body.classList.add(theme);
             localStorage.setItem('savedTheme', theme);
             document.getElementById('theme-picker').value = theme;
         }
 
         function applyLayout(layout) {
-            document.body.classList.remove('layout-desktop', 'layout-mobile');
-            if (layout !== 'layout-auto') document.body.classList.add(layout);
+            document.body.classList.remove('mode-desktop', 'mode-mobile');
+            if (layout === 'layout-desktop') document.body.classList.add('mode-desktop');
+            if (layout === 'layout-mobile') document.body.classList.add('mode-mobile');
             localStorage.setItem('savedLayout', layout);
             document.getElementById('layout-picker').value = layout;
         }
@@ -115,6 +120,7 @@
             document.body.classList.remove('modal-open');
         }
 
+        // Initialize from Memory
         window.onload = function() {
             const savedTheme = localStorage.getItem('savedTheme') || 'theme-skeuo';
             const savedLayout = localStorage.getItem('savedLayout') || 'layout-auto';
