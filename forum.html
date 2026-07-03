@@ -5,80 +5,119 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Creative Chalkboard Studio - Forum</title>
 <style>
-    /* ... [Keep all existing CSS from your provided code] ... */
+    /* Global Base Styles */
+    body { margin: 0; padding: 40px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; box-sizing: border-box; transition: background 0.5s ease, color 0.5s ease; }
+    .controls-wrapper { width: 100%; max-width: 1300px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; gap: 15px; }
+    .left-controls { display: flex; gap: 15px; }
+    .menu-container { padding: 8px 16px; border-radius: 6px; display: flex; align-items: center; gap: 10px; font-family: sans-serif; box-shadow: 0 2px 5px rgba(0,0,0,0.15); }
+    .menu-select { padding: 4px 8px; border-radius: 4px; cursor: pointer; }
+    .forward-nav-btn { padding: 8px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.15); cursor: pointer; }
     
-    /* ADDED: Mobile Override Support */
+    /* Layout Matrix */
+    .studio-wall { width: 100%; max-width: 1300px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    
+    /* Mobile Overrides */
     body.layout-mobile { padding: 15px; }
     body.layout-mobile .studio-wall { grid-template-columns: 1fr !important; }
     body.layout-mobile .controls-wrapper { flex-direction: column; }
-    body.layout-mobile .forward-nav-btn { padding: 15px; font-size: 1.2em; width: 100%; text-align: center; }
+
+    /* Cards */
+    .chalkboard-card { padding: 0; background: none; border: none; width: 100%; cursor: pointer; }
+    .chalkboard { padding: 30px; border-radius: 8px; min-height: 220px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden; }
+    
+    /* Fullscreen Modal */
+    .fullscreen-zoom { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; border-radius: 0 !important; margin: 0; padding: 60px 40px; justify-content: flex-start; overflow-y: auto; }
+    .forum-content-view { display: none; width: 100%; max-width: 900px; margin-top: 25px; }
+    .fullscreen-zoom .forum-content-view { display: block; }
+    .forum-close-x { display: none; position: fixed; top: 25px; right: 45px; cursor: pointer; z-index: 10005; font-size: 2.5em; background: none; border: none; }
+    .fullscreen-zoom .forum-close-x { display: block; }
+
+    /* Themes (Simplified for stability) */
+    body.theme-skeuo { background-color: #2e3138; color: #fff; }
+    body.theme-cyber { background: #0f172a; color: #f8fafc; }
+    body.theme-pastel { background: #2b3a32; color: #ffeb99; }
 </style>
 </head>
 <body class="theme-skeuo">
 
-    <!-- Top Action Control Toolbar Alignment System -->
     <div class="controls-wrapper">
         <div class="nav-buttons">
-            <a href="index.html" class="forward-nav-btn" id="back-btn" title="Back to Home">← Home</a>
+            <a href="index.html" class="forward-nav-btn">← Home</a>
         </div>
-         
         <div class="left-controls">
-            <!-- Layout Switcher (Integrated) -->
             <div class="menu-container">
-                <span class="menu-label">Layout:</span>
-                <select class="menu-select" id="layout-picker" onchange="changeLayout(this.value)">
+                <span>Layout:</span>
+                <select id="layout-picker" onchange="changeLayout(this.value)">
                     <option value="layout-auto">Auto</option>
                     <option value="layout-desktop">Desktop</option>
                     <option value="layout-mobile">Mobile</option>
                 </select>
             </div>
-
             <div class="menu-container">
-                <span class="menu-label">Theme:</span>
-                <select class="menu-select" id="theme-picker" onchange="changeTheme(this.value)">
+                <span>Theme:</span>
+                <select id="theme-picker" onchange="changeTheme(this.value)">
                     <option value="theme-skeuo">Skeuomorphic</option>
-                    <option value="theme-cyber">Cyber Neon / Glass</option>
-                    <option value="theme-pastel">Classic Pastel Rainbow</option>
+                    <option value="theme-cyber">Cyber</option>
+                    <option value="theme-pastel">Pastel</option>
                 </select>
             </div>
         </div>
     </div>
 
-    <!-- Main Content Wall Matrix -->
     <div class="studio-wall">
-        <!-- ... [Keep your existing forum boards here] ... -->
+        <!-- Forum Board 1 -->
+        <div class="chalkboard-card" onclick="openForum(this, event)">
+            <div class="chalkboard">
+                <button class="forum-close-x" onclick="closeForum(this, event)">×</button>
+                <h2>Ulterior Motives</h2>
+                <div class="forum-content-view">
+                    <p>Mystery content regarding the EKT search...</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Forum Board 2 -->
+        <div class="chalkboard-card" onclick="openForum(this, event)">
+            <div class="chalkboard">
+                <button class="forum-close-x" onclick="closeForum(this, event)">×</button>
+                <h2>When the world was so easy</h2>
+                <div class="forum-content-view">
+                    <p>Mystery content regarding Big Picture...</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // 1. Theme Logic
         function changeTheme(themeName) {
-            document.body.classList.remove('theme-skeuo', 'theme-cyber', 'theme-pastel');
-            document.body.classList.add(themeName);
+            document.body.className = themeName;
             localStorage.setItem('savedTheme', themeName);
             document.getElementById('theme-picker').value = themeName;
         }
 
-        // 2. Layout Logic (Added for cross-page persistence)
         function changeLayout(layoutName) {
-            if (layoutName === 'layout-mobile') {
-                document.body.classList.add('layout-mobile');
-            } else {
-                document.body.classList.remove('layout-mobile');
-            }
+            if (layoutName === 'layout-mobile') document.body.classList.add('layout-mobile');
+            else document.body.classList.remove('layout-mobile');
             localStorage.setItem('savedLayout', layoutName);
             document.getElementById('layout-picker').value = layoutName;
         }
 
-        // 3. Memory Recall System
+        function openForum(card, e) {
+            const board = card.querySelector('.chalkboard');
+            board.classList.add('fullscreen-zoom');
+        }
+
+        function closeForum(btn, e) {
+            e.stopPropagation();
+            btn.closest('.chalkboard').classList.remove('fullscreen-zoom');
+        }
+
         window.onload = function() {
             const savedLayout = localStorage.getItem('savedLayout') || 'layout-auto';
             const savedTheme = localStorage.getItem('savedTheme') || 'theme-skeuo';
-            
             changeLayout(savedLayout);
             changeTheme(savedTheme);
         };
-
-        // ... [Keep your openForum/closeForum functions] ...
     </script>
 </body>
 </html>
