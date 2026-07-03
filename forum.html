@@ -77,7 +77,7 @@
         transform: scale(1.05);
     }
 
-    /* 3x3 Grid Matrix System */
+    /* Responsive Studio Wall Matrix Framework */
     .studio-wall {
         width: 100%;
         max-width: 1300px;
@@ -109,7 +109,7 @@
     .chalkboard {
         padding: 30px;
         border-radius: 8px;
-        min-height: 200px;
+        min-height: 220px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -126,9 +126,10 @@
 
     .forum-title {
         margin: 0;
-        font-size: 2em;
+        font-size: 1.8em;
         letter-spacing: 0.5px;
         text-align: center;
+        line-height: 1.3;
     }
 
     /* Hidden Internal View State */
@@ -139,19 +140,19 @@
         transition: opacity 0.3s ease;
         width: 100%;
         max-width: 900px;
-        margin-top: 20px;
+        margin-top: 25px;
         box-sizing: border-box;
     }
 
-    /* Paragraph limits and styling inside forums */
+    /* Typography settings inside expanded forum */
     .forum-text p {
         font-size: 1.25em;
-        line-height: 1.6;
-        margin: 0 0 20px 0;
+        line-height: 1.65;
+        margin: 0 0 22px 0;
         text-align: left;
     }
 
-    /* Sleek Corner "X" Close Button System (Stays Fixed on Screen) */
+    /* Fixed Top-Right Corner Close System */
     .forum-close-x {
         display: none;
         position: fixed;
@@ -174,7 +175,33 @@
         opacity: 1;
     }
 
-    /* Fullscreen Zoom Class Activated via JavaScript */
+    /* Embedded Video Player Box System (Google Slides Rectangular Style) */
+    .media-embed-container {
+        width: 100%;
+        max-width: 640px;
+        margin: 35px auto 15px auto;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        border-radius: 8px;
+        overflow: hidden;
+        border: 3px solid rgba(255,255,255,0.1);
+        background: #000;
+    }
+    .media-aspect-ratio {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* Clean 16:9 widescreen layout */
+        height: 0;
+    }
+    .media-aspect-ratio iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    /* Fullscreen Zoom Activation Rules */
     .chalkboard.fullscreen-zoom {
         position: fixed;
         top: 0;
@@ -185,30 +212,30 @@
         border-radius: 0 !important;
         margin: 0;
         padding: 60px 40px;
-        justify-content: flex-start; /* Aligns content to top so it can scroll down */
+        justify-content: flex-start;
         align-items: center;
         transform: none !important;
         cursor: default;
-        overflow-y: auto; /* Activates scrolling natively */
+        overflow-y: auto;
     }
 
-    /* Custom Chalkboard Scrollbars */
+    /* Adaptive Custom Track Scrollbars */
     .chalkboard.fullscreen-zoom::-webkit-scrollbar {
         width: 10px;
     }
     .chalkboard.fullscreen-zoom::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.1);
+        background: rgba(0, 0, 0, 0.15);
     }
     .chalkboard.fullscreen-zoom::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.25);
         border-radius: 10px;
     }
     .chalkboard.fullscreen-zoom::-webkit-scrollbar-thumb:hover {
-        background: rgba(255, 255, 255, 0.4);
+        background: rgba(255, 255, 255, 0.45);
     }
 
     .chalkboard.fullscreen-zoom .forum-title {
-        font-size: 3.5em;
+        font-size: 3.2em;
         margin-bottom: 30px;
         width: 100%;
     }
@@ -222,7 +249,6 @@
         display: block;
     }
 
-    /* Prevent document body from scrolling when a forum board is open */
     body.modal-open {
         overflow: hidden;
     }
@@ -278,6 +304,7 @@
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
     .theme-cyber .forward-nav-btn:hover { box-shadow: 0 0 15px rgba(56, 189, 248, 0.6); border-color: #38bdf8; color: #38bdf8; }
+    .theme-cyber .media-embed-container { border-color: rgba(56, 189, 248, 0.3); }
 
     /* SKEUOMORPHIC */
     body.theme-skeuo {
@@ -324,28 +351,31 @@
     <div class="studio-wall">
 
         <div class="chalkboard-card" onclick="openForum(this, event)" role="button" tabindex="0" onkeydown="if(event.key === 'Enter') openForum(this, event)">
-            <div class="chalkboard" id="test-forum-board">
+            <div class="chalkboard" id="ulterior-motives-board">
                 <button class="forum-close-x" onclick="closeForum(this, event)" aria-label="Close forum">×</button>
                 
-                <h2 class="forum-title">test</h2>
+                <h2 class="forum-title">Ulterior Motives<br>(EKT)</h2>
                 
                 <div class="forum-content-view">
                     <div class="forum-text">
-                        <p><strong>[Paragraph 1]</strong> test test this is a test 123123. Welcome to the long forum verification checkpoint. Here we test if our structural components scale beautifully when packed with extreme vertical lengths.</p>
-                        <p><strong>[Paragraph 2]</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <p><strong>[Paragraph 3]</strong> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        <p><strong>[Paragraph 4]</strong> Moving onto the next phase of content, layout blocks must remain uniform. On a chalkboard style board, longer items shouldn't bleed out or vanish beneath the layout horizon.</p>
-                        <p><strong>[Paragraph 5]</strong> Fun fact: The custom track scrollbar has been engineered directly into the CSS layout rules above. This forces the scroll bar thumb component to change from clear dark overlays to glass panels depending on your current active theme.</p>
-                        <p><strong>[Paragraph 6]</strong> Here is paragraph six checking in. If you are reading this while checking the interface, it means the scrolling physics are working exactly as intended. The "X" button should still look firmly anchored in the top right quadrant of your active monitor view layout.</p>
-                        <p><strong>[Paragraph 7]</strong> Let's double check alignment systems. Everything within our main content framework wrapper system runs cleanly down a centered linear track system to maximize responsive readability guidelines across small screen frames.</p>
-                        <p><strong>[Paragraph 8]</strong> Halfway through the scroll evaluation matrix! This text acts as standard procedural fill material, but it's crucial for stress-testing how the HTML container tracks height attributes under extreme runtime conditions.</p>
-                        <p><strong>[Paragraph 9]</strong> This studio wall template system uses semantic HTML structural elements like role="button" to replace bad button nesting configurations, which guarantees stable deployments across staging tools.</p>
-                        <p><strong>[Paragraph 10]</strong> Paragraph ten is now active. Feel free to replace all of this randomized draft layout copy down the line with actual conversations, patch updates, or creative community project logs.</p>
-                        <p><strong>[Paragraph 11]</strong> Checking code rendering speeds. The modal expansion script runs on raw hardware CSS transitions via cubic-bezier pacing modules. This makes the zoom mechanics look extremely liquid instead of rigid or choppy.</p>
-                        <p><strong>[Paragraph 12]</strong> Nearly to the base boundary grid line! As the scrolling wrapper engine moves lower, check to ensure that header objects don't stack roughly or smash into active typography elements.</p>
-                        <p><strong>[Paragraph 13]</strong> Tracking variations between environments... Everything continues to run nicely. If you choose the Cyber Neon layout view right now, notice how the text drops back to clean slate tones with glowing hover reflections.</p>
-                        <p><strong>[Paragraph 14]</strong> Almost there. Penultimate test sequence paragraph block entering live view window boundaries. Checking edge margins to guarantee clean spacing at the bottom of the scroll target zone.</p>
-                        <p><strong>[Paragraph 15]</strong> Final Paragraph! You made it all the way to the floor of the test data stack. The scroll test is complete, everything is completely stable, and clicking the "X" in the top corner will gracefully compress this window right back to its original slot on the grid.</p>
+                        <p>"Ulterior Motives" (originally dubbed "Everyone Knows That" or "EKT") stands as one of the most legendary internet mysteries of the digital age. The saga began in October 2021 when a user named carl92 posted a grainy, 17-second audio snippet to the music-identification site WatZatSong, claiming he found it on an old backup DVD from 1999. The snippet featured an incredibly catchy, high-energy 1980s synth-pop hook, but no one could identify the artist. This spark ignited a massive online community of thousands of amateur sleuths, spawning a dedicated Reddit forum that analyzed every single frame of audio data for nearly three years, desperate to figure out where this hidden gem came from.</p>
+                        
+                        <p>During the height of the search, the internet cooked up wild, sprawling theories about who could have recorded the track. Because of the distinct, slick production style and the singer's high vocal range, a major theory was that it was a forgotten, unreleased demo by a mainstream pop titan like Michael Jackson, Darren Hayes of Savage Garden, or even Madonna. Others argued the singer had a slight accent, leading detectives down rabbit holes into the 1980s Japanese City Pop scene, or tracking down obscure Euro-pop artists from Germany and Spain. Some users were absolutely convinced the song was pulled from a lost Saturday morning cartoon theme, an old MTV promotional bumper, or a regional television commercial for a product like shampoo or fast food. As the months dragged on with zero concrete leads, a massive division fractured the community: the Hoax vs. Reality debate. A loud faction of skeptics believed that carl92 was just an internet troll who had generated the track using modern AI or vintage synthesizers specifically to mess with people. Meanwhile, audio experts analyzing the clip noticed a subtle, high-pitched background buzz at 15.734 kHz. This frequency matched the NTSC pilot tone of old cathode-ray tube (CRT) televisions, proving the snippet had definitely been recorded off a TV screen in the 80s or 90s. Yet, a highly controversial "adult film theory" also began to bubble up in the forums. A few users joked—and others genuinely suspected—that the reason the audio quality was so poor, and the reason carl92 refused to provide more information before going completely radio silent, was because the track was playing in the background of a vintage porno.</p>
+                        
+                        <p>That absurd theory became a stunning reality on April 28, 2024. Two dedicated Reddit users, u/One-Truth-5867 and u/south_pole_ball, stopped searching mainstream music archives and started combing through adult movie rights-management databases from the mid-1980s. They finally hit the absolute jackpot exactly 1 hour and 7 minutes into a 1986 hardcore adult film titled Angels of Passion. The community was thrown into utter chaos and hilarity as the full, pristine track blasted through the movie's soundtrack. The discovery instantly solved the mystery of carl92’s disappearance; it also revealed that the faint "crunching noise" in the background that users spent years arguing was a potato chip commercial was actually the rhythm of a squeaking mattress.</p>
+                        
+                        <p>The masterminds behind the song turned out to be British-Canadian twin brothers Christopher Saint Booth and Philip Adrian Booth. In the 1980s, they were struggling young musicians in Los Angeles trying to break into the industry. While working various crew jobs on film sets to make ends meet, an adult movie producer asked if they had any synth tracks they could license for a soundtrack. The brothers handed over "Ulterior Motives"—which they had originally written as a genuine, radio-ready pop song about a cheating partner—completely unaware it would vanish into obscurity only to become a mythic piece of internet folklore forty years later. After the track was found, the brothers lovingly re-recorded it for the fans, and by early 2026, they officially recovered the original 1985 physical master cassette tapes, cementing the track's journey from a forgotten adult film set to the peak of internet history.</p>
+                    </div>
+
+                    <div class="media-embed-container">
+                        <div class="media-aspect-ratio">
+                            <iframe 
+                                src="https://www.youtube.com/embed/muupHD0dUSM" 
+                                title="Ulterior Motives (1985 AOP Mix)" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -366,7 +396,7 @@
             
             if (!board.classList.contains('fullscreen-zoom')) {
                 board.classList.add('fullscreen-zoom');
-                document.body.classList.add('modal-open'); // Stops the background page from scrolling
+                document.body.classList.add('modal-open');
             }
         }
 
@@ -376,9 +406,9 @@
             
             const dynamicBoard = closeButton.closest('.chalkboard');
             dynamicBoard.classList.remove('fullscreen-zoom');
-            document.body.classList.remove('modal-open'); // Restores normal page scrolling
+            document.body.classList.remove('modal-open');
             
-            // Instantly snap the forum internal scroll position back to top for the next time it opens
+            // Snap back up to top immediately for future openings
             dynamicBoard.scrollTop = 0;
         }
     </script>
