@@ -88,6 +88,14 @@
         gap: 40px; 
     }
 
+    /* Manual Layout Engine Constraints */
+    body.layout-desktop .gallery-matrix {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    body.layout-mobile .gallery-matrix {
+        grid-template-columns: 1fr !important;
+    }
+
     @media (max-width: 768px) {
         .gallery-matrix { grid-template-columns: 1fr; }
     }
@@ -262,7 +270,16 @@
         
         <div class="left-controls">
             <div class="menu-container">
-                <span class="menu-label">Theme:</span>
+                <span class="menu-label" id="layout-label">Layout:</span>
+                <select class="menu-select" id="layout-picker" onchange="changeLayout(this.value)">
+                    <option value="layout-auto">Auto</option>
+                    <option value="layout-desktop">Desktop</option>
+                    <option value="layout-mobile">Mobile</option>
+                </select>
+            </div>
+
+            <div class="menu-container">
+                <span class="menu-label" id="theme-label">Theme:</span>
                 <select class="menu-select" id="theme-picker" onchange="changeTheme(this.value)">
                     <option value="theme-skeuo">Skeuomorphic</option>
                     <option value="theme-cyber">Cyber Neon / Glass</option>
@@ -315,17 +332,45 @@
     </div>
 
     <script>
-        // Runtime Dynamic Selector Switcher Engine
+        // Synchronized Runtime Memory State Engine
+        function applySavedState() {
+            const currentTheme = localStorage.getItem('savedTheme') || 'theme-skeuo';
+            const currentLayout = localStorage.getItem('savedLayout') || 'layout-auto';
+            const currentLang = localStorage.getItem('savedLang') || 'en';
+
+            // Cleanly reset structure selectors without wiping layouts or localization states
+            document.body.className = '';
+
+            // Apply active variables back to document context
+            document.body.classList.add(currentTheme);
+            if (currentLayout !== 'layout-auto') {
+                document.body.classList.add(currentLayout);
+            }
+
+            // Align selector menu items values visually
+            document.getElementById('theme-picker').value = currentTheme;
+            document.getElementById('layout-picker').value = currentLayout;
+            
+            // Execute localization
+            changeLanguage(currentLang);
+        }
+
         function changeTheme(themeName) {
-            document.body.className = themeName;
-            // Retain selection in view dropdown component state
-            document.getElementById('theme-picker').value = themeName;
+            localStorage.setItem('savedTheme', themeName);
+            applySavedState();
+        }
+
+        function changeLayout(layoutName) {
+            localStorage.setItem('savedLayout', layoutName);
+            applySavedState();
         }
 
         const translations = {
             en: {
                 backBtn: "← Back",
                 forwardBtn: "Next →",
+                layoutLabel: "Layout:",
+                themeLabel: "Theme:",
                 langLabel: "Language:",
                 capIpadBack: "iPad Collection - Back View",
                 capIpadFront: "iPad Collection - Front View",
@@ -335,6 +380,8 @@
             at: {
                 backBtn: "← Zurück",
                 forwardBtn: "Weiter →",
+                layoutLabel: "Layout:",
+                themeLabel: "Thema:",
                 langLabel: "Sprache:",
                 capIpadBack: "iPad Sammlung - Rückansicht",
                 capIpadFront: "iPad Sammlung - Vorderseite",
@@ -344,6 +391,8 @@
             noe: {
                 backBtn: "← Zruck",
                 forwardBtn: "Weida →",
+                layoutLabel: "Ansicht:",
+                themeLabel: "Stil:",
                 langLabel: "Sproch:",
                 capIpadBack: "iPad Sammlung - hintn glesn",
                 capIpadFront: "iPad Sammlung - vuarn glesn",
@@ -353,6 +402,8 @@
             es: {
                 backBtn: "← Volver",
                 forwardBtn: "Siguiente →",
+                layoutLabel: "Diseño:",
+                themeLabel: "Tema:",
                 langLabel: "Idioma:",
                 capIpadBack: "Colección iPad - Vista Posterior",
                 capIpadFront: "Colección iPad - Vista Frontal",
@@ -362,19 +413,24 @@
         };
 
         function changeLanguage(lang) {
+            localStorage.setItem('savedLang', lang);
             const set = translations[lang] || translations['en'];
             
             document.getElementById('back-btn').innerText = set.backBtn;
             document.getElementById('forward-btn').innerText = set.forwardBtn;
+            document.getElementById('layout-label').innerText = set.layoutLabel;
+            document.getElementById('theme-label').innerText = set.themeLabel;
             document.getElementById('lang-label').innerText = set.langLabel;
             document.getElementById('cap-ipad-back').innerText = set.capIpadBack;
             document.getElementById('cap-ipad-front').innerText = set.capIpadFront;
             document.getElementById('cap-iphone-back').innerText = set.capIphoneBack;
             document.getElementById('cap-iphone-front').innerText = set.capIphoneFront;
             
-            // Retain selection in dropdown component state
             document.getElementById('language-picker').value = lang;
         }
+
+        // Run engine deployment on startup load
+        window.addEventListener('DOMContentLoaded', applySavedState);
     </script>
 </body>
 </html>
