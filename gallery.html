@@ -132,6 +132,40 @@
         text-align: center;
     }
 
+    /* Skeuomorphic Fixed Floating Navigation Arrow Button */
+    .forward-nav-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.2em;
+        text-decoration: none;
+        z-index: 9999;
+        background: linear-gradient(to bottom, #ffffff 0%, #f2f2f2 49%, #e1e1e1 51%, #cccccc 100%);
+        border: 2px solid #8c8c8c;
+        border-top-color: #b3b3b3;
+        border-bottom-color: #666666;
+        color: #4c566c;
+        text-shadow: 0 1px 0 #ffffff;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.35), inset 0 1px 0 #ffffff;
+        font-weight: bold;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .forward-nav-btn:hover {
+        transform: scale(1.08);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.45), inset 0 1px 0 #ffffff;
+    }
+    .forward-nav-btn:active {
+        background: linear-gradient(to bottom, #cccccc 0%, #dddddd 100%);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.5), inset 0 2px 4px rgba(0,0,0,0.2);
+        transform: scale(0.98);
+    }
+
     /* ==========================================
        2. THEME 1: OLD PASTEL RAINBOW
        ========================================== */
@@ -249,10 +283,15 @@
 </head>
 <body class="theme-skeuo">
 
+    <!-- Fixed Floating Navigation Arrow linking to khouzam.html -->
+    <a href="khouzam.html" class="forward-nav-btn" title="Go to Khouzam Page">→</a>
+
+    <!-- Top Action Control Toolbar Alignment System -->
     <div class="controls-wrapper">
         <a href="index.html" class="back-nav-btn" id="back-btn">← Back</a>
         
         <div class="left-controls">
+            <!-- Theme Dynamic Switcher System -->
             <div class="menu-container">
                 <span class="menu-label">Theme:</span>
                 <select class="menu-select" id="theme-picker" onchange="changeTheme(this.value)">
@@ -262,6 +301,7 @@
                 </select>
             </div>
 
+            <!-- Internationalization Engine -->
             <div class="menu-container">
                 <span class="menu-label" id="lang-label">Language:</span>
                 <select class="menu-select" id="language-picker" onchange="changeLanguage(this.value)">
@@ -274,8 +314,10 @@
         </div>
     </div>
 
+    <!-- Gallery 2x2 Device Showcase Grid System system -->
     <div class="gallery-matrix">
 
+        <!-- iPad Back Frame -->
         <div class="chalkboard">
             <div class="gallery-wood-frame">
                 <img src="iPadBack.JPG" alt="iPad Back View">
@@ -283,6 +325,7 @@
             <div class="image-caption" id="cap-ipad-back">iPad Collection - Back View</div>
         </div>
 
+        <!-- iPad Front Frame -->
         <div class="chalkboard">
             <div class="gallery-wood-frame">
                 <img src="iPadFront.JPG" alt="iPad Front View">
@@ -290,6 +333,7 @@
             <div class="image-caption" id="cap-ipad-front">iPad Collection - Front View</div>
         </div>
 
+        <!-- iPhone Back Frame -->
         <div class="chalkboard">
             <div class="gallery-wood-frame">
                 <img src="iPhoneBack.JPG" alt="iPhone Back View">
@@ -297,6 +341,7 @@
             <div class="image-caption" id="cap-iphone-back">iPhone Collection - Back View</div>
         </div>
 
+        <!-- iPhone Front Frame -->
         <div class="chalkboard">
             <div class="gallery-wood-frame">
                 <img src="iPhoneFront.JPG" alt="iPhone Front View">
@@ -306,6 +351,9 @@
 
     </div>
 
+    <!-- ==========================================
+       5. INTERACTIVE JAVASCRIPT LOGIC
+       ========================================== */ -->
     <script>
         // Runtime Dynamic Selector Switcher Engine
         function changeTheme(themeName) {
