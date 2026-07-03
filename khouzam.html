@@ -28,6 +28,14 @@
         gap: 40px; 
     }
 
+    /* Manual Layout Engine Constraints */
+    body.layout-desktop .studio-wall {
+        max-width: 1200px !important;
+    }
+    body.layout-mobile .studio-wall {
+        max-width: 480px !important;
+    }
+
     /* Controls top bar alignment for theme/lang picks */
     .controls-wrapper {
         width: 100%;
@@ -38,6 +46,8 @@
         margin-bottom: 25px;
         gap: 15px;
     }
+    body.layout-desktop .controls-wrapper { max-width: 1200px !important; }
+    body.layout-mobile .controls-wrapper { max-width: 480px !important; }
 
     .left-controls {
         display: flex;
@@ -271,7 +281,6 @@
 </head>
 <body class="theme-skeuo">
 
-    <!-- Top Action Control Toolbar Alignment System -->
     <div class="controls-wrapper">
         <div class="nav-buttons">
             <a href="gallery.html" class="back-nav-btn" id="back-btn">← Back</a>
@@ -279,7 +288,15 @@
         </div>
 
         <div class="left-controls">
-            <!-- Theme Dynamic Switcher System -->
+            <div class="menu-container">
+                <span class="menu-label" id="layout-label">Layout:</span>
+                <select class="menu-select" id="layout-picker" onchange="changeLayout(this.value)">
+                    <option value="layout-auto">Auto</option>
+                    <option value="layout-desktop">Desktop</option>
+                    <option value="layout-mobile">Mobile</option>
+                </select>
+            </div>
+
             <div class="menu-container" id="theme-menu-box">
                 <span class="menu-label" id="theme-label">Theme:</span>
                 <select class="menu-select" id="theme-picker" onchange="changeTheme(this.value)">
@@ -289,7 +306,6 @@
                 </select>
             </div>
 
-            <!-- Internationalization Engine -->
             <div class="menu-container" id="lang-menu-box">
                 <span class="menu-label" id="lang-label">Language:</span>
                 <select class="menu-select" id="language-picker" onchange="changeLanguage(this.value)">
@@ -304,7 +320,6 @@
 
     <div class="studio-wall">
 
-        <!-- Social Media Frame Chalkboard -->
         <div class="chalkboard" id="socials-chalkboard">
             <h2 id="socials-title">Follow Khouzam!</h2>
             <div class="board-list">
@@ -317,7 +332,6 @@
             </div>
         </div>
 
-        <!-- Roblox Project Frame Chalkboard -->
         <div class="chalkboard" id="project-chalkboard">
             <h2 id="project-title">Our Roblox Game</h2>
             <div class="board-list">
@@ -332,18 +346,45 @@
 
     </div>
 
-    <!-- Interface Logic Switcher Handlers -->
     <script>
-        // Runtime Dynamic Theme Switcher Engine
+        // Runtime Dynamic Theme & Layout Memory Engine
+        function applySavedState() {
+            const currentTheme = localStorage.getItem('savedTheme') || 'theme-skeuo';
+            const currentLayout = localStorage.getItem('savedLayout') || 'layout-auto';
+            const currentLang = localStorage.getItem('savedLang') || 'en';
+
+            // Cleanly clear class tags to prevent layout conflicts
+            document.body.className = '';
+
+            // Apply selected choices to context states
+            document.body.classList.add(currentTheme);
+            if (currentLayout !== 'layout-auto') {
+                document.body.classList.add(currentLayout);
+            }
+
+            // Sync structural UI dropdown nodes
+            document.getElementById('theme-picker').value = currentTheme;
+            document.getElementById('layout-picker').value = currentLayout;
+
+            // Trigger engine translation
+            changeLanguage(currentLang);
+        }
+
         function changeTheme(themeName) {
-            document.body.className = themeName;
-            document.getElementById('theme-picker').value = themeName;
+            localStorage.setItem('savedTheme', themeName);
+            applySavedState();
+        }
+
+        function changeLayout(layoutName) {
+            localStorage.setItem('savedLayout', layoutName);
+            applySavedState();
         }
 
         const translations = {
             en: {
                 backBtn: "← Back",
                 forwardBtn: "Next →",
+                layoutLabel: "Layout:",
                 themeLabel: "Theme:",
                 langLabel: "Language:",
                 socialsTitle: "Follow Khouzam!",
@@ -352,6 +393,7 @@
             at: {
                 backBtn: "← Zurück",
                 forwardBtn: "Weiter →",
+                layoutLabel: "Layout:",
                 themeLabel: "Stil:",
                 langLabel: "Sprache:",
                 socialsTitle: "Folge Khouzam!",
@@ -360,7 +402,8 @@
             noe: {
                 backBtn: "← Zruck",
                 forwardBtn: "Weida →",
-                themeLabel: "Design:",
+                layoutLabel: "Ansicht:",
+                themeLabel: " Design:",
                 langLabel: "Sproch:",
                 socialsTitle: "Schau vorbei beim Khouzam!",
                 projectTitle: "Unsa Roblox Gschpü"
@@ -368,6 +411,7 @@
             es: {
                 backBtn: "← Volver",
                 forwardBtn: "Siguiente →",
+                layoutLabel: "Diseño:",
                 themeLabel: "Tema:",
                 langLabel: "Idioma:",
                 socialsTitle: "¡Sigue a Khouzam!",
@@ -376,10 +420,12 @@
         };
 
         function changeLanguage(lang) {
+            localStorage.setItem('savedLang', lang);
             const set = translations[lang] || translations['en'];
             
             document.getElementById('back-btn').innerText = set.backBtn;
             document.getElementById('forward-btn').innerText = set.forwardBtn;
+            document.getElementById('layout-label').innerText = set.layoutLabel;
             document.getElementById('theme-label').innerText = set.themeLabel;
             document.getElementById('lang-label').innerText = set.langLabel;
             document.getElementById('socials-title').innerText = set.socialsTitle;
@@ -387,6 +433,9 @@
             
             document.getElementById('language-picker').value = lang;
         }
+
+        // Initialize state configuration settings on load
+        window.addEventListener('DOMContentLoaded', applySavedState);
     </script>
 </body>
 </html>
