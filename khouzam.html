@@ -44,6 +44,11 @@
         gap: 15px;
     }
 
+    .nav-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
     /* Dropdown Selector Layout Containers */
     .menu-container {
         padding: 8px 16px;
@@ -69,8 +74,8 @@
         outline: none;
     }
 
-    /* Interactive Back Button Structure */
-    .back-nav-btn {
+    /* Interactive Navigation Button Structure */
+    .back-nav-btn, .forward-nav-btn {
         padding: 8px 20px;
         border-radius: 6px;
         text-decoration: none;
@@ -79,7 +84,7 @@
         box-shadow: 0 2px 5px rgba(0,0,0,0.15);
         transition: all 0.3s ease;
     }
-    .back-nav-btn:hover {
+    .back-nav-btn:hover, .forward-nav-btn:hover {
         transform: scale(1.05);
     }
 
@@ -165,7 +170,7 @@
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
-    .theme-pastel .menu-container, .theme-pastel .back-nav-btn {
+    .theme-pastel .menu-container, .theme-pastel .back-nav-btn, .theme-pastel .forward-nav-btn {
         background: #2b3a32;
         border: 4px solid #5c2c16;
         color: #ffe699;
@@ -202,13 +207,13 @@
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
-    .theme-cyber .menu-container, .theme-cyber .back-nav-btn {
+    .theme-cyber .menu-container, .theme-cyber .back-nav-btn, .theme-cyber .forward-nav-btn {
         background: rgba(255, 255, 255, 0.03);
         backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 255, 255, 0.1);
         color: #f1f5f9;
     }
-    .theme-cyber .back-nav-btn { border-radius: 20px; }
+    .theme-cyber .back-nav-btn, .theme-cyber .forward-nav-btn { border-radius: 20px; }
     .theme-cyber .menu-container { border-radius: 50px; }
     .theme-cyber .menu-label { color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
     .theme-cyber .menu-select { background: #0f172a; color: #f1f5f9; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; }
@@ -222,7 +227,7 @@
     .theme-cyber h2 { background: linear-gradient(to right, #fef08a, #fde047); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .theme-cyber .wood-frame { border: 1px solid rgba(255, 255, 255, 0.15); background: #0f172a; }
     .theme-cyber .chalk-link { color: #38bdf8; filter: drop-shadow(0 0 6px rgba(56,189,248,0.4)); }
-    .theme-cyber .back-nav-btn:hover { border-color: #38bdf8; color: #38bdf8; box-shadow: 0 0 10px rgba(56,189,248,0.3); }
+    .theme-cyber .back-nav-btn:hover, .theme-cyber .forward-nav-btn:hover { border-color: #38bdf8; color: #38bdf8; box-shadow: 0 0 10px rgba(56,189,248,0.3); }
     .theme-cyber .board-item:hover .chalk-link { color: #fff !important; }
 
     /* ==========================================
@@ -236,7 +241,7 @@
         font-family: 'Marker Felt', 'Chalkboard SE', sans-serif;
         color: #fff;
     }
-    .theme-skeuo .menu-container, .theme-skeuo .back-nav-btn {
+    .theme-skeuo .menu-container, .theme-skeuo .back-nav-btn, .theme-skeuo .forward-nav-btn {
         background: linear-gradient(to bottom, #ffffff 0%, #f2f2f2 49%, #e1e1e1 51%, #cccccc 100%);
         border: 1px solid #a6a6a6; border-top-color: #b3b3b3; border-bottom-color: #8c8c8c;
         color: #4c566c; text-shadow: 0 1px 0 #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 #fff;
@@ -257,7 +262,7 @@
     }
     .theme-skeuo .chalk-link { color: #ffe699; }
     .theme-skeuo .board-item:hover .chalk-link { color: #fff !important; text-shadow: 0 0 10px rgba(255,255,255,0.8) !important; }
-    .theme-skeuo .back-nav-btn:active {
+    .theme-skeuo .back-nav-btn:active, .theme-skeuo .forward-nav-btn:active {
         background: linear-gradient(to bottom, #cccccc 0%, #dddddd 100%);
         box-shadow: 0 1px 2px rgba(0,0,0,0.4), inset 0 2px 4px rgba(0,0,0,0.15);
         transform: scale(0.98);
@@ -266,10 +271,15 @@
 </head>
 <body class="theme-skeuo">
 
+    <!-- Top Action Control Toolbar Alignment System -->
     <div class="controls-wrapper">
-        <a href="gallery.html" class="back-nav-btn" id="back-btn">← Back</a>
+        <div class="nav-buttons">
+            <a href="gallery.html" class="back-nav-btn" id="back-btn">← Back</a>
+            <a href="valoria.html" class="forward-nav-btn" id="forward-btn">Next →</a>
+        </div>
 
         <div class="left-controls">
+            <!-- Theme Dynamic Switcher System -->
             <div class="menu-container" id="theme-menu-box">
                 <span class="menu-label" id="theme-label">Theme:</span>
                 <select class="menu-select" id="theme-picker" onchange="changeTheme(this.value)">
@@ -279,6 +289,7 @@
                 </select>
             </div>
 
+            <!-- Internationalization Engine -->
             <div class="menu-container" id="lang-menu-box">
                 <span class="menu-label" id="lang-label">Language:</span>
                 <select class="menu-select" id="language-picker" onchange="changeLanguage(this.value)">
@@ -293,6 +304,7 @@
 
     <div class="studio-wall">
 
+        <!-- Social Media Frame Chalkboard -->
         <div class="chalkboard" id="socials-chalkboard">
             <h2 id="socials-title">Follow Khouzam!</h2>
             <div class="board-list">
@@ -305,12 +317,13 @@
             </div>
         </div>
 
+        <!-- Roblox Project Frame Chalkboard -->
         <div class="chalkboard" id="project-chalkboard">
             <h2 id="project-title">Our Roblox Game</h2>
             <div class="board-list">
                 <a href="https://www.roblox.com/games/96551542053675/Ragdoll-Window" class="board-item" target="_blank">
                     <div class="wood-frame">
-                        <img src="https://images.rbxcdn.com/1ff991d6cc47c32cf93db4c6a6e700a9.png" alt="Roblox Game Logo">
+                        <img src="RagdollWindow.png" alt="Ragdoll Window Game Logo">
                     </div>
                     <span class="chalk-link" id="project-game-link">Ragdoll Window</span>
                 </a>
@@ -319,6 +332,7 @@
 
     </div>
 
+    <!-- Interface Logic Switcher Handlers -->
     <script>
         // Runtime Dynamic Theme Switcher Engine
         function changeTheme(themeName) {
@@ -329,6 +343,7 @@
         const translations = {
             en: {
                 backBtn: "← Back",
+                forwardBtn: "Next →",
                 themeLabel: "Theme:",
                 langLabel: "Language:",
                 socialsTitle: "Follow Khouzam!",
@@ -336,6 +351,7 @@
             },
             at: {
                 backBtn: "← Zurück",
+                forwardBtn: "Weiter →",
                 themeLabel: "Stil:",
                 langLabel: "Sprache:",
                 socialsTitle: "Folge Khouzam!",
@@ -343,6 +359,7 @@
             },
             noe: {
                 backBtn: "← Zruck",
+                forwardBtn: "Weida →",
                 themeLabel: "Design:",
                 langLabel: "Sproch:",
                 socialsTitle: "Schau vorbei beim Khouzam!",
@@ -350,6 +367,7 @@
             },
             es: {
                 backBtn: "← Volver",
+                forwardBtn: "Siguiente →",
                 themeLabel: "Tema:",
                 langLabel: "Idioma:",
                 socialsTitle: "¡Sigue a Khouzam!",
@@ -361,6 +379,7 @@
             const set = translations[lang] || translations['en'];
             
             document.getElementById('back-btn').innerText = set.backBtn;
+            document.getElementById('forward-btn').innerText = set.forwardBtn;
             document.getElementById('theme-label').innerText = set.themeLabel;
             document.getElementById('lang-label').innerText = set.langLabel;
             document.getElementById('socials-title').innerText = set.socialsTitle;
