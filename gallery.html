@@ -108,40 +108,63 @@
         .gallery-matrix { grid-template-columns: 1fr; }
     }
 
-    /* Strict Mobile Stacking Rules matching user specifications */
-    body.layout-mobile .controls-wrapper,
-    @media (max-width: 768px) {
+    /* ==========================================
+       STRICT MOBILE ENGINE STACKING CONFIGURATION
+       ========================================== */
+    
+    /* Triggers when layout mode 'Mobile' is selected */
+    body.layout-mobile .controls-wrapper {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+    }
+    body.layout-mobile .nav-layout-row {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        width: 100% !important;
+        gap: 15px !important;
+    }
+    body.layout-mobile .stacked-selectors {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        width: 100% !important;
+        align-items: flex-start !important;
+    }
+    body.layout-mobile .stacked-selectors .menu-container {
+        width: 100% !important;
+        max-width: 400px;
+        box-sizing: border-box !important;
+        justify-content: space-between !important;
+    }
+
+    /* Triggers responsively on smaller touch viewports */
+    @media (max-width: 850px) {
         .controls-wrapper {
             flex-direction: column !important;
             align-items: stretch !important;
             gap: 12px !important;
         }
-        
-        /* Row 1: Back, Next, Layout stretched perfectly */
         .nav-layout-row {
             display: flex !important;
             flex-direction: row !important;
-            justify-content: space-between !important;
+            justify-content: flex-start !important;
             align-items: center !important;
             width: 100% !important;
-            gap: 10px !important;
+            gap: 15px !important;
         }
-
-        .nav-layout-row .menu-container {
-            flex-grow: 1 !important;
-            justify-content: space-between !important;
-        }
-
-        /* Forces Theme and Language into distinct separate rows below */
         .stacked-selectors {
             display: flex !important;
             flex-direction: column !important;
             gap: 12px !important;
             width: 100% !important;
+            align-items: flex-start !important;
         }
-
         .stacked-selectors .menu-container {
             width: 100% !important;
+            max-width: 400px;
             box-sizing: border-box !important;
             justify-content: space-between !important;
         }
@@ -310,7 +333,7 @@
 <body class="theme-skeuo">
 
     <div class="controls-wrapper">
-        <!-- Row 1 Container: Keeps Nav buttons and Layout Picker grouped -->
+        <!-- Row 1: Back, Next, Layout -->
         <div class="nav-layout-row">
             <div class="nav-buttons">
                 <a href="index.html" class="back-nav-btn" id="back-btn">← Back</a>
@@ -327,7 +350,7 @@
             </div>
         </div>
         
-        <!-- Stacking Container: Each takes a full row underneath on mobile layouts -->
+        <!-- Row 2 and 3: Stacks Theme and Language into completely clean separate vertical blocks -->
         <div class="stacked-selectors">
             <div class="menu-container">
                 <span class="menu-label" id="theme-label">Theme:</span>
