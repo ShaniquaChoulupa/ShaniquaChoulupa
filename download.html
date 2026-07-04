@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Downloads - The Creative Chalkboard Studio</title>
+<style>
+    /* ==========================================
+       1. GLOBAL BASE STYLES & LAYOUT
+       ========================================== */
+    body {
+        margin: 0;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        box-sizing: border-box;
+        transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    /* Top bar layout for selectors and navigation */
+    .controls-wrapper {
+        width: 100%;
+        max-width: 1300px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        gap: 15px;
+        transition: all 0.3s ease;
+    }
+
+    .left-controls {
+        display: flex;
+        gap: 15px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-buttons {
+        display: flex;
+        gap: 10px;
+        transition: all 0.3s ease;
+    }
+
+    /* Dropdown UI Containers */
+    .menu-container {
+        padding: 8px 16px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+    }
+
+    .menu-label {
+        font-weight: bold;
+        font-size: 0.95em;
+        white-space: nowrap;
+    }
+
+    .menu-select {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        cursor: pointer;
+        outline: none;
+        width: 100%;
+    }
+
+    /* Interactive Navigation Button Structure */
+    .forward-nav-btn {
+        padding: 8px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .forward-nav-btn:hover {
+        transform: scale(1.05);
+    }
+
+    /* 3x3 Grid Matrix System */
+    .studio-wall {
+        width: 100%;
+        max-width: 1300px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px; 
+    }
+
+    .welcome-card, .bottom-spanner {
+        grid-column: span 3;
+    }
+
+    /* Automatic Media Queries */
+    @media (max-width: 1024px) {
+        .studio-wall { grid-template-columns: repeat(2, 1fr); }
+        .welcome-card, .bottom-spanner { grid-column: span 2; }
+    }
+    @media (max-width: 768px) {
+        .studio-wall { grid-template-columns: 1fr; }
+        .welcome-card, .bottom-spanner { grid-column: span 1; }
+        .controls-wrapper, .left-controls { flex-direction: column; width: 100%; }
+        .menu-container, .nav-buttons { width: 100%; justify-content: space-between; box-sizing: border-box; }
+        .forward-nav-btn { flex: 1; padding: 12px 20px; font-size: 1.1em; }
+        body { padding: 20px; }
+    }
+
+    /* ==========================================
+       2. FORCE MOBILE OVERRIDE CLASSES
+       ========================================== */
+    body.layout-mobile {
+        padding: 15px;
+    }
+    body.layout-mobile .studio-wall {
+        grid-template-columns: 1fr !important;
+    }
+    body.layout-mobile .welcome-card, 
+    body.layout-mobile .bottom-spanner {
+        grid-column: span 1 !important;
+    }
+    body.layout-mobile .controls-wrapper,
+    body.layout-mobile .left-controls {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+    body.layout-mobile .menu-container,
+    body.layout-mobile .nav-buttons {
+        width: 100%;
+        justify-content: space-between;
+        box-sizing: border-box;
+    }
+    body.layout-mobile .forward-nav-btn {
+        flex: 1;
+        padding: 15px 20px;
+        font-size: 1.2em;
+    }
+
+    /* Standard Elements */
+    .chalkboard {
+        padding: 25px;
+        border-radius: 8px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: all 0.3s ease;
+    }
+
+    h1, h2 { text-align: center; margin-top: 0; letter-spacing: 0.5px; }
+    p { font-size: 1.15em; line-height: 1.5; text-align: center; }
+
+    .board-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .board-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 18px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .wood-frame {
+        width: 55px;
+        height: 55px;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-right: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        font-size: 1.8em;
+    }
+
+    .chalk-link { font-size: 1.4em; text-decoration: none; font-weight: bold; transition: color 0.2s ease, text-shadow 0.2s ease; }
+
+    /* ==========================================
+       3. THEME VARIATIONS
+       ========================================== */
+    /* PASTEL RAINBOW */
+    body.theme-pastel {
+        background: linear-gradient(45deg, #FFB3BA, #FFDFBA, #FFFFBA, #BAFFC9, #BAE1FF, #D0BAFF, #FFB3BA);
+        background-size: 400% 400%; animation: rainbowFade 16s ease infinite; font-family: 'Comic Sans MS', cursive, sans-serif; color: rgba(245, 245, 245, 0.95);
+    }
+    @keyframes rainbowFade { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    .theme-pastel .menu-container, .theme-pastel .forward-nav-btn { background: #2b3a32; border: 4px solid #5c2c16; color: #ffeb99; }
+    .theme-pastel .menu-select { background: #333; color: #fff; border: 1px dashed rgba(255,255,255,0.3); }
+    .theme-pastel .chalkboard { background: radial-gradient(circle at 50% 30%, rgba(55, 75, 65, 0.9), rgba(35, 45, 40, 0.95)), #2b3a32; border: 14px solid #5c2c16; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); box-shadow: inset 0px 0px 20px rgba(0,0,0,0.7), 6px 8px 15px rgba(0,0,0,0.3); }
+    .theme-pastel .wood-frame { border: 4px solid #5c2c16; background-color: #222; }
+    .theme-pastel .board-item { background: rgba(255, 255, 255, 0.04); border: 1px dashed rgba(255, 255, 255, 0.15); }
+    .theme-pastel .chalk-link { color: #ffe699; }
+
+    /* CYBER NEON GLASS */
+    body.theme-cyber {
+        background: linear-gradient(-45deg, #0f172a, #1e1b4b, #2e1065, #0f172a);
+        background-size: 400% 400%; animation: cyberPulse 12s ease infinite; font-family: 'Segoe UI', sans-serif; color: #f8fafc;
+    }
+    @keyframes cyberPulse { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    .theme-cyber .menu-container, .theme-cyber .forward-nav-btn { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); color: #f1f5f9; }
+    .theme-cyber .forward-nav-btn { border-radius: 20px; }
+    .theme-cyber .menu-container { border-radius: 50px; }
+    .theme-cyber .menu-select { background: #0f172a; color: #f1f5f9; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; }
+    .theme-cyber .chalkboard { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
+    .theme-cyber h1, .theme-cyber h2 { background: linear-gradient(to right, #fef08a, #fde047); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .theme-cyber .wood-frame { background-color: #0f172a; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; }
+    .theme-cyber .board-item { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); }
+    .theme-cyber .chalk-link { color: #38bdf8; }
+
+    /* SKEUOMORPHIC */
+    body.theme-skeuo {
+        background-color: #2e3138;
+        background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 0), radial-gradient(rgba(0,0,0,0.3) 1px, transparent 0);
+        background-size: 4px 4px; background-position: 0 0, 2px 2px; font-family: 'Marker Felt', 'Chalkboard SE', sans-serif; color: #fff;
+    }
+    .theme-skeuo .menu-container, .theme-skeuo .forward-nav-btn { background: linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 50%, #dddddd 50%, #cfcfcf 100%); border: 1px solid #a6a6a6; box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 #fff; color: #4c566c; text-shadow: 0 1px 0 #fff; }
+    .theme-skeuo .menu-select { background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%); color: #333; border: 1px solid #abafb3; }
+    .theme-skeuo .chalkboard { background: radial-gradient(circle at 50% 30%, #2f4f3e, #1b3327); border: 14px solid #4a2711; border-image: repeating-linear-gradient(45deg, #3d1f0d, #542d15 15px, #3d1f0d 30px) 14 stretch; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8); box-shadow: inset 0px 0px 15px rgba(0,0,0,0.6), 0 8px 16px rgba(0, 0, 0, 0.5); }
+    .theme-skeuo .wood-frame { border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.5); background-color: #111; }
+    .theme-skeuo .board-item { background: rgba(0, 0, 0, 0.15); border: 1px dashed rgba(255, 255, 255, 0.1); box-shadow: inset 0 2px 4px rgba(0,0,0,0.4); }
+    .theme-skeuo .chalk-link { color: #ffe699; }
+</style>
+</head>
+<body class="theme-skeuo">
+
+    <div class="controls-wrapper">
+        <div class="nav-buttons">
+            <a href="index.html" class="forward-nav-btn" id="home-btn" title="Go to Home">← Home</a>
+            <a href="forum.html" class="forward-nav-btn" id="forum-btn" title="Go to Forum">Forum</a>
+            <a href="download.html" class="forward-nav-btn" id="download-btn" title="Go to Downloads">Downloads</a>
+        </div>
+         
+        <div class="left-controls">
+            <div class="menu-container">
+                <span class="menu-label" id="layout-label">Layout:</span>
+                <select class="menu-select" id="layout-picker" onchange="changeLayout(this.value)">
+                    <option value="layout-auto">Auto</option>
+                    <option value="layout-desktop">Desktop</option>
+                    <option value="layout-mobile">Mobile</option>
+                </select>
+            </div>
+
+            <div class="menu-container">
+                <span class="menu-label" id="theme-label">Theme:</span>
+                <select class="menu-select" id="theme-picker" onchange="changeTheme(this.value)">
+                    <option value="theme-skeuo">Skeuomorphic</option>
+                    <option value="theme-cyber">Cyber Neon</option>
+                    <option value="theme-pastel">Pastel Rainbow</option>
+                </select>
+            </div>
+
+            <div class="menu-container">
+                <span class="menu-label" id="lang-label">Language:</span>
+                <select class="menu-select" id="language-picker" onchange="changeLanguage(this.value)">
+                    <option value="en">English</option>
+                    <option value="at">Österreichisch</option>
+                    <option value="noe">Niederösterreichisch</option>
+                    <option value="es">Español</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="studio-wall">
+
+        <div class="chalkboard welcome-card">
+            <div>
+                <h1 id="downloads-main-title">Downloads Depot</h1>
+                <p id="downloads-main-desc">Grab all the tools and software archived here.</p>
+            </div>
+        </div>
+
+        <!-- System & Browsing Chalkboard -->
+        <div class="chalkboard">
+            <div>
+                <h2 id="cat-browsing">Browsers & Messaging</h2>
+                <div class="board-list">
+                    <div class="board-item">
+                        <div class="wood-frame">💬</div>
+                        <a href="https://storage.levelleap.com/nina/clients/msnp/patched-installer/msn/escargot-wlm-14.0.8117.0416-en.zip" class="chalk-link" target="_blank">Escargot WLM</a>
+                    </div>
+                    <div class="board-item">
+                        <div class="wood-frame">🌐</div>
+                        <a href="https://download.win32subsystem.live/supermium/releases/v144-r4_01/supermium_144_32_setup.exe" class="chalk-link" target="_blank">Supermium X32</a>
+                    </div>
+                    <div class="board-item">
+                        <div class="wood-frame">🌐</div>
+                        <a href="https://download.win32subsystem.live/supermium/releases/v144-r4_01/supermium_144_64_setup.exe" class="chalk-link" target="_blank">Supermium X64</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Media Tools Chalkboard -->
+        <div class="chalkboard">
+            <div>
+                <h2 id="cat-media">Media Tools</h2>
+                <div class="board-list">
+                    <div class="board-item">
+                        <div class="wood-frame">💿</div>
+                        <a href="https://sourceforge.net/projects/dvdstyler/files/dvdstyler/1.8.4/DVDStylerPortable-1.8.4-win32.exe/download" class="chalk-link" target="_blank">DVDStyler Portable</a>
+                    </div>
+                    <div class="board-item">
+                        <div class="wood-frame">🔥</div>
+                        <a href="https://cdburnerxp.com/out/cdburnerxp-32" class="chalk-link" target="_blank">CDBurner XP X32</a>
+                    </div>
+                    <div class="board-item">
+                        <div class="wood-frame">🔥</div>
+                        <a href="https://cdburnerxp.com/out/cdburnerxp-64" class="chalk-link" target="_blank">CDBurner XP X64</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Tracker Chalkboard -->
+        <div class="chalkboard">
+            <div>
+                <h2 id="downloads-notice-title">Server Status</h2>
+                <p id="downloads-notice-desc" style="font-size: 1em; text-align: left; margin-top: 15px;">All download paths match historical configurations directly from source hosts. Keep your local machines ready for burning and deployment tasks.</p>
+            </div>
+        </div>
+
+        <div class="chalkboard bottom-spanner">
+            <div>
+                <p id="bottom-text" style="font-size: 1.4em; font-weight: bold; margin: 0;">More utilities coming soon</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // 1. Layout Mode Handler
+        function changeLayout(layoutName) {
+            if (layoutName === 'layout-mobile') {
+                document.body.classList.add('layout-mobile');
+            } else {
+                document.body.classList.remove('layout-mobile');
+            }
+            localStorage.setItem('savedLayout', layoutName);
+            document.getElementById('layout-picker').value = layoutName;
+        }
+
+        // 2. Theme Mode Handler
+        function changeTheme(themeName) {
+            document.body.classList.remove('theme-skeuo', 'theme-cyber', 'theme-pastel');
+            document.body.classList.add(themeName);
+            localStorage.setItem('savedTheme', themeName);
+            document.getElementById('theme-picker').value = themeName;
+        }
+
+        const translations = {
+            en: {
+                homeBtn: "← Home",
+                forumBtn: "Forum",
+                downloadBtn: "Downloads",
+                layoutLabel: "Layout:",
+                themeLabel: "Theme:",
+                langLabel: "Language:",
+                mainTitle: "Downloads Depot",
+                mainDesc: "Grab all the tools and software archived here.",
+                catBrowsing: "Browsers & Messaging",
+                catMedia: "Media Tools",
+                noticeTitle: "Server Status",
+                noticeDesc: "All download paths match historical configurations directly from source hosts. Keep your local machines ready for burning and deployment tasks.",
+                bottomText: "More utilities coming soon"
+            },
+            at: {
+                homeBtn: "← Startseite",
+                forumBtn: "Forum",
+                downloadBtn: "Downloads",
+                layoutLabel: "Ansicht:",
+                themeLabel: "Stil:",
+                langLabel: "Sprache:",
+                mainTitle: "Download-Zentrale",
+                mainDesc: "Hol dir das ganze Zeug und die Programme, die da herinnen aufbewahrt werden.",
+                catBrowsing: "Web-Browser & Nachrichten",
+                catMedia: "Medien-Werkzeuge",
+                noticeTitle: "Server-Status",
+                noticeDesc: "Alle Pfade stimmen exakt mit den Originalen überein. Halt deine Rechner bereit zum Brennen und Herumbasteln.",
+                bottomText: "Mehr Zeug kommt bald"
+            },
+            noe: {
+                homeBtn: "← Ham",
+                forumBtn: "Forum",
+                downloadBtn: "Downloads",
+                layoutLabel: "Ansicht:",
+                themeLabel: "Design:",
+                langLabel: "Sproch:",
+                mainTitle: "Dateihüttn",
+                mainDesc: "Greif da oin den gscheitn Kram und de Software ab, de mir da herstoin.",
+                catBrowsing: "Netzwurschtler & Quatschen",
+                catMedia: "Musi & Video Kraffl",
+                noticeTitle: "Kisten-Status",
+                noticeDesc: "De Pfade san genau so kofituriert wia damals. Schmeiß die Maschin an fürs Brenna und Installiern.",
+                bottomText: "No mehr Zeug kummt gschwind"
+            },
+            es: {
+                homeBtn: "← Inicio",
+                forumBtn: "Foro",
+                downloadBtn: "Descargas",
+                layoutLabel: "Diseño:",
+                themeLabel: "Tema:",
+                langLabel: "Idioma:",
+                mainTitle: "Depósito de Descargas",
+                mainDesc: "Consigue todas las herramientas y software archivados aquí.",
+                catBrowsing: "Navegadores y Mensajería",
+                catMedia: "Herramientas de Medios",
+                noticeTitle: "Estado del Servidor",
+                noticeDesc: "Todas las rutas de descarga coinciden directamente con los hosts de origen. Mantén tus máquinas listas para tareas de grabación y despliegue.",
+                bottomText: "Pronto habrá más utilidades disponibles"
+            }
+        };
+
+        // 3. Language Selection Handler
+        function changeLanguage(lang) {
+            const set = translations[lang] || translations['en'];
+            
+            document.getElementById('home-btn').innerText = set.homeBtn;
+            document.getElementById('forum-btn').innerText = set.forumBtn;
+            document.getElementById('download-btn').innerText = set.downloadBtn;
+            document.getElementById('layout-label').innerText = set.layoutLabel;
+            document.getElementById('theme-label').innerText = set.themeLabel;
+            document.getElementById('lang-label').innerText = set.langLabel;
+            document.getElementById('downloads-main-title').innerText = set.mainTitle;
+            document.getElementById('downloads-main-desc').innerText = set.mainDesc;
+            document.getElementById('cat-browsing').innerText = set.catBrowsing;
+            document.getElementById('cat-media').innerText = set.catMedia;
+            document.getElementById('downloads-notice-title').innerText = set.noticeTitle;
+            document.getElementById('downloads-notice-desc').innerText = set.noticeDesc;
+            document.getElementById('bottom-text').innerText = set.bottomText;
+            
+            localStorage.setItem('savedLang', lang);
+            document.getElementById('language-picker').value = lang;
+        }
+
+        // 4. MEMORY RECALL SYSTEM: Loads settings seamlessly
+        window.onload = function() {
+            const savedLayout = localStorage.getItem('savedLayout') || 'layout-auto';
+            const savedTheme = localStorage.getItem('savedTheme') || 'theme-skeuo';
+            const savedLang = localStorage.getItem('savedLang') || 'en';
+
+            changeLayout(savedLayout);
+            changeTheme(savedTheme);
+            changeLanguage(savedLang);
+        };
+    </script>
+</body>
+</html>
