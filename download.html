@@ -84,9 +84,6 @@
         align-items: center;
         justify-content: center;
     }
-    .forward-nav-btn:hover {
-        transform: scale(1.05);
-    }
 
     /* 3x3 Grid Matrix System */
     .studio-wall {
@@ -174,6 +171,9 @@
         padding: 12px 18px;
         border-radius: 8px;
         transition: all 0.3s ease;
+    }
+    .board-item:hover {
+        transform: scale(1.02); /* Very very slightly bigger ONLY for downloads */
     }
 
     .wood-frame {
@@ -286,7 +286,6 @@
             </div>
         </div>
 
-        <!-- System & Browsing Chalkboard -->
         <div class="chalkboard">
             <div>
                 <h2 id="cat-browsing">Browsers & Messaging</h2>
@@ -307,7 +306,6 @@
             </div>
         </div>
 
-        <!-- Media Tools Chalkboard -->
         <div class="chalkboard">
             <div>
                 <h2 id="cat-media">Media Tools</h2>
@@ -328,7 +326,6 @@
             </div>
         </div>
 
-        <!-- Status Tracker Chalkboard -->
         <div class="chalkboard">
             <div>
                 <h2 id="downloads-notice-title">Server Status</h2>
