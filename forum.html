@@ -140,6 +140,33 @@
         line-height: 1.3;
     }
 
+    /* SPECIAL FUN SMOOTH PASTEL CHALKBOARD FOR BACKROOMS STORY */
+    #backrooms-board {
+        background: linear-gradient(-45deg, #ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff, #d0baff);
+        background-size: 400% 400%;
+        animation: smoothPastelWave 10s ease infinite;
+        border: 14px solid #fff;
+        border-image: none;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), inset 0 0 15px rgba(255, 255, 255, 0.6);
+    }
+    #backrooms-board .forum-title {
+        color: #4a4a4a !important;
+        text-shadow: 1px 1px 2px rgba(255,255,255,0.8) !important;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+    #backrooms-board .forum-text p {
+        color: #333333 !important;
+    }
+    #backrooms-board .forum-close-x {
+        color: #4a4a4a !important;
+    }
+
+    @keyframes smoothPastelWave {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
     /* Hidden Internal View State */
     .forum-content-view {
         display: none;
@@ -183,7 +210,7 @@
         opacity: 1;
     }
 
-    /* Embedded Video Player Box System (Google Slides Rectangular Style) */
+    /* Embedded Video Player Box System */
     .media-embed-container {
         width: 100%;
         max-width: 640px;
@@ -197,7 +224,7 @@
     .media-aspect-ratio {
         position: relative;
         width: 100%;
-        padding-bottom: 56.25%; /* Clean 16:9 widescreen layout */
+        padding-bottom: 56.25%; 
         height: 0;
     }
     .media-aspect-ratio iframe {
@@ -366,6 +393,49 @@
 
     <div class="studio-wall">
 
+        <!-- NEWLY CONSTRUCTED BACKROOMS CHALKBOARD FORUM CARD -->
+        <div class="chalkboard-card" onclick="openForum(this, event)" role="button" tabindex="0" onkeydown="if(event.key === 'Enter') openForum(this, event)">
+            <div class="chalkboard" id="backrooms-board">
+                <button class="forum-close-x" onclick="closeForum(this, event)" aria-label="Close forum">×</button>
+                <h2 class="forum-title">Backrooms<br>(story)</h2>
+                
+                <div class="forum-content-view">
+                    <div class="forum-text">
+                        <p>The concept of the Backrooms represents one of the most significant and transformative milestones in internet-driven horror folklore. It is a lore built completely from scratch by thousands of separate, anonymous minds collaborating across digital forums. Unlike traditional horror monsters that rely on immediate physical threats, jumpscares, or gore, the Backrooms explores psychological dread, isolation, and spatial distortion. The environment is rooted entirely in an uncanny layout of endless, monotonous empty rooms that mimic corporate decay.</p>
+                        <p>The mythos officially began on May 12, 2019, on the anonymous imageboard 4chan. An user posted a thread on the /x/ paranormal forum asking individuals to share unsettling images that felt "off" or wrong. Amidst typical horror art and eerie landscapes, one anonymous user uploaded a slightly tilted, low-resolution photo. It depicted an empty room featuring dingy, yellowing wallpaper, uniform commercial carpeting, and fluorescent ceiling lights. The image carried an undeniable, hypnotic sense of familiarity despite its profound emptiness.</p>
+                        <p>Along with the photograph, another anonymous poster attached a brief paragraph of text that established the fundamental baseline for the entire lore. The passage warned that if an individual isn't careful and "no-clips" out of reality in the wrong areas, they will end up in the Backrooms. It described the setting as nothing but the stink of old moist carpet, the madness of mono-yellow, and the endless background hum of fluorescent lights at maximum hum. It estimated the space to encompass roughly six hundred million square miles of randomly segmented empty rooms.</p>
+                        <p>This single piece of creative writing instantly struck a nerve online, introducing the concept of "no-clipping" to standard horror vocabulary. Borrowed directly from video game terms where a player glitches through a solid wall or boundary map, no-clipping became the theoretical trigger for falling entirely out of the known universe. Reality was suddenly redefined as a fragile digital simulation containing hidden architectural boundaries. Stepping off a wrong curb or leaning too hard against a anomalous wall could cause an individual to plunge into the yellow maze.</p>
+                        <p>The unique horror of the initial post relied completely on liminal spaces—environments associated with transitions that are entirely devoid of human life. Locations like empty school hallways at midnight, vacant airport terminals, or abandoned shopping malls trigger an innate psychological discomfort because their core purpose is missing. The Backrooms perfectly Weaponized this aesthetic, trapping the subconscious mind inside a endless, corporate office purgatory. It was an environment designed specifically to look like a familiar human construct while refusing to provide comfort.</p>
+                        <p>For the initial months following the post, the lore remained remarkably minimalist and pure. The space was treated as a completely solitary nightmare where the true enemy was the victim's own fracturing sanity. The background hum of the lights was said to be loud enough to induce headaches, and the damp carpet smelled of stale water and mildew. The original text hinted at threats with the line, "God save you if you hear something wandering around nearby, because it sure as hell has heard you."</p>
+                        <p>As the concept spread to platforms like Reddit, Twitter, and YouTube, the internet did what it does best: it began to build a massive database. Universal categorization structures were introduced to help organize the expanding mythology. The original yellow office space was universally labeled "Level 0." Creative contributors realized that if reality had multiple layers, then the Backrooms should have a progressive sequence of anomalous environments extending downward into infinity.</p>
+                        <p>This community expansion led directly to the creation of Level 1 and Level 2. Level 1 was envisioned as a dark, industrial warehouse grid with unpainted concrete walls, exposed pipes, and a low-hanging fog that collected near puddles of water. Level 2 stepped up the claustrophobia significantly, morphing into a series of long, sweltering service tunnels filled with heavy machinery and steam pipes that reached scalding temperatures. The progression moved the setting away from corporate decay into a industrial subterranean hell.</p>
+                        <p>With the introduction of numerical layers, a massive schism formed within the fandom regarding how the setting should be handled. One faction preferred the absolute isolation of the original 4chan post, arguing that adding monsters and intricate rules completely ruined the psychological dread. The competing faction wanted to develop complex survival logs, inventing distinct entities, items, and human factions trying to colonize the empty spaces. The collaborative world-building faction eventually won out, giving birth to dedicated wikis.</p>
+                        <p>The official Backrooms Wiki and its branch on the SCP Foundation-style sandbox site established a deeply layered, interactive encyclopedia of the universe. Strange items were logged into the universe's canon, such as "Almond Water," a sweet, nutty substance found in vending machines that became essential for retaining human sanity. Entities were given specific taxonomy numbers, classifying hostile anomalies like "Smilers"—glowing grins hiding in absolute darkness—and "Skin-Stealers"—humanoid monsters that wear their victims' skin.</p>
+                        <p>Human groups were written into the expanding narrative, most notably the M.E.G., which stands for the Major Explorer Group. In the wiki's extensive timeline, the M.E.G. functioned as a semi-organized military and scientific government that set up outposts in safe rooms to rescue lost wanderers. The addition of human outposts turned the setting into a hostile, sci-fi survival RPG. The universe grew to feature thousands of unique layers, including endless indoor oceans, infinite neon arcades, and sub-basements.</p>
+                        <p>The lore remained a highly active but relatively niche internet phenomenon until January 2022, when an extraordinarily talented 16-year-old animator named Kane Parsons changed everything. Uploading under his channel name Kane Pixels, he released a short found-footage horror film titled "The Backrooms (Found Footage)." The video was created entirely in Blender and looked completely real, perfectly capturing the grain, jitter, and camera focus of an old 1990s VHS tape.</p>
+                        <p>Kane's video followed a young cameraman who accidentally slips through the floor while filming a low-budget movie with his friends. The viewer watches in real-time as he lands inside the unmistakable, yellow-walled corridors of Level 0. The sheer realism of the animation, paired with impeccable sound design that captured the echo of footsteps, caused the video to go massively viral. Within days, it garnered tens of millions of views, thrusting the Backrooms directly into mainstream internet culture.</p>
+                        <p>Rather than simply copying the existing wiki lore, Kane created his own highly structured cinematic universe that added massive depth to the story. He introduced a fictional research institution from the late 1980s known as ASYNC. According to Kane’s alternate history, the ASYNC corporation was commissioned by the United States government to find a solution to residential overcrowding and warehouse shortages. Their solution was to construct a massive machine that ripped a hole directly into another dimension.</p>
+                        <p>This dimensional tear opened the "Low Proximity Magnetic Distortion System," which ASYNC researchers officially dubbed "The Complex." Kane's narrative cleverly framed the Backrooms not as a magical paranormal curse, but as a sterile, scientific discovery gone horribly wrong. Scientists in hazmat suits began entering the yellow void with measuring equipment, building heavy industrial vault doors and observation stations directly inside the unstable, shifting corridors of Level 0.</p>
+                        <p>The horror in the Kane Pixels universe came from the stark contrast between bureaucratic corporate behavior and absolute cosmic terror. ASYNC executives viewed the infinite space as a real estate goldmine, completely ignoring the fact that the architecture constantly shifted and rearranged itself. They failed to realize that the environment was actively hostile to human psychology. The found-footage tapes showed how the dimension would effortlessly construct mocking imitations of houses, kitchens, and human neighborhoods inside the drywall.</p>
+                        <p>Kane's videos also introduced a unique entity known as the Bacteria monster, a tall, spindly wire-like creature that sprinted at terrifying speeds while emitting distorted, distorted human screams. The entity was implied to be a form of mutated environmental lifecycle native to the dimension. It hunted down explorers and researchers alike, leaving their bodies to rot in isolated, forgotten corners of the maze. The found-footage series quickly evolved into a masterful multi-part sci-fi epic.</p>
+                        <p>The explosion of the found-footage series triggered a monumental renaissance for the entire creepypasta community. It proved that classic internet horror could be revitalized using modern filmmaking tools and hyper-realistic digital rendering. The success of the project caught the attention of major Hollywood studios. A theatrical movie adaptation was officially put into production, backed by powerhouse companies like A24 and Atomic Monster, with Kane Parsons tapped to direct the film during his school breaks.</p>
+                        <p>As the Backrooms crossed over into mainstream entertainment, it thoroughly saturated video game platforms and indie development spaces. Thousands of standalone titles and custom multiplayer maps flooded Steam, Roblox, and Garry's Mod. Players loved the thrill of navigating the yellow maze with friends, managing stamina bars, and running from monsters. The setting proved to be a perfect sandbox loop for survival gameplay, where the simple act of turning a corner created immense tension.</p>
+                        <p>Simultaneously, the online community continued to push the boundaries of the lore by creating subgenres of liminal horror. Concepts like "Poolrooms"—an infinite, peaceful yet deeply eerie labyrinth of pristine turquoise swimming pools and white tile—became massive hits. The Poolrooms stripped away the ugly, noisy fluorescent lights of Level 0, replacing them with a quiet, surreal architectural beauty that felt calming yet deeply unsettling.</p>
+                        <p>Other popular variants included "The End," which disguised itself as a massive, empty public library containing infinite rows of bookshelves and computer monitors displaying fake exit messages. This layer played directly on the psychological torment of false hope, tricking travelers into believing they had safely returned to reality, only to realize the exit doors led right back into another sector of the maze. The universe became a giant psychological mirror reflecting contemporary isolation.</p>
+                        <p>Today, the Backrooms stands as a monument to modern, open-source collective storytelling. It represents a mythos that no single author can claim or control, changing constantly depending on who is uploading a video or editing a wiki page. It has evolved from a simple, blurry image posted on a 4chan message board into a multimillion-dollar cinematic universe. The core idea taps into a universal human anxiety about the hidden architecture of our modern world.</p>
+                        <p>The lasting power of the lore resides in its ability to make the mundane feel profoundly dangerous. It forces people to look at the ordinary office buildings, school corridors, and basement storage spaces they pass through every single day and wonder what lies directly behind the drywall. It suggests that our stable, familiar reality is nothing more than a thin layer of paint covering an infinite, indifferent layout of yellow rooms.</p>
+                        <p>As the internet marches forward, the lore shows absolutely no signs of slowing down. New generations of digital creators continue to log new entities, map out hidden levels, and record found-footage videos that blur the line between digital animation and real life. The definition of what the Backrooms represents keeps shifting, expanding its boundaries to mirror the growing complexities and anxieties of the digital age.</p>
+                        <p>Wanderers who enter the fiction through the wikis find themselves lost in a massive maze of text, documentation, and conflicting reports. Some levels are listed as safe, habitable, and filled with communities, while others are classified as existential death zones where the fabric of space itself begins to disintegrate. This unpredictability keeps the community completely engaged, as no one truly knows what the next layer looks like.</p>
+                        <p>The transition from a lonely internet joke to a structured sci-fi setting highlights how contemporary folklore is created. Instead of campfire stories passed down through generations, modern myths are forged through digital files, shared templates, and video rendering software. The Backrooms is a ghost story built specifically by and for a generation that grew up inside digital spaces and endless corridors.</p>
+                        <p>When looking back at the original photograph from 2019, its simple mystery remains incredibly potent. Even with all the complex wiki updates, factions, and cinematic monster videos, the raw imagery of that empty yellow room continues to be the definitive heart of the horror. It is a visual representation of absolute loneliness, a place where no one can hear you scream over the hum of the lights.</p>
+                        <p>The journey of the lore from a small forum thread to a Hollywood movie production proves that the internet is the ultimate engine for modern mythology. It takes a simple spark of creative dread and amplifies it across millions of minds, letting it grow organically into a cultural phenomenon. The yellow walls have become an permanent fixture of modern pop culture history.</p>
+                        <p>As we look to the future, the endless corridors of the Backrooms will undoubtedly continue to expand across our screens and inside our imaginations. The setting remains a perfect monument to the uncanny, a modern labyrinth that reminds us how exhilarating it is to get completely lost. It proves that the most terrifying monsters aren't hiding under the bed, but just outside the boundaries of our universe.</p>
+                        <p>So, the next time you find yourself walking through a quiet, empty office building after hours, listen closely to the hum of the fluorescent lights above you. Keep your balance, watch your step, and remember the golden rule of the internet's favorite maze. If you aren't careful, you might just slide right through the floorboards and find yourself exactly where the story began.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="chalkboard-card" onclick="openForum(this, event)" role="button" tabindex="0" onkeydown="if(event.key === 'Enter') openForum(this, event)">
             <div class="chalkboard" id="ulterior-motives-board">
                 <button class="forum-close-x" onclick="closeForum(this, event)" aria-label="Close forum">×</button>
@@ -412,36 +482,27 @@
     </div>
 
     <script>
-        // Synchronized Core Engine - Manages selections independently without class wiping
+        // Synchronized Core Engine
         function applySavedState() {
             const currentTheme = localStorage.getItem('savedTheme') || 'theme-skeuo';
             const currentLayout = localStorage.getItem('savedLayout') || 'layout-auto';
-
-            // Check if a modal/forum window is open to preserve scroll locks
             const isModalOpen = document.body.classList.contains('modal-open');
 
-            // Reset body classes cleanly
             document.body.className = '';
-
-            // Apply selected theme class
             document.body.classList.add(currentTheme);
 
-            // Apply manual layout override if active
             if (currentLayout !== 'layout-auto') {
                 document.body.classList.add(currentLayout);
             }
 
-            // Restore modal status if true
             if (isModalOpen) {
                 document.body.classList.add('modal-open');
             }
 
-            // Sync visual menu dropdown pickers
             document.getElementById('theme-picker').value = currentTheme;
             document.getElementById('layout-picker').value = currentLayout;
         }
 
-        // Dropdown actions triggers
         function changeTheme(themeName) {
             localStorage.setItem('savedTheme', themeName);
             applySavedState();
@@ -452,7 +513,6 @@
             applySavedState();
         }
 
-        // Handles smoothly zooming into full-screen viewport layout
         function openForum(cardElement, event) {
             const board = cardElement.querySelector('.chalkboard');
             
@@ -462,7 +522,6 @@
             }
         }
 
-        // Handles closing the modal view structure without re-triggering the click frame event
         function closeForum(closeButton, event) {
             event.stopPropagation();
             
@@ -470,11 +529,9 @@
             dynamicBoard.classList.remove('fullscreen-zoom');
             document.body.classList.remove('modal-open');
             
-            // Snap back up to top immediately for future openings
             dynamicBoard.scrollTop = 0;
         }
 
-        // Run engine setup once document elements load
         window.addEventListener('DOMContentLoaded', applySavedState);
     </script>
 </body>
