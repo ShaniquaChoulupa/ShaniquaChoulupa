@@ -165,15 +165,24 @@
         margin-top: 10px;
     }
 
+    /* Make wrapper anchor element full width block with no text decorations */
+    .download-wrapper-link {
+        text-decoration: none;
+        display: block;
+        width: 100%;
+    }
+
     .board-item {
         display: flex;
         align-items: center;
         padding: 12px 18px;
         border-radius: 8px;
         transition: all 0.3s ease;
+        box-sizing: border-box;
     }
-    .board-item:hover {
-        transform: scale(1.02); /* Very very slightly bigger ONLY for downloads */
+    /* Wrap hover zoom animation specifically around the item zone */
+    .download-wrapper-link:hover .board-item {
+        transform: scale(1.02);
     }
 
     .wood-frame {
@@ -189,7 +198,7 @@
         font-size: 1.8em;
     }
 
-    .chalk-link { font-size: 1.4em; text-decoration: none; font-weight: bold; transition: color 0.2s ease, text-shadow 0.2s ease; }
+    .chalk-link { font-size: 1.4em; font-weight: bold; transition: color 0.2s ease, text-shadow 0.2s ease; pointer-events: none; }
 
     /* ==========================================
        3. THEME VARIATIONS
@@ -290,18 +299,24 @@
             <div>
                 <h2 id="cat-browsing">Browsers & Messaging</h2>
                 <div class="board-list">
-                    <div class="board-item">
-                        <div class="wood-frame">💬</div>
-                        <a href="https://storage.levelleap.com/nina/clients/msnp/patched-installer/msn/escargot-wlm-14.0.8117.0416-en.zip" class="chalk-link" target="_blank">Escargot WLM</a>
-                    </div>
-                    <div class="board-item">
-                        <div class="wood-frame">🌐</div>
-                        <a href="https://download.win32subsystem.live/supermium/releases/v144-r4_01/supermium_144_32_setup.exe" class="chalk-link" target="_blank">Supermium X32</a>
-                    </div>
-                    <div class="board-item">
-                        <div class="wood-frame">🌐</div>
-                        <a href="https://download.win32subsystem.live/supermium/releases/v144-r4_01/supermium_144_64_setup.exe" class="chalk-link" target="_blank">Supermium X64</a>
-                    </div>
+                    <a href="https://storage.levelleap.com/nina/clients/msnp/patched-installer/msn/escargot-wlm-14.0.8117.0416-en.zip" class="download-wrapper-link" target="_blank">
+                        <div class="board-item">
+                            <div class="wood-frame">💬</div>
+                            <span class="chalk-link">Escargot WLM</span>
+                        </div>
+                    </a>
+                    <a href="https://download.win32subsystem.live/supermium/releases/v144-r4_01/supermium_144_32_setup.exe" class="download-wrapper-link" target="_blank">
+                        <div class="board-item">
+                            <div class="wood-frame">🌐</div>
+                            <span class="chalk-link">Supermium X32</span>
+                        </div>
+                    </a>
+                    <a href="https://download.win32subsystem.live/supermium/releases/v144-r4_01/supermium_144_64_setup.exe" class="download-wrapper-link" target="_blank">
+                        <div class="board-item">
+                            <div class="wood-frame">🌐</div>
+                            <span class="chalk-link">Supermium X64</span>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -310,18 +325,24 @@
             <div>
                 <h2 id="cat-media">Media Tools</h2>
                 <div class="board-list">
-                    <div class="board-item">
-                        <div class="wood-frame">💿</div>
-                        <a href="https://sourceforge.net/projects/dvdstyler/files/dvdstyler/1.8.4/DVDStylerPortable-1.8.4-win32.exe/download" class="chalk-link" target="_blank">DVDStyler Portable</a>
-                    </div>
-                    <div class="board-item">
-                        <div class="wood-frame">🔥</div>
-                        <a href="https://cdburnerxp.com/out/cdburnerxp-32" class="chalk-link" target="_blank">CDBurner XP X32</a>
-                    </div>
-                    <div class="board-item">
-                        <div class="wood-frame">🔥</div>
-                        <a href="https://cdburnerxp.com/out/cdburnerxp-64" class="chalk-link" target="_blank">CDBurner XP X64</a>
-                    </div>
+                    <a href="https://sourceforge.net/projects/dvdstyler/files/dvdstyler/1.8.4/DVDStylerPortable-1.8.4-win32.exe/download" class="download-wrapper-link" target="_blank">
+                        <div class="board-item">
+                            <div class="wood-frame">💿</div>
+                            <span class="chalk-link">DVDStyler Portable</span>
+                        </div>
+                    </a>
+                    <a href="https://cdburnerxp.com/out/cdburnerxp-32" class="download-wrapper-link" target="_blank">
+                        <div class="board-item">
+                            <div class="wood-frame">🔥</div>
+                            <span class="chalk-link">CDBurner XP X32</span>
+                        </div>
+                    </a>
+                    <a href="https://cdburnerxp.com/out/cdburnerxp-64" class="download-wrapper-link" target="_blank">
+                        <div class="board-item">
+                            <div class="wood-frame">🔥</div>
+                            <span class="chalk-link">CDBurner XP X64</span>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
