@@ -373,7 +373,8 @@
             const loadingBubble = appendBubble('Thinking...', 'ai');
 
             try {
-                const response = await fetch('https://cohere-backend.netlify.app', {
+                // Pointing to your Netlify serverless function endpoint
+                const response = await fetch('https://kewl-backend.netlify.app/.netlify/functions/chat', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -387,8 +388,14 @@
 
                 const data = await response.json();
                 
-                // Inspect payload structural properties to extract string message data safely
-                const replyText = data.reply || data.response || data.message || JSON.stringify(data);
+                // Parsing Cohere v2 API response formatting safely
+                let replyText = '';
+                if (data.message && data.message.content && data.message.content[0]) {
+                    replyText = data.message.content[0].text;
+                } else {
+                    replyText = data.reply || data.response || JSON.stringify(data);
+                }
+                
                 loadingBubble.innerText = replyText;
 
             } catch (error) {
