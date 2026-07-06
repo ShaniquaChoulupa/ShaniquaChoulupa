@@ -89,7 +89,7 @@
         width: 100%;
         max-width: 1300px;
         display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Balanced for 2 cards */
+        grid-template-columns: repeat(2, 1fr);
         gap: 30px; 
     }
 
@@ -392,7 +392,6 @@
             </div>
         </div>
 
-        <!-- Interactive Shuffling Chalkboard Layout Card -->
         <div class="chalkboard interactive-board" onclick="openZoomDeck()">
             <div>
                 <h2 id="card-july-title">4th Of July 2026</h2>
@@ -410,16 +409,13 @@
 
     </div>
 
-    <!-- TRUE FULL SCREEN CINEMATIC THEATER OVERLAY -->
     <div class="zoom-overlay" id="global-zoom-canvas">
         <button class="close-zoom-btn" onclick="closeZoomDeck(event)">×</button>
         
         <div class="chalkboard zoom-board-container">
             <div>
-                <h3 id="zoom-board-title" style="font-size: 2em; margin-bottom: 5px;">4th Of July 2026 - Media Vault</h3>
-                <p id="zoom-board-desc" style="font-size: 1.1em; margin-bottom: 20px; opacity: 0.9;">Viewing vertical image records and optimized video stream playbacks cleanly.</p>
+                <h3 id="zoom-board-title" style="font-size: 2em; margin-bottom: 20px;">4th Of July 2026 - Media Vault</h3>
                 
-                <!-- Vertical Rows Layout Grid -->
                 <div class="vertical-gallery-grid">
                     <div class="gallery-row-card"><img src="me + mom.JPG" alt="Photo 1"></div>
                     <div class="gallery-row-card"><img src="Me&Mom.JPG" alt="Photo 2"></div>
@@ -529,8 +525,7 @@
                 julyTitle: "4th Of July 2026",
                 julyClick: "(Click to view full screen)",
                 videoTitle: "Recorded Fireworks Playbacks (.mp4)",
-                zoomTitle: "4th Of July 2026 - Media Vault",
-                zoomDesc: "Viewing vertical image records and optimized video stream playbacks cleanly."
+                zoomTitle: "4th Of July 2026 - Media Vault"
             },
             at: {
                 homeBtn: "← Startseite",
@@ -544,8 +539,7 @@
                 julyTitle: "4. Juli 2026",
                 julyClick: "(Anklicken für Vollbild)",
                 videoTitle: "Aufgenommene Feuerwerke (.mp4 Videos)",
-                zoomTitle: "4. Juli 2026 - Medienarchiv",
-                zoomDesc: "Vertikale Bildanzeige und optimierte Videowiedergabe."
+                zoomTitle: "4. Juli 2026 - Medienarchiv"
             },
             noe: {
                 homeBtn: "← Ham",
@@ -559,8 +553,7 @@
                 julyTitle: "4. Juli 2026",
                 julyClick: "(Draufdruckn für Vollbuidl)",
                 videoTitle: "Gefilmte Kracher (.mp4 Videos)",
-                zoomTitle: "4. Juli 2026 - Büda-Kistn",
-                zoomDesc: "Büda in da Reihenfolg und gscheite Videos."
+                zoomTitle: "4. Juli 2026 - Büda-Kistn"
             },
             es: {
                 homeBtn: "← Inicio",
@@ -574,8 +567,7 @@
                 julyTitle: "4 de Julio de 2026",
                 julyClick: "(Haz clic para ver en pantalla completa)",
                 videoTitle: "Fuegos Artificiales Grabados (.mp4)",
-                zoomTitle: "4 de Julio de 2026 - Bóveda de Medios",
-                zoomDesc: "Visualización de registros fotográficos verticales y reproducciones de vídeo optimizadas."
+                zoomTitle: "4 de Julio de 2026 - Bóveda de Medios"
             }
         };
 
@@ -594,7 +586,6 @@
             document.getElementById('card-july-click').innerText = set.julyClick;
             document.getElementById('section-video-title').innerText = set.videoTitle;
             document.getElementById('zoom-board-title').innerText = set.zoomTitle;
-            document.getElementById('zoom-board-desc').innerText = set.zoomDesc;
             
             localStorage.setItem('savedLang', lang);
             document.getElementById('language-picker').value = lang;
