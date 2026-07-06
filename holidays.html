@@ -89,12 +89,12 @@
         width: 100%;
         max-width: 1300px;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr); /* Balanced for 2 cards */
         gap: 30px; 
     }
 
     .welcome-card {
-        grid-column: span 3;
+        grid-column: span 2;
     }
 
     /* Auto/Responsive Media Queries */
@@ -257,7 +257,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #dc2626 !important; /* Striking Red X Button */
+        background: #dc2626 !important;
         color: #ffffff !important;
         box-shadow: 0 4px 15px rgba(0,0,0,0.6);
         z-index: 10000;
@@ -408,18 +408,10 @@
             </div>
         </div>
 
-        <div class="chalkboard">
-            <div>
-                <h2 id="card-archive-title">Archive Specs</h2>
-                <p id="card-archive-desc" style="font-size: 1em; text-align: left; margin-top: 15px;">Image sets run active client side crossfades every few seconds. Selecting interactive chalkboards pauses rendering algorithms and exposes native high-res horizontal tracking tracks.</p>
-            </div>
-        </div>
-
     </div>
 
     <!-- TRUE FULL SCREEN CINEMATIC THEATER OVERLAY -->
     <div class="zoom-overlay" id="global-zoom-canvas">
-        <!-- Floating Close Trigger Anchor -->
         <button class="close-zoom-btn" onclick="closeZoomDeck(event)">×</button>
         
         <div class="chalkboard zoom-board-container">
@@ -436,10 +428,8 @@
                     <div class="gallery-row-card"><img src="My Mom.JPG" alt="Photo 5"></div>
                 </div>
 
-                <!-- Custom Section Separator -->
                 <hr class="section-divider">
 
-                <!-- Embedded Integrated Video Row Element Matrix -->
                 <h2 id="section-video-title" style="margin-top: 20px; font-size: 1.6em;">Recorded Fireworks Playbacks (.mp4)</h2>
                 <div class="video-grid">
                     
@@ -496,13 +486,13 @@
         function openZoomDeck() {
             clearInterval(shuffleInterval);
             document.getElementById('global-zoom-canvas').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Prevents background body window scrolling
+            document.body.style.overflow = 'hidden';
         }
 
         function closeZoomDeck(e) {
             if(e) e.stopPropagation();
             document.getElementById('global-zoom-canvas').style.display = 'none';
-            document.body.style.overflow = ''; // Restores window viewport behavior
+            document.body.style.overflow = '';
             runShuffleSequence();
         }
 
@@ -538,8 +528,6 @@
                 mainDesc: "Relive the summer spectacles and family memories captured live.",
                 julyTitle: "4th Of July 2026",
                 julyClick: "(Click to view full screen)",
-                archiveTitle: "Archive Specs",
-                archiveDesc: "Image sets run active client side crossfades every few seconds. Selecting interactive chalkboards pauses rendering algorithms and exposes native high-res horizontal tracking tracks.",
                 videoTitle: "Recorded Fireworks Playbacks (.mp4)",
                 zoomTitle: "4th Of July 2026 - Media Vault",
                 zoomDesc: "Viewing vertical image records and optimized video stream playbacks cleanly."
@@ -555,8 +543,6 @@
                 mainDesc: "Erlebe die Sommer-Momente und aufgezeichneten Familienerinnerungen noch einmal.",
                 julyTitle: "4. Juli 2026",
                 julyClick: "(Anklicken für Vollbild)",
-                archiveTitle: "Archiv-Details",
-                archiveDesc: "Die Bildersätze wechseln alle paar Sekunden automatisch. Wenn du die Kreidetafel anklickst, pausiert der Wechsel und zeigt die hochauflösenden Zeilen.",
                 videoTitle: "Aufgenommene Feuerwerke (.mp4 Videos)",
                 zoomTitle: "4. Juli 2026 - Medienarchiv",
                 zoomDesc: "Vertikale Bildanzeige und optimierte Videowiedergabe."
@@ -572,8 +558,6 @@
                 mainDesc: "Schau da no amoi de scheen Video-Aufnahmen und Erinnerungen von da Familie an.",
                 julyTitle: "4. Juli 2026",
                 julyClick: "(Draufdruckn für Vollbuidl)",
-                archiveTitle: "Kisten-Details",
-                archiveDesc: "De Büda wechseln olle paar Sekundn ganz automatisch. Beim Draufklicken bleibt des Buidl stehn und du kannst gscheit durchscrolln.",
                 videoTitle: "Gefilmte Kracher (.mp4 Videos)",
                 zoomTitle: "4. Juli 2026 - Büda-Kistn",
                 zoomDesc: "Büda in da Reihenfolg und gscheite Videos."
@@ -589,8 +573,6 @@
                 mainDesc: "Revive los espectáculos de verano y los recuerdos familiares capturados en vivo.",
                 julyTitle: "4 de Julio de 2026",
                 julyClick: "(Haz clic para ver en pantalla completa)",
-                archiveTitle: "Detalles del Archivo",
-                archiveDesc: "Los conjuntos de imágenes realizan desvanecimientos cruzados automáticos cada pocos segundos. Al seleccionar las pizarras interactivas se pausa el algoritmo para mostrar las filas de desplazamiento.",
                 videoTitle: "Fuegos Artificiales Grabados (.mp4)",
                 zoomTitle: "4 de Julio de 2026 - Bóveda de Medios",
                 zoomDesc: "Visualización de registros fotográficos verticales y reproducciones de vídeo optimizadas."
@@ -610,8 +592,6 @@
             document.getElementById('holidays-main-desc').innerText = set.mainDesc;
             document.getElementById('card-july-title').innerText = set.julyTitle;
             document.getElementById('card-july-click').innerText = set.julyClick;
-            document.getElementById('card-archive-title').innerText = set.archiveTitle;
-            document.getElementById('card-archive-desc').innerText = set.archiveDesc;
             document.getElementById('section-video-title').innerText = set.videoTitle;
             document.getElementById('zoom-board-title').innerText = set.zoomTitle;
             document.getElementById('zoom-board-desc').innerText = set.zoomDesc;
