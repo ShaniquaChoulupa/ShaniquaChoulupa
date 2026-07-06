@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Holidays Archive - The Creative Chalkboard Studio</title>
+<style>
+    /* ==========================================
+       1. GLOBAL BASE STYLES & LAYOUT
+       ========================================== */
+    body {
+        margin: 0;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        box-sizing: border-box;
+        transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    .controls-wrapper {
+        width: 100%;
+        max-width: 1300px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        gap: 15px;
+        transition: all 0.3s ease;
+    }
+
+    .left-controls {
+        display: flex;
+        gap: 15px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-buttons {
+        display: flex;
+        gap: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .menu-container {
+        padding: 8px 16px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+    }
+
+    .menu-label {
+        font-weight: bold;
+        font-size: 0.95em;
+        white-space: nowrap;
+    }
+
+    .menu-select {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        cursor: pointer;
+        outline: none;
+        width: 100%;
+    }
+
+    .forward-nav-btn {
+        padding: 8px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .forward-nav-btn:hover {
+        transform: scale(1.02);
+    }
+
+    .studio-wall {
+        width: 100%;
+        max-width: 1300px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px; 
+    }
+
+    .welcome-card, .video-spanner {
+        grid-column: span 3;
+    }
+
+    /* Auto/Responsive Media Queries */
+    @media (max-width: 1024px) {
+        .studio-wall { grid-template-columns: repeat(2, 1fr); }
+        .welcome-card, .video-spanner { grid-column: span 2; }
+    }
+    @media (max-width: 768px) {
+        .studio-wall { grid-template-columns: 1fr; }
+        .welcome-card, .video-spanner { grid-column: span 1; }
+        .controls-wrapper, .left-controls { flex-direction: column; width: 100%; }
+        .menu-container, .nav-buttons { width: 100%; justify-content: space-between; box-sizing: border-box; }
+        .forward-nav-btn { flex: 1; padding: 12px 20px; font-size: 1.1em; }
+        body { padding: 20px; }
+    }
+
+    /* ==========================================
+       2. FORCE MOBILE OVERRIDE CLASSES
+       ========================================== */
+    body.layout-mobile { padding: 15px; }
+    body.layout-mobile .studio-wall { grid-template-columns: 1fr !important; }
+    body.layout-mobile .welcome-card, body.layout-mobile .video-spanner { grid-column: span 1 !important; }
+    body.layout-mobile .controls-wrapper, body.layout-mobile .left-controls { flex-direction: column; width: 100%; gap: 10px; }
+    body.layout-mobile .menu-container, body.layout-mobile .nav-buttons { width: 100%; justify-content: space-between; box-sizing: border-box; }
+    body.layout-mobile .forward-nav-btn { flex: 1; padding: 15px 20px; font-size: 1.2em; }
+
+    /* Standard Elements */
+    .chalkboard {
+        padding: 25px;
+        border-radius: 8px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: all 0.3s ease;
+    }
+
+    .interactive-board {
+        cursor: pointer;
+    }
+    .interactive-board:hover {
+        transform: scale(1.02);
+    }
+
+    h1, h2, h3 { text-align: center; margin-top: 0; letter-spacing: 0.5px; }
+    p { font-size: 1.15em; line-height: 1.5; text-align: center; }
+
+    /* Shuffle Showcase Screen */
+    .shuffle-window {
+        width: 100%;
+        height: 220px;
+        border-radius: 6px;
+        overflow: hidden;
+        position: relative;
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+    }
+
+    .shuffle-window img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .shuffle-window img.active {
+        opacity: 1;
+    }
+
+    /* Video Deck Layout */
+    .video-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 15px;
+    }
+    @media (max-width: 768px) {
+        .video-grid { grid-template-columns: 1fr; }
+    }
+
+    .video-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .wood-video-frame {
+        width: 100%;
+        aspect-ratio: 16/9;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5), 4px 4px 8px rgba(0,0,0,0.6);
+        background: #000;
+    }
+    .wood-video-frame video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .video-label {
+        margin-top: 8px;
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+
+    /* ==========================================
+       3. ZOOM WINDOW ENGINE (MODAL OVERLAY)
+       ========================================== */
+    .zoom-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 2000;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .zoom-board-container {
+        width: 100%;
+        max-width: 900px;
+        animation: boardZoomIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes boardZoomIn {
+        from { transform: scale(0.7); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    .close-zoom-btn {
+        position: absolute;
+        top: -20px;
+        right: -20px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        font-size: 1.5em;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    /* Scrollable Horizontal Rows */
+    .scrollable-gallery-row {
+        width: 100%;
+        display: flex;
+        gap: 15px;
+        overflow-x: auto;
+        padding: 15px 5px;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+    }
+
+    .scrollable-gallery-row::-webkit-scrollbar {
+        height: 8px;
+    }
+    .scrollable-gallery-row::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+    }
+
+    .gallery-row-card {
+        flex: 0 0 240px;
+        height: 180px;
+        border-radius: 6px;
+        overflow: hidden;
+        box-shadow: 3px 3px 8px rgba(0,0,0,0.5);
+    }
+    .gallery-row-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* ==========================================
+       4. THEME SYSTEM COLOR VARIATIONS
+       ========================================== */
+    /* PASTEL RAINBOW */
+    body.theme-pastel {
+        background: linear-gradient(45deg, #FFB3BA, #FFDFBA, #FFFFBA, #BAFFC9, #BAE1FF, #D0BAFF, #FFB3BA);
+        background-size: 400% 400%; animation: rainbowFade 16s ease infinite; font-family: 'Comic Sans MS', cursive, sans-serif; color: rgba(245, 245, 245, 0.95);
+    }
+    .theme-pastel .menu-container, .theme-pastel .forward-nav-btn { background: #2b3a32; border: 4px solid #5c2c16; color: #ffeb99; }
+    .theme-pastel .menu-select { background: #333; color: #fff; border: 1px dashed rgba(255,255,255,0.3); }
+    .theme-pastel .chalkboard { background: radial-gradient(circle at 50% 30%, rgba(55, 75, 65, 0.9), rgba(35, 45, 40, 0.95)), #2b3a32; border: 14px solid #5c2c16; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); box-shadow: inset 0px 0px 20px rgba(0,0,0,0.7), 6px 8px 15px rgba(0,0,0,0.3); }
+    .theme-pastel .shuffle-window, .theme-pastel .wood-video-frame { border: 4px solid #5c2c16; background-color: #222; }
+    .theme-pastel .close-zoom-btn { background: #5c2c16; color: #ffeb99; }
+    .theme-pastel .scrollable-gallery-row::-webkit-scrollbar-thumb { background: #5c2c16; }
+    .theme-pastel .scrollable-gallery-row::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+
+    /* CYBER NEON GLASS */
+    body.theme-cyber {
+        background: linear-gradient(-45deg, #0f172a, #1e1b4b, #2e1065, #0f172a);
+        background-size: 400% 400%; animation: cyberPulse 12s ease infinite; font-family: 'Segoe UI', sans-serif; color: #f8fafc;
+    }
+    .theme-cyber .menu-container, .theme-cyber .forward-nav-btn { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); color: #f1f5f9; }
+    .theme-cyber .forward-nav-btn { border-radius: 20px; }
+    .theme-cyber .menu-container { border-radius: 50px; }
+    .theme-cyber .menu-select { background: #0f172a; color: #f1f5f9; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; }
+    .theme-cyber .chalkboard { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
+    .theme-cyber h1, .theme-cyber h2, .theme-cyber h3 { background: linear-gradient(to right, #fef08a, #fde047); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .theme-cyber .shuffle-window, .theme-cyber .wood-video-frame { background-color: #0f172a; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; }
+    .theme-cyber .close-zoom-btn { background: #38bdf8; color: #0f172a; }
+    .theme-cyber .scrollable-gallery-row::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); }
+    .theme-cyber .scrollable-gallery-row::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+
+    /* SKEUOMORPHIC */
+    body.theme-skeuo {
+        background-color: #2e3138;
+        background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 0), radial-gradient(rgba(0,0,0,0.3) 1px, transparent 0);
+        background-size: 4px 4px; background-position: 0 0, 2px 2px; font-family: 'Marker Felt', 'Chalkboard SE', sans-serif; color: #fff;
+    }
+    .theme-skeuo .menu-container, .theme-skeuo .forward-nav-btn { background: linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 50%, #dddddd 50%, #cfcfcf 100%); border: 1px solid #a6a6a6; box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 #fff; color: #4c566c; text-shadow: 0 1px 0 #fff; }
+    .theme-skeuo .menu-select { background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%); color: #333; border: 1px solid #abafb3; }
+    .theme-skeuo .chalkboard { background: radial-gradient(circle at 50% 30%, #2f4f3e, #1b3327); border: 14px solid #4a2711; border-image: repeating-linear-gradient(45deg, #3d1f0d, #542d15 15px, #3d1f0d 30px) 14 stretch; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8); box-shadow: inset 0px 0px 15px rgba(0,0,0,0.6), 0 8px 16px rgba(0, 0, 0, 0.5); }
+    .theme-skeuo .shuffle-window, .theme-skeuo .wood-video-frame { border: 4px solid #4a2711; background-color: #111; box-shadow: inset 0 3px 10px #000; }
+    .theme-skeuo .close-zoom-btn { background: linear-gradient(to bottom, #fff, #ccc); color: #333; border: 1px solid #777; }
+    .theme-skeuo .scrollable-gallery-row::-webkit-scrollbar-thumb { background: #4a2711; }
+    .theme-skeuo .scrollable-gallery-row::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+</style>
+</head>
+<body class="theme-skeuo">
+
+    <div class="controls-wrapper">
+        <div class="nav-buttons">
+            <a href="index.html" class="forward-nav-btn" id="home-btn" title="Go to Home">← Home</a>
+            <a href="forum.html" class="forward-nav-btn" id="forum-btn" title="Go to Forum">Forum</a>
+            <a href="download.html" class="forward-nav-btn" id="download-btn" title="Go to Downloads">Downloads</a>
+        </div>
+         
+        <div class="left-controls">
+            <div class="menu-container">
+                <span class="menu-label" id="layout-label">Layout:</span>
+                <select class="menu-select" id="layout-picker" onchange="changeLayout(this.value)">
+                    <option value="layout-auto">Auto</option>
+                    <option value="layout-desktop">Desktop</option>
+                    <option value="layout-mobile">Mobile</option>
+                </select>
+            </div>
+
+            <div class="menu-container">
+                <span class="menu-label" id="theme-label">Theme:</span>
+                <select class="menu-select" id="theme-picker" onchange="changeTheme(this.value)">
+                    <option value="theme-skeuo">Skeuomorphic</option>
+                    <option value="theme-cyber">Cyber Neon</option>
+                    <option value="theme-pastel">Pastel Rainbow</option>
+                </select>
+            </div>
+
+            <div class="menu-container">
+                <span class="menu-label" id="lang-label">Language:</span>
+                <select class="menu-select" id="language-picker" onchange="changeLanguage(this.value)">
+                    <option value="en">English</option>
+                    <option value="at">Österreichisch</option>
+                    <option value="noe">Niederösterreichisch</option>
+                    <option value="es">Español</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="studio-wall">
+
+        <div class="chalkboard welcome-card">
+            <div>
+                <h1 id="holidays-main-title">Holiday Vault</h1>
+                <p id="holidays-main-desc">Relive the summer spectacles and family memories captured live.</p>
+            </div>
+        </div>
+
+        <div class="chalkboard interactive-board" onclick="openZoomDeck()">
+            <div>
+                <h2 id="card-july-title">4th Of July 2026</h2>
+                <p id="card-july-click" style="font-size: 0.9em; opacity: 0.8; margin: -5px 0 10px 0;">(Click to view full row)</p>
+                
+                <div class="shuffle-window" id="shuffle-deck">
+                    <img src="me + mom.JPG" class="active" alt="Me and Mom">
+                    <img src="Me&Mom.JPG" alt="Me and Mom Alternate">
+                    <img src="More Mom.JPG" alt="More Mom Photo">
+                    <img src="my mom (2).JPG" alt="My Mom Second Version">
+                    <img src="My Mom.JPG" alt="My Mom Close Up">
+                </div>
+            </div>
+        </div>
+
+        <div class="chalkboard">
+            <div>
+                <h2 id="card-archive-title">Archive Specs</h2>
+                <p id="card-archive-desc" style="font-size: 1em; text-align: left; margin-top: 15px;">Image sets run active client side crossfades every few seconds. Selecting interactive chalkboards pauses rendering algorithms and exposes native high-res horizontal tracking tracks.</p>
+            </div>
+        </div>
+
+        <div class="chalkboard video-spanner">
+            <div>
+                <h2 id="section-video-title">Recorded Fireworks Display (.MOV Archives)</h2>
+                <div class="video-grid">
+                    
+                    <div class="video-card">
+                        <div class="wood-video-frame">
+                            <video controls preload="metadata">
+                                <source src="Fireworks1.MOV" type="video/quicktime">
+                                <source src="Fireworks1.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-label">Fireworks1.MOV</div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="wood-video-frame">
+                            <video controls preload="metadata">
+                                <source src="Fireworks2.MOV" type="video/quicktime">
+                                <source src="Fireworks2.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-label">Fireworks2.MOV</div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="wood-video-frame">
+                            <video controls preload="metadata">
+                                <source src="Fireworks3.MOV" type="video/quicktime">
+                                <source src="Fireworks3.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-label">Fireworks3.MOV</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="zoom-overlay" id="global-zoom-canvas" onclick="closeZoomDeck(event)">
+        <div class="chalkboard zoom-board-container" onclick="event.stopPropagation()">
+            <button class="close-zoom-btn" onclick="closeZoomDeck(event)">×</button>
+            <div>
+                <h3 id="zoom-board-title" style="font-size: 1.8em; margin-bottom: 5px;">4th Of July 2026 - Photo Stream</h3>
+                <p id="zoom-board-desc" style="font-size: 1em; margin-bottom: 20px; opacity: 0.9;">Scroll horizontally to inspect your full-size archive photos.</p>
+                
+                <div class="scrollable-gallery-row">
+                    <div class="gallery-row-card"><img src="me + mom.JPG" alt="Photo 1"></div>
+                    <div class="gallery-row-card"><img src="Me&Mom.JPG" alt="Photo 2"></div>
+                    <div class="gallery-row-card"><img src="More Mom.JPG" alt="Photo 3"></div>
+                    <div class="gallery-row-card"><img src="my mom (2).JPG" alt="Photo 4"></div>
+                    <div class="gallery-row-card"><img src="My Mom.JPG" alt="Photo 5"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // DYNAMIC SHUFFLE ENGINE
+        // ==========================================
+        let shuffleInterval;
+        function runShuffleSequence() {
+            const container = document.getElementById('shuffle-deck');
+            const images = container.getElementsByTagName('img');
+            let index = 0;
+
+            shuffleInterval = setInterval(() => {
+                images[index].classList.remove('active');
+                index = (index + 1) % images.length;
+                images[index].classList.add('active');
+            }, 2500);
+        }
+
+        function openZoomDeck() {
+            clearInterval(shuffleInterval);
+            document.getElementById('global-zoom-canvas').style.display = 'flex';
+        }
+
+        function closeZoomDeck(e) {
+            document.getElementById('global-zoom-canvas').style.display = 'none';
+            runShuffleSequence();
+        }
+
+        // ==========================================
+        // THEME & PERSISTENCE CONFIGURATORS
+        // ==========================================
+        function changeLayout(layoutName) {
+            if (layoutName === 'layout-mobile') {
+                document.body.classList.add('layout-mobile');
+            } else {
+                document.body.classList.remove('layout-mobile');
+            }
+            localStorage.setItem('savedLayout', layoutName);
+            document.getElementById('layout-picker').value = layoutName;
+        }
+
+        function changeTheme(themeName) {
+            document.body.classList.remove('theme-skeuo', 'theme-cyber', 'theme-pastel');
+            document.body.classList.add(themeName);
+            localStorage.setItem('savedTheme', themeName);
+            document.getElementById('theme-picker').value = themeName;
+        }
+
+        const translations = {
+            en: {
+                homeBtn: "← Home",
+                forumBtn: "Forum",
+                downloadBtn: "Downloads",
+                layoutLabel: "Layout:",
+                themeLabel: "Theme:",
+                langLabel: "Language:",
+                mainTitle: "Holiday Vault",
+                mainDesc: "Relive the summer spectacles and family memories captured live.",
+                julyTitle: "4th Of July 2026",
+                julyClick: "(Click to view full row)",
+                archiveTitle: "Archive Specs",
+                archiveDesc: "Image sets run active client side crossfades every few seconds. Selecting interactive chalkboards pauses rendering algorithms and exposes native high-res horizontal tracking tracks.",
+                videoTitle: "Recorded Fireworks Display (.MOV Archives)",
+                zoomTitle: "4th Of July 2026 - Photo Stream",
+                zoomDesc: "Scroll horizontally to inspect your full-size archive photos."
+            },
+            at: {
+                homeBtn: "← Startseite",
+                forumBtn: "Forum",
+                downloadBtn: "Downloads",
+                layoutLabel: "Ansicht:",
+                themeLabel: "Stil:",
+                langLabel: "Sprache:",
+                mainTitle: "Feiertags-Archiv",
+                mainDesc: "Erlebe die Sommer-Momente und aufgezeichneten Familienerinnerungen noch einmal.",
+                julyTitle: "4. Juli 2026",
+                julyClick: "(Anklicken für die ganze Reihe)",
+                archiveTitle: "Archiv-Details",
+                archiveDesc: "Die Bildersätze wechseln alle paar Sekunden automatisch. Wenn du die Kreidetafel anklickst, pausiert der Wechsel und zeigt die hochauflösenden Zeilen.",
+                videoTitle: "Aufgenommene Feuerwerke (.MOV Dateien)",
+                zoomTitle: "4. Juli 2026 - Foto-Reihe",
+                zoomDesc: "Scrolle seitwärts, um alle Bilder in voller Größe anzusehen."
+            },
+            noe: {
+                homeBtn: "← Ham",
+                forumBtn: "Forum",
+                downloadBtn: "Downloads",
+                layoutLabel: "Ansicht:",
+                themeLabel: "Design:",
+                langLabel: "Sproch:",
+                mainTitle: "Feiertagshüttn",
+                mainDesc: "Schau da no amoi de scheen Video-Aufnahmen und Erinnerungen von da Familie an.",
+                julyTitle: "4. Juli 2026",
+                julyClick: "(Draufdruckn für de ganze Zeiln)",
+                archiveTitle: "Kisten-Details",
+                archiveDesc: "De Büda wechseln olle paar Sekundn ganz automatisch. Beim Draufklicken bleibt des Buidl stehn und du kannst gscheit durchscrolln.",
+                videoTitle: "Gefilmte Kracher (.MOV Videos)",
+                zoomTitle: "4. Juli 2026 - Büda-Reihn",
+                zoomDesc: "Schieb rüber für de ganze Pracht in voller Größn."
+            },
+            es: {
+                homeBtn: "← Inicio",
+                forumBtn: "Foro",
+                downloadBtn: "Descargas",
+                layoutLabel: "Diseño:",
+                themeLabel: "Tema:",
+                langLabel: "Idioma:",
+                mainTitle: "Bóveda de Festivos",
+                mainDesc: "Revive los espectáculos de verano y los recuerdos familiares capturados en vivo.",
+                julyTitle: "4 de Julio de 2026",
+                julyClick: "(Haz clic para ver la fila completa)",
+                archiveTitle: "Detalles del Archivo",
+                archiveDesc: "Los conjuntos de imágenes realizan desvanecimientos cruzados automáticos cada pocos segundos. Al seleccionar las pizarras interactivas se pausa el algoritmo para mostrar las filas de desplazamiento.",
+                videoTitle: "Espectáculo de Fuegos Artificiales Grabado (Archivos .MOV)",
+                zoomTitle: "4 de Julio de 2026 - Flujo de Fotos",
+                zoomDesc: "Desplázate horizontalmente para inspeccionar las fotos de archivo a tamaño completo."
+            }
+        };
+
+        function changeLanguage(lang) {
+            const set = translations[lang] || translations['en'];
+            
+            document.getElementById('home-btn').innerText = set.homeBtn;
+            document.getElementById('forum-btn').innerText = set.forumBtn;
+            document.getElementById('download-btn').innerText = set.downloadBtn;
+            document.getElementById('layout-label').innerText = set.layoutLabel;
+            document.getElementById('theme-label').innerText = set.themeLabel;
+            document.getElementById('lang-label').innerText = set.langLabel;
+            document.getElementById('holidays-main-title').innerText = set.mainTitle;
+            document.getElementById('holidays-main-desc').innerText = set.mainDesc;
+            document.getElementById('card-july-title').innerText = set.julyTitle;
+            document.getElementById('card-july-click').innerText = set.julyClick;
+            document.getElementById('card-archive-title').innerText = set.archiveTitle;
+            document.getElementById('card-archive-desc').innerText = set.archiveDesc;
+            document.getElementById('section-video-title').innerText = set.videoTitle;
+            document.getElementById('zoom-board-title').innerText = set.zoomTitle;
+            document.getElementById('zoom-board-desc').innerText = set.zoomDesc;
+            
+            localStorage.setItem('savedLang', lang);
+            document.getElementById('language-picker').value = lang;
+        }
+
+        window.onload = function() {
+            const savedLayout = localStorage.getItem('savedLayout') || 'layout-auto';
+            const savedTheme = localStorage.getItem('savedTheme') || 'theme-skeuo';
+            const savedLang = localStorage.getItem('savedLang') || 'en';
+
+            changeLayout(savedLayout);
+            changeTheme(savedTheme);
+            changeLanguage(savedLang);
+            runShuffleSequence();
+        };
+    </script>
+</body>
+</html>
